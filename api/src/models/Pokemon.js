@@ -8,8 +8,9 @@ module.exports = (sequelize) => {
     {
       id: {
         type: DataTypes.UUID, //genera un identidicador numérico único
-        defaultValue: DataTypes.UUIDV4, //genera un identificador único por defecto
+        defaultValue: DataTypes.UUIDV4, //genera un identificador único por defecto, un UUIDV4, la más estable
         primaryKey: true,
+        allowNull: false,
       },
       name: {
         type: DataTypes.STRING,
@@ -35,6 +36,9 @@ module.exports = (sequelize) => {
         type: DataTypes.INTEGER,
       },
       //podría ir un atributo imagen que recibe una url, para la sprite...
+      img: {
+        type: DataTypes.TEXT,
+      },
     },
     {
       timestamps: true,

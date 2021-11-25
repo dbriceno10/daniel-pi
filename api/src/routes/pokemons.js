@@ -1,7 +1,8 @@
 const { Router } = require('express');
 const axios = require('axios');
 const { Pokemon, Type } = require('../db'); //me raigo mis modelos de base de datos
-const e = require('express');
+const { getPokemonData } = require('../utils/getPokemonData');
+const { getNamesByTypes } = require('../utils/getNamesByTypes');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -15,8 +16,17 @@ router.get('/', async (req, res, next) => {
     if (!name) {
       //----> Traemos los pokemon que están en la base de datos
       let arrPokemonsDb = [];
+      // arrPokemonsDb = await Pokemon.findAll({
+      //   include: Type,
+      // });
       arrPokemonsDb = await Pokemon.findAll({
-        include: Type,
+        include: {
+          model: Type,
+          atributes: ['name'], //trae la data mediante el nombre(la propiedad del modelo type)
+          thorugh: {
+            atributes: [], //para comprobación, siempre va
+          },
+        },
       });
       // ---> Traemos a los pokemon desde el API
       const data1 = await axios.get('https://pokeapi.co/api/v2/pokemon'); //obtenemos pokemons del 1 al 20
@@ -30,9 +40,12 @@ router.get('/', async (req, res, next) => {
         // data2.data.results[1],
         // data2.data.results[2],
       ];
+      // let pokemons = [];
       // let pk = [...data1.data.results, ...data2.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
-      let pokemons = pk.map((pokemon) => axios.get(pokemon.url)); //genero un array de promesas, para trater la info de cada pokemon
-      const data = await Promise.all(pokemons); //paso mi array de promesas para resolverlo
+      // let pokemons = await pk.map((pokemon) => axios.get(pokemon.url)); //genero un array de promesas, para trater la info de cada pokemon
+      const data = await Promise.all(
+        pk.map((pokemon) => axios.get(pokemon.url))
+      ); //paso mi array de promesas para resolverlo
       let arrPokemons = []; // array auxiliar para guardar la info filtrada de cada pokemon
       data.forEach((pokemon) => {
         arrPokemons.push({
@@ -72,41 +85,37 @@ router.get('/', async (req, res, next) => {
     }
   } catch (error) {
     // console.error(error);
-    res.send('Error');
+    // res.send('Error');
     res.sendStatus(404);
   }
 });
 
-function getPokemonData(auxData) {
-  return {
-    id: auxData.data.id,
-    name: auxData.data.name,
-    hp: auxData.data.stats[0].base_stat,
-    strength: auxData.data.stats[1].base_stat,
-    defense: auxData.data.stats[2].base_stat,
-    speed: auxData.data.stats[5].base_stat,
-    height: auxData.data.height,
-    weight: auxData.data.weight,
-    img: auxData.data.sprites.front_default,
-    types: auxData.data.types.map((e) => e.type.name),
-  };
-}
+router.post('/', async (req, res, next) => {
+  const { name, hp, strength, defense, speed, height, weight, img, types } =
+    req.body;
+  const pokemonCreated = await Pokemon.create({
+    name,
+    hp,
+    strength,
+    defense,
+    speed,
+    height,
+    weight,
+    img,
+  });
+});
 
-function getNamesByTypes(pokemon) {
-  pokemon = pokemon.types.map((e) => e.dataValues.name);
-  return pokemon;
+async function getID(data) {
+  let array = [];
+  for (let i = 0; i < data.length; i++) {
+    arr.push(
+      await Type.findOne({
+        where: { name: data[i] },
+        attributes: ['id'],
+      })
+    );
+  }
+  return array;
 }
-
-/*
-    let arrPokemons = [];
-      for (let pokemon of pk) {
-        let pkDetail = await axios.get(pokemon.url);
-        pkDetail = pkDetail.data;
-        delete pokemon.url;
-        arrPokemons.push({
-          ...getPokemonData(pokemon),
-        });
-      }
-    */
 
 module.exports = router;

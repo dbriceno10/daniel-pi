@@ -1,3 +1,5 @@
+const { Type } = require('../db');
+
 async function getID(data) {
   let types = [];
   for (let i = 0; i < data.length; i++) {

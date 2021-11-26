@@ -117,4 +117,24 @@ router.post('/', async (req, res, next) => {
   res.status(404).send('Name is required to create a new pokemon');
 });
 
+router.get('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    let pokemonDB = await Pokemon.findOne({ where: { id }, include: Type });
+    console.log('Pokemon DB: ', pokemonDB);
+    pokemonDB = { ...pokemonDB.dataValues, types: getNamesByTypes(pokemonDB) };
+    return res.send(pokemonDB);
+  } catch (error) {
+    try {
+      let pokemonAPI = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon/${parseInt(id)}`
+      );
+      pokemonAPI = getPokemonData(pokemonAPI);
+      return res.send(pokemonAPI);
+    } catch (error) {
+      return res.status(404).send('ID not found');
+    }
+  }
+});
+
 module.exports = router;

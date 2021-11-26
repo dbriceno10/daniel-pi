@@ -85,8 +85,8 @@ router.get('/', async (req, res, next) => {
 
 router.post('/', async (req, res, next) => {
   const { name, hp, strength, defense, speed, height, weight, img, types } =
-    req.body;
-  if (name) {
+    req.body; //recibo toda la info por body
+  if (name) { //solo si recibo un nombre voy a guardar el pokemon en la base de datos
     const pokemonCreated = await Pokemon.create({
       name,
       hp,
@@ -97,42 +97,42 @@ router.post('/', async (req, res, next) => {
       weight,
       img,
     });
-    if (types) {
+    if (types) { //si recibo un tipos los voy a buscar en la base de datos de tipos para buscar sus ids
       const arrID = await getID(types);
       await pokemonCreated.setTypes(arrID);
       let pokemons = await Pokemon.findOne({
         where: {
           id: pokemonCreated.id,
-        },
+        }, //busco el id
         include: Type,
       });
       pokemons = {
         ...pokemons.dataValues,
-        types: getNamesByTypes(pokemons),
+        types: getNamesByTypes(pokemons), //obtengo el array de tipos
         // types: getNamestypes(pokemons).reverse(),
       };
       return res.json(pokemons);
     }
-  }
+  }//Nota debemos mejorar esta lógica, se puede dar el caso de que si no le paso un tipo, solo voy a guardar los datos del pokemon, pero no sus tipos, y no retornaría una repuesta, por lo que terminaría enviando solo un mensaje de error
   res.status(404).send('Name is required to create a new pokemon');
 });
 
 router.get('/:id', async (req, res, next) => {
   const { id } = req.params;
-  try {
+  try {//Primero vamos a buscar en la base de datos, si llega a fallar, lo carturamos en el bloque catch y disparamos un nuevo código
     let pokemonDB = await Pokemon.findOne({ where: { id }, include: Type });
     console.log('Pokemon DB: ', pokemonDB);
     pokemonDB = { ...pokemonDB.dataValues, types: getNamesByTypes(pokemonDB) };
     return res.send(pokemonDB);
   } catch (error) {
-    try {
+    try { //como ese id no estaba en la base de datos, ahora vamos a buscar en el api
       let pokemonAPI = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${parseInt(id)}`
       );
       pokemonAPI = getPokemonData(pokemonAPI);
       return res.send(pokemonAPI);
     } catch (error) {
-      return res.status(404).send('ID not found');
+      return res.status(404).send('ID not found'); //si el id no se encontró en ningún lado
     }
   }
 });

@@ -5,23 +5,24 @@ const { Type } = require('../db'); //me raigo mis
 const router = Router();
 
 router.get('/', async (req, res, next) => {
-  const typesBD = await Type.findAll({
-    atributes: ['name'], //trae la data mediante el nombre(la propiedad del modelo type)
-  });
-  if (!typesBD.length) {
-    let typesAPI = await axios.get('https://pokeapi.co/api/v2/type');
-    typesAPI = await typesAPI.data.results.map((type) => {
-      return { name: type.name };
+  try {
+    const typesBD = await Type.findAll({
+      //Primero me fijo si los tipos están en la base de datos
+      atributes: ['name'], //trae la data mediante el nombre(la propiedad del modelo type)
     });
-    Type.bulkCreate(typesAPI);
-    res.send(typesAPI);
+    if (!typesBD.length) {
+      //si no están, los busco en el api
+      let typesAPI = await axios.get('https://pokeapi.co/api/v2/type');
+      typesAPI = await typesAPI.data.results.map((type) => {
+        return { name: type.name };
+      });
+      await Type.bulkCreate(typesAPI); //los guardo todos, bulkCreate me permite guardar un array de elementos de un solo jalón
+      return res.send(typesAPI);
+    }
+    res.send(typesBD); // si estaba en la base de datos mando la respuesta
+  } catch (error) {
+    res.status(404).send('error');
   }
 });
-
-// router.get('/', async (req, res, next) => {
-//   let typesAPI = await axios.get('https://pokeapi.co/api/v2/type');
-//   typesAPI = typesAPI.data.results.map((type) => type.name);
-//   console.log(typesAPI);
-// });
 
 module.exports = router;

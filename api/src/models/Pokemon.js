@@ -17,13 +17,13 @@ module.exports = (sequelize) => {
         allowNull: false, //para hacer que sea obligatorio
       },
       //de life a weigth, son opcionales y todos de tipo entero
-      life: {
+      hp: {
         type: DataTypes.INTEGER,
       },
       strength: {
         type: DataTypes.INTEGER,
       },
-      defending: {
+      defense: {
         type: DataTypes.INTEGER,
       },
       speed: {
@@ -32,7 +32,7 @@ module.exports = (sequelize) => {
       height: {
         type: DataTypes.INTEGER,
       },
-      weigth: {
+      weight: {
         type: DataTypes.INTEGER,
       },
       //podría ir un atributo imagen que recibe una url, para la sprite...

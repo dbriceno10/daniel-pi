@@ -3,6 +3,7 @@ const axios = require('axios');
 const { Pokemon, Type } = require('../db'); //me raigo mis modelos de base de datos
 const { getPokemonData } = require('../utils/getPokemonData');
 const { getNamesByTypes } = require('../utils/getNamesByTypes');
+const { getID } = require('../utils/getID.js');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -29,22 +30,18 @@ router.get('/', async (req, res, next) => {
         },
       });
       // ---> Traemos a los pokemon desde el API
-      const data1 = await axios.get('https://pokeapi.co/api/v2/pokemon'); //obtenemos pokemons del 1 al 20
-      const data2 = await axios.get(data1.data.next); //obtenemos pokemons del 21 al 40
-      let pk = [
-        // por cuestiones del internet solo nos limitaremos a traer 6 pokemon, los primeros 3 de cada petición
-        data1.data.results[0],
-        // data1.data.results[1],
-        // data1.data.results[2],
-        // data2.data.results[0],
-        // data2.data.results[1],
-        // data2.data.results[2],
+      const dataAPI = await axios.get(
+        'https://pokeapi.co/api/v2/pokemon?limit=40'
+      ); //obtenemos pokemons del 1 al 40
+
+      // const pk = [...dataAPI.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
+      const pk = [
+        dataAPI.data.results[0],
+        dataAPI.data.results[2],
+        dataAPI.data.results[3],
       ];
-      // let pokemons = [];
-      // let pk = [...data1.data.results, ...data2.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
-      // let pokemons = await pk.map((pokemon) => axios.get(pokemon.url)); //genero un array de promesas, para trater la info de cada pokemon
       const data = await Promise.all(
-        pk.map((pokemon) => axios.get(pokemon.url))
+        pk.map((pokemon) => axios.get(pokemon.url)) //genero un array de promesas
       ); //paso mi array de promesas para resolverlo
       let arrPokemons = []; // array auxiliar para guardar la info filtrada de cada pokemon
       data.forEach((pokemon) => {
@@ -55,6 +52,7 @@ router.get('/', async (req, res, next) => {
       arrPokemonsDb = arrPokemonsDb.map((e) => {
         return { ...e.dataValues, types: getNamesByTypes(e.dataValues) };
       });
+      console.log(arrPokemons);
       return res.send([...arrPokemonsDb, ...arrPokemons]);
     } else {
       //si llegó un name por query
@@ -79,13 +77,8 @@ router.get('/', async (req, res, next) => {
       );
       pokemonAPI = getPokemonData(pokemonAPI);
       return res.send(pokemonAPI);
-      // } catch (error) {
-      //   res.sendStatus(404)
-      // }
     }
   } catch (error) {
-    // console.error(error);
-    // res.send('Error');
     res.sendStatus(404);
   }
 });
@@ -93,29 +86,35 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const { name, hp, strength, defense, speed, height, weight, img, types } =
     req.body;
-  const pokemonCreated = await Pokemon.create({
-    name,
-    hp,
-    strength,
-    defense,
-    speed,
-    height,
-    weight,
-    img,
-  });
-});
-
-async function getID(data) {
-  let array = [];
-  for (let i = 0; i < data.length; i++) {
-    arr.push(
-      await Type.findOne({
-        where: { name: data[i] },
-        attributes: ['id'],
-      })
-    );
+  if (name) {
+    const pokemonCreated = await Pokemon.create({
+      name,
+      hp,
+      strength,
+      defense,
+      speed,
+      height,
+      weight,
+      img,
+    });
+    if (types) {
+      const arrID = await getID(types);
+      await pokemonCreated.setTypes(arrID);
+      let pokemons = await Pokemon.findOne({
+        where: {
+          id: pokemonCreated.id,
+        },
+        include: Type,
+      });
+      pokemons = {
+        ...pokemons.dataValues,
+        types: getNamesByTypes(pokemons),
+        // types: getNamestypes(pokemons).reverse(),
+      };
+      return res.json(pokemons);
+    }
   }
-  return array;
-}
+  res.status(404).send('Name is required to create a new pokemon');
+});
 
 module.exports = router;

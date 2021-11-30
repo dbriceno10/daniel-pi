@@ -4,6 +4,7 @@ const { Pokemon, Type } = require('../db'); //me raigo mis modelos de base de da
 const { getPokemonData } = require('../utils/getPokemonData');
 const { getNamesByTypes } = require('../utils/getNamesByTypes');
 const { getID } = require('../utils/getID.js');
+const { arrayPokemonFilterMocks } = require('../../../mocks/mocksData.js');
 // Importar todos los routers;
 // Ejemplo: const authRouter = require('./auth.js');
 
@@ -29,15 +30,12 @@ router.get('/', async (req, res, next) => {
           },
         },
       });
+      /*
       // ---> Traemos a los pokemon desde el API
       const dataAPI = await axios.get(
         'https://pokeapi.co/api/v2/pokemon?limit=40'
       ); //obtenemos pokemons del 1 al 40
-
       // const pk = [...dataAPI.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
-      const pk = [
-        dataAPI.data.results[0],
-      ];
       const data = await Promise.all(
         pk.map((pokemon) => axios.get(pokemon.url)) //genero un array de promesas
       ); //paso mi array de promesas para resolverlo
@@ -47,9 +45,11 @@ router.get('/', async (req, res, next) => {
           ...getPokemonData(pokemon), //obtenemos la data y la guardamos en el array de pokemons
         });
       });
+      */
       arrPokemonsDb = arrPokemonsDb.map((e) => {
         return { ...e.dataValues, types: getNamesByTypes(e.dataValues) };
       });
+      const arrPokemons = arrayPokemonFilterMocks.slice(); // ---> Data hardcodeada para mandar al front, ya tiene la info que nos interesa de los 40 pokemon en ese array
       return res.send([...arrPokemonsDb, ...arrPokemons]);
     } else {
       //si llegó un name por query
@@ -83,7 +83,8 @@ router.get('/', async (req, res, next) => {
 router.post('/', async (req, res, next) => {
   const { name, hp, strength, defense, speed, height, weight, img, types } =
     req.body; //recibo toda la info por body
-  if (name) { //solo si recibo un nombre voy a guardar el pokemon en la base de datos
+  if (name) {
+    //solo si recibo un nombre voy a guardar el pokemon en la base de datos
     const pokemonCreated = await Pokemon.create({
       name,
       hp,
@@ -94,7 +95,8 @@ router.post('/', async (req, res, next) => {
       weight,
       img,
     });
-    if (types) { //si recibo un tipos los voy a buscar en la base de datos de tipos para buscar sus ids
+    if (types) {
+      //si recibo un tipos los voy a buscar en la base de datos de tipos para buscar sus ids
       const arrID = await getID(types);
       await pokemonCreated.setTypes(arrID);
       let pokemons = await Pokemon.findOne({
@@ -110,18 +112,20 @@ router.post('/', async (req, res, next) => {
       };
       return res.json(pokemons);
     }
-  }//Nota debemos mejorar esta lógica, se puede dar el caso de que si no le paso un tipo, solo voy a guardar los datos del pokemon, pero no sus tipos, y no retornaría una repuesta, por lo que terminaría enviando solo un mensaje de error
+  } //Nota debemos mejorar esta lógica, se puede dar el caso de que si no le paso un tipo, solo voy a guardar los datos del pokemon, pero no sus tipos, y no retornaría una repuesta, por lo que terminaría enviando solo un mensaje de error
   res.status(404).send('Name is required to create a new pokemon');
 });
 
 router.get('/:id', async (req, res, next) => {
   const { id } = req.params;
-  try {//Primero vamos a buscar en la base de datos, si llega a fallar, lo carturamos en el bloque catch y disparamos un nuevo código
+  try {
+    //Primero vamos a buscar en la base de datos, si llega a fallar, lo carturamos en el bloque catch y disparamos un nuevo código
     let pokemonDB = await Pokemon.findOne({ where: { id }, include: Type });
     pokemonDB = { ...pokemonDB.dataValues, types: getNamesByTypes(pokemonDB) };
     return res.send(pokemonDB);
   } catch (error) {
-    try { //como ese id no estaba en la base de datos, ahora vamos a buscar en el api
+    try {
+      //como ese id no estaba en la base de datos, ahora vamos a buscar en el api
       let pokemonAPI = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${parseInt(id)}`
       );

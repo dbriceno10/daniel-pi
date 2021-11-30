@@ -37,8 +37,6 @@ router.get('/', async (req, res, next) => {
       // const pk = [...dataAPI.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
       const pk = [
         dataAPI.data.results[0],
-        dataAPI.data.results[2],
-        dataAPI.data.results[3],
       ];
       const data = await Promise.all(
         pk.map((pokemon) => axios.get(pokemon.url)) //genero un array de promesas
@@ -52,7 +50,6 @@ router.get('/', async (req, res, next) => {
       arrPokemonsDb = arrPokemonsDb.map((e) => {
         return { ...e.dataValues, types: getNamesByTypes(e.dataValues) };
       });
-      console.log(arrPokemons);
       return res.send([...arrPokemonsDb, ...arrPokemons]);
     } else {
       //si llegó un name por query
@@ -121,7 +118,6 @@ router.get('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {//Primero vamos a buscar en la base de datos, si llega a fallar, lo carturamos en el bloque catch y disparamos un nuevo código
     let pokemonDB = await Pokemon.findOne({ where: { id }, include: Type });
-    console.log('Pokemon DB: ', pokemonDB);
     pokemonDB = { ...pokemonDB.dataValues, types: getNamesByTypes(pokemonDB) };
     return res.send(pokemonDB);
   } catch (error) {

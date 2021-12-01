@@ -81,8 +81,18 @@ router.get('/', async (req, res, next) => {
 });
 
 router.post('/', async (req, res, next) => {
-  const { name, hp, strength, defense, speed, height, weight, img, types } =
-    req.body; //recibo toda la info por body
+  const {
+    name,
+    hp,
+    strength,
+    defense,
+    speed,
+    height,
+    weight,
+    img,
+    types,
+    createInDb,
+  } = req.body; //recibo toda la info por body
   if (name) {
     //solo si recibo un nombre voy a guardar el pokemon en la base de datos
     const pokemonCreated = await Pokemon.create({
@@ -94,6 +104,7 @@ router.post('/', async (req, res, next) => {
       height,
       weight,
       img,
+      createInDb,
     });
     if (types) {
       //si recibo un tipos los voy a buscar en la base de datos de tipos para buscar sus ids

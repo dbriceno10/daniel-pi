@@ -9,11 +9,12 @@ module.exports = (sequelize) => {
       //el id queda como numérico autoincremental
       name: {
         type: DataTypes.STRING,
+        allowNull: true,
       },
     },
     {
-      timestamps: false,
-      createdAt: false,
+      timestamps: true,
+      createdAt: true,
       updatedAt: false,
     }
   );

@@ -2,7 +2,13 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPokemons, getTypes, fillterPokemonsByType } from "../actions";
+import {
+  getAllPokemons,
+  getTypes,
+  fillterPokemonsByType,
+  fillterPokemonsCreated,
+  sortPokemons,
+} from "../actions";
 import Card from "./Card";
 import { capitalizeStringWithTrim } from "../utils/utils";
 import Paginado from "./Paginado";
@@ -19,9 +25,9 @@ export default function Home() {
   }, []); //NOTA: Podemos poner dispatch como argumento para que se ejecute el useEffect cada vez que se despache una acción, pero como no queremos estarle pegando a cada momento a la ruta de pokemons y tipos lo dejaremos así mientras.
 
   // Voy a setear estados locales para manejar el paginado
+  const [order, setOrder] = useState("")
   const [currentPage, setCurrentPage] = useState(1); //inicializamos en la página 1 para arrancar desde allí
-  // eslint-disable-next-line no-unused-vars
-  const [pokemonsPerPage, setPokemonsPerPage] = useState(12); //12 pokemons por página
+  const pokemonsPerPage = 12; //12 pokemons por página
   const indexOfLastPokemon = currentPage * pokemonsPerPage; //voy a guardar el índice del último pokemon por página, para irlos ordenando, ojo es índice no id
   const indexOfFirstPokemon = indexOfLastPokemon - pokemonsPerPage; //0
   const currentPokemons = allPokemons.slice(
@@ -34,12 +40,25 @@ export default function Home() {
 
   function handleClick(e) {
     e.preventDefault();
+    dispatch(getTypes());
     dispatch(getAllPokemons());
   }
 
   function handleFilterTypes(e) {
-    e.preventDefault();
+    // e.preventDefault();
     dispatch(fillterPokemonsByType(e.target.value));
+  }
+
+  function handleFilterCreated(e) {
+    // e.preventDefault();
+    dispatch(fillterPokemonsCreated(e.target.value));
+  }
+
+  function handleSort(e) {
+    e.preventDefault(e)
+    dispatch(sortPokemons(e.target.value));
+    setCurrentPage(1) //seteo la página actual en 1
+    setOrder(e.target.value) //Seteo el orden actual para que me lo tome y haga el renderizado
   }
 
   return (
@@ -50,10 +69,10 @@ export default function Home() {
       <button onClick={handleClick}>Volver a cargar todos los pokemons</button>
       <div>
         {/* Acá vamos a poner los filtros */}
-        <select>
+        <select onChange={handleSort}>
           {/*Primer select para ordenar de forma ascendente y descendente por orden alfabético y por fuerza */}
-          <option value="ascendente">Ascendente</option>
-          <option value="descendente">Descendente</option>
+          <option value="asc">Ascendente</option>
+          <option value="desc">Descendente</option>
         </select>
         <select onChange={handleFilterTypes}>
           {/*Segundo select para filtrar por tipo de pokemon */}
@@ -66,7 +85,7 @@ export default function Home() {
             );
           })}
         </select>
-        <select>
+        <select onChange={handleFilterCreated}>
           {/* Tercer select, para filtrar por pokemons que vienen del api o por pokemons creados por el usuario */}
           <option value="all">Todos</option>
           <option value="created">Creados</option>

@@ -8,7 +8,7 @@ router.get('/', async (req, res, next) => {
   try {
     const typesBD = await Type.findAll({
       //Primero me fijo si los tipos están en la base de datos
-      atributes: ['name', 'id'], //trae la data mediante el nombre(la propiedad del modelo type)
+      // atributes: ['name', 'id'], //trae la data mediante el nombre(la propiedad del modelo type)
     });
     if (!typesBD.length) {
       //si no están, los busco en el api

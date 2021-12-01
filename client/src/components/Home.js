@@ -2,7 +2,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { getAllPokemons, getTypes } from "../actions";
+import { getAllPokemons, getTypes, fillterPokemonsByType } from "../actions";
 import Card from "./Card";
 import { capitalizeStringWithTrim } from "../utils/utils";
 import Paginado from "./Paginado";
@@ -36,6 +36,12 @@ export default function Home() {
     e.preventDefault();
     dispatch(getAllPokemons());
   }
+
+  function handleFilterTypes(e) {
+    e.preventDefault();
+    dispatch(fillterPokemonsByType(e.target.value));
+  }
+
   return (
     <React.Fragment>
       <Link to="/pokemons">
@@ -49,7 +55,7 @@ export default function Home() {
           <option value="ascendente">Ascendente</option>
           <option value="descendente">Descendente</option>
         </select>
-        <select>
+        <select onChange={handleFilterTypes}>
           {/*Segundo select para filtrar por tipo de pokemon */}
           <option value="all">Todos</option>
           {typesPokemons?.map((type) => {
@@ -71,6 +77,7 @@ export default function Home() {
           allPokemons={allPokemons}
           paginado={paginado}
         />
+        {/* Ahora debemos mapear currentPokemons */}
         {currentPokemons?.map((pokemon) => {
           return (
             <Card

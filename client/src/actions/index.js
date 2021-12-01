@@ -5,7 +5,8 @@ export const pokeAction = {
   GET_TYPES: "GET_TYPES",
   FILTER_POKEMONS_BY_TYPE: "FILTER_POKEMONS_BY_TYPE",
   FILTER_POKEMONS_CREATED: "FILTER_POKEMONS_CREATED",
-  SORT_POKEMONS: "SORT_POKEMONS",
+  SORT_POKEMONS_ALPHABETICALLY: "SORT_POKEMONS_ALPHABETICALLY",
+  SORT_POKEMONS_BY_STRENGTH: "SORT_POKEMONS_BY_STRENGTH",
 };
 
 //acción para traerme a todos los pokemons del api + los de la base de datos
@@ -43,9 +44,16 @@ export function fillterPokemonsCreated(created) {
   };
 }
 
-export function sortPokemons(sort) {
+export function sortPokemonsAlphabetically(sort) {
   return {
-    type: pokeAction.SORT_POKEMONS,
+    type: pokeAction.SORT_POKEMONS_ALPHABETICALLY,
+    payload: sort,
+  };
+}
+
+export function sortPokemonsByStrength(sort) {
+  return {
+    type: pokeAction.SORT_POKEMONS_BY_STRENGTH,
     payload: sort,
   };
 }

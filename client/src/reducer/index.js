@@ -12,7 +12,8 @@ function rootReducer(state = inicialState, action) {
       return {
         ...state,
         pokemons: action.payload, //en mi estado de pokemons, que en un principio es un arreglo vacío, manda todo lo que te envie la acción
-        pokemonsCopy: action.payload,
+        pokemonsCopy: action.payload, //una copia que siempre voy a mantener con todos los pokemons que envía el back
+        pokemonsTypesFilter: action.payload, // para no perder los estados filtrados al buscar entre pokemons del api y creados, la inicializa con todos los pokemon en un pricipio
       };
     case pokeAction.GET_TYPES:
       return {
@@ -34,41 +35,59 @@ function rootReducer(state = inicialState, action) {
       };
     case pokeAction.FILTER_POKEMONS_CREATED:
       const allPokemons2 = state.pokemonsTypesFilter;
-      // const createdFilter = action.payload === "created" ? allPokemons2.filter(pokemon => pokemon.createdInDb) : allPokemons2.filter(pokemon => !pokemon.createdInDb)
       let createdFilter = [];
       if (action.payload === "created") {
         createdFilter = allPokemons2.filter((pokemon) => pokemon.createInDb);
-        // console.log(createdFilter);
       } else if (action.payload === "api") {
         createdFilter = allPokemons2.filter((pokemon) => !pokemon.createInDb);
-        // console.log(createdFilter);
       } else {
         createdFilter = allPokemons2;
-        // console.log(createdFilter);
       }
       return {
         ...state,
         pokemons: createdFilter,
       };
-    case pokeAction.SORT_POKEMONS:
-      // const allPokemons3 = state.pokemonsCopy;
-      let sortedArr = [];
+    case pokeAction.SORT_POKEMONS_ALPHABETICALLY:
+      let sortedArr1 = [];
       if (action.payload === "asc") {
-        sortedArr = state.pokemons.sort((a, b) => {
-          if (a.name > b.name) return 1; // a - b ---> a, b
+        sortedArr1 = state.pokemons.sort((a, b) => {
+          if (a.name > b.name) return 1;
           if (a.name < b.name) return -1;
           return 0;
         });
-      } else {
-        sortedArr = state.pokemons.sort((a, b) => {
+      } else if (action.payload === "desc") {
+        sortedArr1 = state.pokemons.sort((a, b) => {
           if (a.name > b.name) return -1;
           if (a.name < b.name) return 1;
           return 0;
         });
+      } else {
+        sortedArr1 = state.pokemons;
       }
       return {
         ...state,
-        pokemons: sortedArr,
+        pokemons: sortedArr1,
+      };
+    case pokeAction.SORT_POKEMONS_BY_STRENGTH:
+      let sortedArr2 = [];
+      if (action.payload === "asc") {
+        sortedArr2 = state.pokemons.sort((a, b) => {
+          if (a.strength > b.strength) return 1;
+          if (a.strength < b.strength) return -1;
+          return 0;
+        });
+      } else if (action.payload === "desc") {
+        sortedArr2 = state.pokemons.sort((a, b) => {
+          if (a.strength > b.strength) return -1;
+          if (a.strength < b.strength) return 1;
+          return 0;
+        });
+      } else {
+        sortedArr2 = state.pokemons;
+      }
+      return {
+        ...state,
+        pokemons: sortedArr2,
       };
     default:
       return state;

@@ -3,6 +3,7 @@ import { BrowserRouter, Route, Switch } from "react-router-dom";
 //Nota: por ahora vamos a estar trabajando con la versión 5 de react-router-dom para agilizar, luego lo vamos a migrar a la verisón 6
 import LandingPage from "./components/LandingPage";
 import Home from "./components/Home";
+import PokemonCreate from "./components/PokemonCreate";
 
 function App() {
   return (
@@ -11,6 +12,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={LandingPage} />
           <Route exact path="/home" component={Home} />
+          <Route exact path="/create" component={PokemonCreate} />
         </Switch>
       </div>
     </BrowserRouter>

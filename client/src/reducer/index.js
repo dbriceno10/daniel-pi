@@ -4,6 +4,7 @@ const inicialState = {
   pokemonsTypesFilter: [], //estado de los pokemons filtrados
   pokemonsCopy: [], //copia del estado original siempre va a tener todos los pokemon del api y bd
   types: [], //guarda el arreglo de los tipos
+  // pokemon: {}, //un pokemon
 };
 
 function rootReducer(state = inicialState, action) {
@@ -14,6 +15,17 @@ function rootReducer(state = inicialState, action) {
         pokemons: action.payload, //en mi estado de pokemons, que en un principio es un arreglo vacío, manda todo lo que te envie la acción
         pokemonsCopy: action.payload, //una copia que siempre voy a mantener con todos los pokemons que envía el back
         pokemonsTypesFilter: action.payload, // para no perder los estados filtrados al buscar entre pokemons del api y creados, la inicializa con todos los pokemon en un pricipio
+      };
+    case pokeAction.GET_POKEMON:
+      return {
+        ...state,
+        pokemons: [action.payload],
+        // pokemon: action.payload,
+        // pokemons: [action.payload, ...state.pokemons],
+      };
+    case pokeAction.POST_POKEMON:
+      return {
+        ...state,
       };
     case pokeAction.GET_TYPES:
       return {

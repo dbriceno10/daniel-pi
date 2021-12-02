@@ -2,6 +2,8 @@ import axios from "axios";
 
 export const pokeAction = {
   GET_ALL_POKEMONS: "GET_ALL_POKEMONS",
+  GET_POKEMON: "GET_POKEMON",
+  POST_POKEMON: "POST_POKEMON",
   GET_TYPES: "GET_TYPES",
   FILTER_POKEMONS_BY_TYPE: "FILTER_POKEMONS_BY_TYPE",
   FILTER_POKEMONS_CREATED: "FILTER_POKEMONS_CREATED",
@@ -17,6 +19,34 @@ export function getAllPokemons() {
       type: pokeAction.GET_ALL_POKEMONS,
       payload: pokemons.data,
     });
+  };
+}
+export function getPokemon(name) {
+  return async function (dispatch) {
+    try {
+      const pokemon = await axios(
+        `http://localhost:3001/api/pokemons?name=${name}`
+      );
+      return dispatch({
+        type: pokeAction.GET_POKEMON,
+        payload: pokemon.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
+  };
+}
+
+export function postPokemon(dataPokemon) {
+  return async function (dispatch) {
+    const pokemon = await axios.post(
+      "http://localhost:3001/api/pokemons",
+      dataPokemon
+    );
+    console.log(pokemon);
+    return {
+      payload: pokemon,
+    };
   };
 }
 

@@ -14,6 +14,7 @@ import Card from "./Card";
 import { capitalizeStringWithTrim } from "../utils/utils";
 import Paginado from "./Paginado";
 import SortSelect from "./SortSelect";
+import SearchBar from "./SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -77,6 +78,7 @@ export default function Home() {
         <h1>Crear Pokemon</h1>
       </Link>
       <button onClick={handleClick}>Volver a cargar todos los pokemons</button>
+      <SearchBar />
       <div>
         {/* Acá vamos a poner los filtros */}
         {/*Primeros select para ordenar de forma ascendente y descendente por orden alfabético y fuerza*/}

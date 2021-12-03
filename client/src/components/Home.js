@@ -74,7 +74,7 @@ export default function Home() {
 
   return (
     <React.Fragment>
-      <Link to="/pokemons">
+      <Link to="/create">
         <h1>Crear Pokemon</h1>
       </Link>
       <button onClick={handleClick}>Volver a cargar todos los pokemons</button>
@@ -121,6 +121,7 @@ export default function Home() {
               img={pokemon.img}
               types={pokemon.types}
               key={pokemon.id}
+              id={pokemon.id}
             />
           );
         })}

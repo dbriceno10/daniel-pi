@@ -9,16 +9,21 @@ export const pokeAction = {
   FILTER_POKEMONS_CREATED: "FILTER_POKEMONS_CREATED",
   SORT_POKEMONS_ALPHABETICALLY: "SORT_POKEMONS_ALPHABETICALLY",
   SORT_POKEMONS_BY_STRENGTH: "SORT_POKEMONS_BY_STRENGTH",
+  GET_DETAILS: "GET_DETAILS",
 };
 
 //acción para traerme a todos los pokemons del api + los de la base de datos
 export function getAllPokemons() {
   return async function (dispatch) {
-    const pokemons = await axios("http://localhost:3001/api/pokemons");
-    return dispatch({
-      type: pokeAction.GET_ALL_POKEMONS,
-      payload: pokemons.data,
-    });
+    try {
+      const pokemons = await axios("http://localhost:3001/api/pokemons");
+      return dispatch({
+        type: pokeAction.GET_ALL_POKEMONS,
+        payload: pokemons.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 export function getPokemon(name) {
@@ -39,24 +44,33 @@ export function getPokemon(name) {
 
 export function postPokemon(dataPokemon) {
   return async function (dispatch) {
-    const pokemon = await axios.post(
-      "http://localhost:3001/api/pokemons",
-      dataPokemon
-    );
-    console.log(pokemon);
-    return {
-      payload: pokemon,
-    };
+    try {
+      const pokemon = await axios.post(
+        "http://localhost:3001/api/pokemons",
+        dataPokemon
+      );
+      console.log(pokemon);
+      return dispatch({
+        type: pokeAction.POST_POKEMON,
+        payload: pokemon,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 
 export function getTypes() {
   return async function (dispatch) {
-    const types = await axios("http://localhost:3001/api/types");
-    return dispatch({
-      type: pokeAction.GET_TYPES,
-      payload: types.data,
-    });
+    try {
+      const types = await axios("http://localhost:3001/api/types");
+      return dispatch({
+        type: pokeAction.GET_TYPES,
+        payload: types.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 }
 
@@ -85,5 +99,19 @@ export function sortPokemonsByStrength(sort) {
   return {
     type: pokeAction.SORT_POKEMONS_BY_STRENGTH,
     payload: sort,
+  };
+}
+
+export function getDetails(id) {
+  return async function (dispatch) {
+    try {
+      const detail = await axios(`http://localhost:3001/api/pokemons/${id}`);
+      return dispatch({
+        type: pokeAction.GET_DETAILS,
+        payload: detail.data,
+      });
+    } catch (error) {
+      console.error(error);
+    }
   };
 }

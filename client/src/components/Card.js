@@ -1,11 +1,14 @@
 import React from "react";
+import { Link } from "react-router-dom";
 import { capitalizeStringWithTrim } from "../utils/utils";
 
-export default function Card({ img, name, types }) {
+export default function Card({ img, name, types, id }) {
   // types ---> es un arreglo con los tipos del pokemon
   return (
     <div>
-      <img src={img} alt="img not found" width="200px" height="250px" />
+      <Link to={`/home/${id}`}>
+        <img src={img} alt="img not found" width="200px" height="250px" />
+      </Link>
       <h2>{name}</h2>
       <h5>
         {types?.map((type) => {

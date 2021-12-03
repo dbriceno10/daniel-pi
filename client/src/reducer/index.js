@@ -4,6 +4,7 @@ const inicialState = {
   pokemonsTypesFilter: [], //estado de los pokemons filtrados
   pokemonsCopy: [], //copia del estado original siempre va a tener todos los pokemon del api y bd
   types: [], //guarda el arreglo de los tipos
+  details: [],
   // pokemon: {}, //un pokemon
 };
 
@@ -100,6 +101,11 @@ function rootReducer(state = inicialState, action) {
       return {
         ...state,
         pokemons: sortedArr2,
+      };
+    case pokeAction.GET_DETAILS:
+      return {
+        ...state,
+        details: [action.payload],
       };
     default:
       return state;

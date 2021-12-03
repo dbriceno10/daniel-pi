@@ -19,16 +19,25 @@ export default function PokemonCreate() {
     img: "",
     types: [],
   });
+  const [error, setError] = useState({});
+  const [disabled, setDisabled] = useState(true);
   const history = useHistory();
   useEffect(() => {
     dispatch(getTypes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
+
   function handleChange(e) {
     setInput({
       ...input,
       [e.target.name]: e.target.value,
     });
+    setError(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   }
   function handleSubmit(e) {
     e.preventDefault();
@@ -56,28 +65,48 @@ export default function PokemonCreate() {
     }
     if (!e.target.checked) {
       input.types.splice(input.types.indexOf(e.target.value), 1);
-      // const index = input.types.indexOf(e.target.value);
-      // const newTypes = input.types.filter((e) => e !== input.types[index]);
       setInput({
         ...input,
-        // types: newTypes,
       });
     }
+    setError(
+      validate({
+        ...input,
+        [e.target.name]: e.target.value,
+      })
+    );
   }
-  // function handleCheck(e) {
-  //   if (e.target.checked) {
-  //     setInput({
-  //       ...input,
-  //       types: e.target.value,
-  //     });
-  //   }
-  // }
-  // function handleSelect(e) {
-  //   setInput({
-  //     ...input,
-  //     types: [...input.types, e.target.value], //traeme lo que había y concatenale el target.value
-  //   });
-  // }
+  function validate(input) {
+    let errors = {};
+    if (!input.types.length) errors.types = "Tipo Requerido";
+    if (!input.name) errors.name = "Nombre Requerido";
+    // if (!input.hp) errors.hp = "Vida Requerida";
+    // if (!input.strength) errors.strength = "Fuerza Requerida";
+    // if (!input.defense) errors.defense = "Fuerza Requerida";
+    // if (!input.speed) errors.speed = "Velocidad Requerida";
+    // if (!input.height) errors.height = "Altura Requerida";
+    // if (!input.weight) errors.weight = "Peso Requerido";
+    // if (!input.img) errors.img = "Imagen Requerida";
+    return errors;
+  }
+  useEffect(() => {
+    if (
+      input.types.length > 0 &&
+      input.name.length > 0 &&
+      input.types.length < 3
+      // input.hp.length > 0 &&
+      // input.strength.length > 0 &&
+      // input.defense.length > 0 &&
+      // input.speed.length > 0 &&
+      // input.height.length > 0 &&
+      // input.weight.length > 0 &&
+      // input.img.length > 0
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [input, setDisabled]);
   return (
     <div>
       <Link to="/home">
@@ -93,6 +122,7 @@ export default function PokemonCreate() {
           value={input.name}
           onChange={handleChange}
         />
+        {/* {error.name && <p>{error.name}</p>} */}
         <label>Vida:</label>
         <input
           type="number"
@@ -101,6 +131,7 @@ export default function PokemonCreate() {
           value={input.hp}
           onChange={handleChange}
         />
+        {/* {error.hp && <p>{error.hp}</p>} */}
         <label>Fuerza:</label>
         <input
           type="number"
@@ -109,6 +140,7 @@ export default function PokemonCreate() {
           value={input.strength}
           onChange={handleChange}
         />
+        {/* {error.strength && <p>{error.strength}</p>} */}
         <label>Defensa:</label>
         <input
           type="number"
@@ -117,6 +149,7 @@ export default function PokemonCreate() {
           value={input.defense}
           onChange={handleChange}
         />
+        {/* {error.defense && <p>{error.defense}</p>} */}
         <label>Velocidad:</label>
         <input
           type="number"
@@ -125,6 +158,7 @@ export default function PokemonCreate() {
           value={input.speed}
           onChange={handleChange}
         />
+        {/* {error.speed && <p>{error.speed}</p>} */}
         <label>Altura:</label>
         <input
           type="number"
@@ -133,6 +167,7 @@ export default function PokemonCreate() {
           value={input.height}
           onChange={handleChange}
         />
+        {/* {error.height && <p>{error.height}</p>} */}
         <label>Peso:</label>
         <input
           type="number"
@@ -141,6 +176,7 @@ export default function PokemonCreate() {
           value={input.weight}
           onChange={handleChange}
         />
+        {/* {error.weight && <p>{error.weight}</p>} */}
         <label>Imagen:</label>
         <input
           type="text"
@@ -149,6 +185,7 @@ export default function PokemonCreate() {
           value={input.img}
           onChange={handleChange}
         />
+        {/* {error.img && <p>{error.img}</p>} */}
         <label>Tipo</label>
         <div>
           {typesPokemons?.map((type) => {
@@ -158,29 +195,18 @@ export default function PokemonCreate() {
                   type="checkbox"
                   name={type.name}
                   value={type.name}
-                  onChange={handleCheck}
+                  onClick={handleCheck}
                 />
                 {capitalizeStringWithTrim(type.name)}
               </label>
             );
           })}
         </div>
-        {/* <div>
-          <label>Tipos</label>
-          <select onChange={handleSelect}>
-            {typesPokemons?.map((type) => {
-              return (
-                <option key={type.id} value={type.name}>
-                  {capitalizeStringWithTrim(type.name)}
-                </option>
-              );
-            })}
-          </select>
-          <ul>
-            <li>{input.types.map((type) => type + ",")}</li>
-          </ul>
-        </div> */}
-        <button type="submit">Enviar</button>
+        {error.types && <p>{error.types}</p>}
+        {input.types.length > 2 ? <p>Seleccione Máximo 2 Tipos</p> : null}
+        <button type="submit" disabled={disabled}>
+          Enviar
+        </button>
       </form>
     </div>
   );

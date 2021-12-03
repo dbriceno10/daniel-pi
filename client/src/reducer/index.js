@@ -14,8 +14,9 @@ function rootReducer(state = inicialState, action) {
     case pokeAction.GET_ALL_POKEMONS:
       return {
         ...state,
-        pokemons: action.payload.concat(state.searchPokemons), //en mi estado de pokemons, que en un principio es un arreglo vacío, manda todo lo que te envie la acción
-        pokemonsCopy: action.payload.concat(state.searchPokemons), //una copia que siempre voy a mantener con todos los pokemons que envía el back
+
+        pokemons: [...state.searchPokemons, ...action.payload], //en mi estado de pokemons, que en un principio es un arreglo vacío, manda todo lo que te envie la acción
+        pokemonsCopy: [...state.searchPokemons, ...action.payload], //una copia que siempre voy a mantener con todos los pokemons que envía el back
         pokemonsTypesFilter: action.payload, // para no perder los estados filtrados al buscar entre pokemons del api y creados, la inicializa con todos los pokemon en un pricipio
       };
     case pokeAction.GET_POKEMON:
@@ -31,10 +32,9 @@ function rootReducer(state = inicialState, action) {
         return {
           ...state,
           pokemons: [action.payload],
-          searchPokemons: [...state.searchPokemons, action.payload],
+          searchPokemons: [action.payload, ...state.searchPokemons],
         };
       }
-
     case pokeAction.POST_POKEMON:
       return {
         ...state,

@@ -107,6 +107,11 @@ function rootReducer(state = inicialState, action) {
         ...state,
         details: [action.payload],
       };
+    case pokeAction.CLEAR_DETAILS_STATE:
+      return {
+        ...state,
+        details: [],
+      };
     default:
       return state;
   }

@@ -10,6 +10,7 @@ export const pokeAction = {
   SORT_POKEMONS_ALPHABETICALLY: "SORT_POKEMONS_ALPHABETICALLY",
   SORT_POKEMONS_BY_STRENGTH: "SORT_POKEMONS_BY_STRENGTH",
   GET_DETAILS: "GET_DETAILS",
+  CLEAR_DETAILS_STATE: "CLEAR_DETAILS_STATE",
 };
 
 //acción para traerme a todos los pokemons del api + los de la base de datos
@@ -49,7 +50,6 @@ export function postPokemon(dataPokemon) {
         "http://localhost:3001/api/pokemons",
         dataPokemon
       );
-      console.log(pokemon);
       return dispatch({
         type: pokeAction.POST_POKEMON,
         payload: pokemon,
@@ -113,5 +113,11 @@ export function getDetails(id) {
     } catch (error) {
       console.error(error);
     }
+  };
+}
+
+export function clearDetailsState() {
+  return {
+    type: pokeAction.CLEAR_DETAILS_STATE,
   };
 }

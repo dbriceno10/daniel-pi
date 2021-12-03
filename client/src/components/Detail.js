@@ -2,16 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDetails } from "../actions";
+import { getDetails, clearDetailsState } from "../actions";
 import { capitalizeStringWithTrim } from "../utils/utils";
 export default function Details(props) {
-  // console.log(props);
   const dispatch = useDispatch();
+  const pokemon = useSelector((state) => state.details);
   useEffect(() => {
     dispatch(getDetails(props.match.params.id));
+    return () => {
+      dispatch(clearDetailsState());
+    };
   }, []);
 
-  const pokemon = useSelector((state) => state.details);
   return (
     <div>
       {pokemon.length > 0 ? (
@@ -43,7 +45,9 @@ export default function Details(props) {
       ) : (
         <p>...Loading</p>
       )}
-      <Link to="/home"><button>Volver</button></Link>
+      <Link to="/home">
+        <button>Volver</button>
+      </Link>
     </div>
   );
 }

@@ -55,6 +55,7 @@ export function postPokemon(dataPokemon) {
         "http://localhost:3001/api/pokemons",
         dataPokemon
       );
+      alert("Pokemon Creado");
       return dispatch({
         type: pokeAction.POST_POKEMON,
         payload: pokemon,

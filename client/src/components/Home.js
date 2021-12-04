@@ -12,7 +12,7 @@ import {
   trueLoader,
 } from "../actions";
 import Card from "./Card";
-import { capitalizeStringWithTrim } from "../utils/utils";
+import { capitalizeString } from "../utils/utils";
 import Paginado from "./Paginado";
 import SortSelect from "./SortSelect";
 import SearchBar from "./SearchBar";
@@ -101,7 +101,7 @@ export default function Home() {
           {typesPokemons?.map((type) => {
             return (
               <option key={type.name} value={type.name}>
-                {capitalizeStringWithTrim(type.name)}
+                {capitalizeString(type.name)}
               </option>
             );
           })}
@@ -126,7 +126,7 @@ export default function Home() {
             {currentPokemons?.map((pokemon) => {
               return (
                 <Card
-                  name={capitalizeStringWithTrim(pokemon.name)}
+                  name={capitalizeString(pokemon.name)}
                   img={pokemon.img}
                   types={pokemon.types}
                   key={pokemon.id}

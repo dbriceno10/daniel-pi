@@ -3,7 +3,8 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 import { getDetails, clearDetailsState, trueLoader } from "../actions";
-import { capitalizeStringWithTrim } from "../utils/utils";
+import { capitalizeString } from "../utils/utils";
+import defaultImg from "../assets/who_is.png";
 export default function Details(props) {
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.details);
@@ -21,8 +22,13 @@ export default function Details(props) {
     <div>
       {pokemon.length > 0 ? (
         <div>
-          <h1>{capitalizeStringWithTrim(pokemon[0].name)}</h1>
-          <img src={pokemon[0].img} alt="not found" />
+          <h1>{capitalizeString(pokemon[0].name)}</h1>
+          <img
+            src={pokemon[0].img ? pokemon[0].img : defaultImg}
+            alt="not found"
+            width="150px"
+            height="150px"
+          />
           <p>Vida: {pokemon[0].hp}</p>
           <p>Fuerza: {pokemon[0].strength}</p>
           <p>Defensa: {pokemon[0].defense}</p>
@@ -39,7 +45,7 @@ export default function Details(props) {
                   }}
                   key={type}
                 >
-                  {capitalizeStringWithTrim(type)}
+                  {capitalizeString(type)}
                 </span>
               );
             })}

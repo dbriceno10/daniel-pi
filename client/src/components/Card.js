@@ -1,13 +1,19 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { capitalizeStringWithTrim } from "../utils/utils";
+import defaultImg from "../assets/who_is.png";
 
 export default function Card({ img, name, types, id }) {
   // types ---> es un arreglo con los tipos del pokemon
   return (
     <div>
       <Link to={`/home/${id}`}>
-        <img src={img} alt="img not found" width="200px" height="250px" />
+        <img
+          src={img ? img : defaultImg}
+          alt="img not found"
+          width="150px"
+          height="150px"
+        />
       </Link>
       <h2>{name}</h2>
       <h5>

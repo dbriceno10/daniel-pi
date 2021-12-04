@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { getTypes, postPokemon } from "../actions";
-import { capitalizeStringWithTrim } from "../utils/utils";
+import { capitalizeString, urlPatternValidation } from "../utils/utils";
 
 export default function PokemonCreate() {
   const dispatch = useDispatch();
@@ -30,7 +30,7 @@ export default function PokemonCreate() {
   function handleChange(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value,
+      [e.target.name]: e.target.value.trim(),
     });
     setError(
       validate({
@@ -42,7 +42,7 @@ export default function PokemonCreate() {
   function handleSubmit(e) {
     e.preventDefault();
     dispatch(postPokemon(input));
-    alert("Pokemon Creado");
+    // alert("Pokemon Creado");
     setInput({
       name: "",
       hp: "",
@@ -87,13 +87,16 @@ export default function PokemonCreate() {
     // if (!input.height) errors.height = "Altura Requerida";
     // if (!input.weight) errors.weight = "Peso Requerido";
     // if (!input.img) errors.img = "Imagen Requerida";
+    if (!urlPatternValidation(input.img) && input.img !== "")
+      errors.img = "Formato no soportado";
     return errors;
   }
   useEffect(() => {
     if (
       input.types.length > 0 &&
       input.name.length > 0 &&
-      input.types.length < 3
+      input.types.length < 3 &&
+      !error.hasOwnProperty("img")
       // input.hp.length > 0 &&
       // input.strength.length > 0 &&
       // input.defense.length > 0 &&
@@ -185,7 +188,7 @@ export default function PokemonCreate() {
           value={input.img}
           onChange={handleChange}
         />
-        {/* {error.img && <p>{error.img}</p>} */}
+        {error.img && <p>{error.img}</p>}
         <label>Tipo</label>
         <div>
           {typesPokemons?.map((type) => {
@@ -197,7 +200,7 @@ export default function PokemonCreate() {
                   value={type.name}
                   onClick={handleCheck}
                 />
-                {capitalizeStringWithTrim(type.name)}
+                {capitalizeString(type.name)}
               </label>
             );
           })}

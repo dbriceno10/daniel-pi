@@ -15,6 +15,7 @@ module.exports = (sequelize) => {
       name: {
         type: DataTypes.STRING,
         allowNull: false, //para hacer que sea obligatorio
+        unique: true,
       },
       //de life a weigth, son opcionales y todos de tipo entero
       hp: {

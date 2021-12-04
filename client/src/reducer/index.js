@@ -6,6 +6,7 @@ const inicialState = {
   types: [], //guarda el arreglo de los tipos
   details: [],
   searchPokemons: [], //para guardar los pokemon buscados con la SearchBar
+  loader: true, //para setear un loader
   // pokemon: {}, //un pokemon
 };
 
@@ -14,7 +15,7 @@ function rootReducer(state = inicialState, action) {
     case pokeAction.GET_ALL_POKEMONS:
       return {
         ...state,
-
+        loader: false,
         pokemons: [...state.searchPokemons, ...action.payload], //en mi estado de pokemons, que en un principio es un arreglo vacío, manda todo lo que te envie la acción
         pokemonsCopy: [...state.searchPokemons, ...action.payload], //una copia que siempre voy a mantener con todos los pokemons que envía el back
         pokemonsTypesFilter: action.payload, // para no perder los estados filtrados al buscar entre pokemons del api y creados, la inicializa con todos los pokemon en un pricipio
@@ -27,12 +28,14 @@ function rootReducer(state = inicialState, action) {
         return {
           ...state,
           pokemons: [action.payload],
+          loader: false,
         };
       } else {
         return {
           ...state,
-          pokemons: [action.payload],// si hago get a un pokemon que no esté en el estado actual, lo guardo en un arreglo y luego lo paso al principal
+          pokemons: [action.payload], // si hago get a un pokemon que no esté en el estado actual, lo guardo en un arreglo y luego lo paso al principal
           searchPokemons: [action.payload, ...state.searchPokemons],
+          loader: false,
         };
       }
     case pokeAction.POST_POKEMON:
@@ -122,6 +125,16 @@ function rootReducer(state = inicialState, action) {
       return {
         ...state,
         details: [],
+      };
+    case pokeAction.LOADER_TRUE:
+      return {
+        ...state,
+        loader: true,
+      };
+    case pokeAction.LOADER_FALSE:
+      return {
+        ...state,
+        loader: false,
       };
     default:
       return state;

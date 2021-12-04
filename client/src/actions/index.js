@@ -11,6 +11,8 @@ export const pokeAction = {
   SORT_POKEMONS_BY_STRENGTH: "SORT_POKEMONS_BY_STRENGTH",
   GET_DETAILS: "GET_DETAILS",
   CLEAR_DETAILS_STATE: "CLEAR_DETAILS_STATE",
+  LOADER_TRUE: "LOADER_TRUE",
+  LOADER_FALSE: "LOADER_FALSE",
 };
 
 //acción para traerme a todos los pokemons del api + los de la base de datos
@@ -41,6 +43,7 @@ export function getPokemon(name) {
     } catch (error) {
       console.error(error);
       alert("Ha ocurrido un error, por favor vuelve a intentar");
+      return dispatch({ type: pokeAction.LOADER_FALSE });
     }
   };
 }
@@ -117,6 +120,7 @@ export function getDetails(id) {
     } catch (error) {
       console.error(error);
       alert("Ha ocurrido un error, por favor vuelve a intentar");
+      return dispatch({ type: pokeAction.LOADER_FALSE });
     }
   };
 }
@@ -124,5 +128,11 @@ export function getDetails(id) {
 export function clearDetailsState() {
   return {
     type: pokeAction.CLEAR_DETAILS_STATE,
+  };
+}
+
+export function trueLoader() {
+  return {
+    type: pokeAction.LOADER_TRUE,
   };
 }

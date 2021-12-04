@@ -2,15 +2,18 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
-import { getDetails, clearDetailsState } from "../actions";
+import { getDetails, clearDetailsState, trueLoader } from "../actions";
 import { capitalizeStringWithTrim } from "../utils/utils";
 export default function Details(props) {
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.details);
+  const loader = useSelector((state) => state.loader);
   useEffect(() => {
     dispatch(getDetails(props.match.params.id));
-    return () => { //componentWilUnmount
+    return () => {
+      //componentWilUnmount
       dispatch(clearDetailsState());
+      dispatch(trueLoader());
     };
   }, []);
 
@@ -43,8 +46,9 @@ export default function Details(props) {
           </h5>
         </div>
       ) : (
-        <p>...Loading</p>
+        <p className={loader ? null : "hidden"}>...Loading</p>
       )}
+      <p className={loader ? "hidden" : null}>Pokemon Not Found</p>
       <Link to="/home">
         <button>Volver</button>
       </Link>

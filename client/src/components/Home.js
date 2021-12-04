@@ -9,6 +9,7 @@ import {
   fillterPokemonsCreated,
   sortPokemonsAlphabetically,
   sortPokemonsByStrength,
+  trueLoader,
 } from "../actions";
 import Card from "./Card";
 import { capitalizeStringWithTrim } from "../utils/utils";
@@ -20,13 +21,16 @@ export default function Home() {
   const dispatch = useDispatch();
   const allPokemons = useSelector((state) => state.pokemons);
   const typesPokemons = useSelector((state) => state.types);
+  const loader = useSelector((state) => state.loader);
   useEffect(() => {
     //componentDitMount
     dispatch(getTypes());
     dispatch(getAllPokemons());
     // eslint-disable-next-line react-hooks/exhaustive-deps
+    return () => {
+      dispatch(trueLoader());
+    };
   }, []); //NOTA: Podemos poner dispatch como argumento para que se ejecute el useEffect cada vez que se despache una acción, pero como no queremos estarle pegando a cada momento a la ruta de pokemons y tipos lo dejaremos así mientras.
-
   // Voy a setear estados locales para manejar el paginado
   // eslint-disable-next-line no-unused-vars
   const [order, setOrder] = useState("");
@@ -74,6 +78,7 @@ export default function Home() {
 
   return (
     <React.Fragment>
+    <Link to="/"><h2>LandingPage</h2></Link>
       <Link to="/create">
         <h1>Crear Pokemon</h1>
       </Link>
@@ -108,23 +113,29 @@ export default function Home() {
           <option value="created">Creados</option>
           <option value="api">De Internet</option>
         </select>
-        <Paginado
-          pokemonsPerPage={pokemonsPerPage}
-          allPokemons={allPokemons}
-          paginado={paginado}
-        />
-        {/* Ahora debemos mapear currentPokemons */}
-        {currentPokemons?.map((pokemon) => {
-          return (
-            <Card
-              name={capitalizeStringWithTrim(pokemon.name)}
-              img={pokemon.img}
-              types={pokemon.types}
-              key={pokemon.id}
-              id={pokemon.id}
+        {loader ? (
+          <p>...loading</p>
+        ) : (
+          <div>
+            <Paginado
+              pokemonsPerPage={pokemonsPerPage}
+              allPokemons={allPokemons}
+              paginado={paginado}
             />
-          );
-        })}
+            {/* Ahora debemos mapear currentPokemons */}
+            {currentPokemons?.map((pokemon) => {
+              return (
+                <Card
+                  name={capitalizeStringWithTrim(pokemon.name)}
+                  img={pokemon.img}
+                  types={pokemon.types}
+                  key={pokemon.id}
+                  id={pokemon.id}
+                />
+              );
+            })}
+          </div>
+        )}
       </div>
     </React.Fragment>
   );

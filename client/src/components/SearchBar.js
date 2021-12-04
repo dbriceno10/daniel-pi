@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
-import { getPokemon } from "../actions";
+import { getPokemon, trueLoader } from "../actions";
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -9,11 +9,12 @@ export default function SearchBar() {
   const [error, setError] = useState(true);
   function handleInputChange(e) {
     e.preventDefault();
-    setPokemon(e.target.value);
+    setPokemon(e.target.value.toLowerCase());
   }
   function handleSubmit(e) {
     e.preventDefault(e);
     dispatch(getPokemon(pokemon));
+    dispatch(trueLoader());
     setPokemon("");
     e.target.reset();
   }

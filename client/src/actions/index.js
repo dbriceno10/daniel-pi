@@ -24,6 +24,7 @@ export function getAllPokemons() {
       });
     } catch (error) {
       console.error(error);
+      alert("Ha ocurrido un error, por favor vuelve a intentar");
     }
   };
 }
@@ -39,6 +40,7 @@ export function getPokemon(name) {
       });
     } catch (error) {
       console.error(error);
+      alert("Ha ocurrido un error, por favor vuelve a intentar");
     }
   };
 }
@@ -56,6 +58,7 @@ export function postPokemon(dataPokemon) {
       });
     } catch (error) {
       console.error(error);
+      alert("Ha ocurrido un error, por favor vuelve a intentar");
     }
   };
 }
@@ -70,6 +73,7 @@ export function getTypes() {
       });
     } catch (error) {
       console.error(error);
+      alert("Ha ocurrido un error, por favor vuelve a intentar");
     }
   };
 }
@@ -112,6 +116,7 @@ export function getDetails(id) {
       });
     } catch (error) {
       console.error(error);
+      alert("Ha ocurrido un error, por favor vuelve a intentar");
     }
   };
 }

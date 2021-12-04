@@ -122,7 +122,7 @@ export default function PokemonCreate() {
           value={input.name}
           onChange={handleChange}
         />
-        {/* {error.name && <p>{error.name}</p>} */}
+        {error.name && <p>{error.name}</p>}
         <label>Vida:</label>
         <input
           type="number"

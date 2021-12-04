@@ -31,7 +31,7 @@ function rootReducer(state = inicialState, action) {
       } else {
         return {
           ...state,
-          pokemons: [action.payload],
+          pokemons: [action.payload],// si hago get a un pokemon que no esté en el estado actual, lo guardo en un arreglo y luego lo paso al principal
           searchPokemons: [action.payload, ...state.searchPokemons],
         };
       }

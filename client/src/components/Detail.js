@@ -9,7 +9,7 @@ export default function Details(props) {
   const pokemon = useSelector((state) => state.details);
   useEffect(() => {
     dispatch(getDetails(props.match.params.id));
-    return () => {
+    return () => { //componentWilUnmount
       dispatch(clearDetailsState());
     };
   }, []);
@@ -18,7 +18,7 @@ export default function Details(props) {
     <div>
       {pokemon.length > 0 ? (
         <div>
-          <h1>{pokemon[0].name}</h1>
+          <h1>{capitalizeStringWithTrim(pokemon[0].name)}</h1>
           <img src={pokemon[0].img} alt="not found" />
           <p>Vida: {pokemon[0].hp}</p>
           <p>Fuerza: {pokemon[0].strength}</p>

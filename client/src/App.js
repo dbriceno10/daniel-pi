@@ -1,10 +1,11 @@
 import "./App.css";
+import "./global.css"
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 //Nota: por ahora vamos a estar trabajando con la versión 5 de react-router-dom para agilizar, luego lo vamos a migrar a la verisón 6
 import LandingPage from "./components/LandingPage";
 import Home from "./components/Home";
 import PokemonCreate from "./components/PokemonCreate";
-import  Details  from "./components/Detail";
+import Details from "./components/Detail";
 
 function App() {
   return (

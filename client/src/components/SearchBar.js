@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { getPokemon, trueLoader } from "../actions";
+import styles from "./styles/SearchBar.module.css"
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -29,15 +30,16 @@ export default function SearchBar() {
     }
   }, [pokemon, setError]);
   return (
-    <form onSubmit={handleSubmit}>
+    <form className={styles.form} onSubmit={handleSubmit}>
       <input
+      className={styles.input}
         name="name"
         value={pokemon.name}
         onChange={handleInputChange}
         type="text"
         placeholder="Buscar..."
       />
-      <button disabled={error} type="submit">
+      <button className={styles.button} disabled={error} type="submit">
         Bucar
       </button>
     </form>

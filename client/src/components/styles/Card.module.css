@@ -1,0 +1,196 @@
+:root {
+  /* --black-contrast: #0b0f10; */
+  --black-contrast: #21292c;
+  --blue-bootstrap: #007bff;
+  --absolute-white: #fff;
+  --absolute-black: #000;
+  --trasition-blue: #1f65b6;
+  --btn-gray: #d0d1d1;
+  --hover-gray: #818081;
+  --steel-color: #b1a7ba;
+  --water-color: #3399ff;
+  --bug-color: #a7b33b;
+  --dragon-color: #7365ab;
+  --electric-color: #f4cb5c;
+  --ghost-color: #6d6895;
+  --fire-color: #de5039;
+  --fairy-color: #f2b4eb;
+  --ice-color: #90d9e5;
+  --fighting-color: #dc9c8f;
+  --normal-color: #dbd3d1;
+  --grass-color: #a9df8f;
+  --psychic-color: #f89dbb;
+  --rock-color: #bba96f;
+  --dark-color: #4f4436;
+  --ground-color: #ecd495;
+  --poison-color: #9c5e8c;
+  --flying-color: #6590c8;
+  --unknown-color: #699d8e;
+  --shadow-color: #000000;
+}
+
+.background {
+  position: relative;
+  /* margin: 0 auto; */
+  min-width: 300px;
+  max-width: 500px;
+  font-family: "Roboto", sans-serif;
+}
+
+.link {
+  /* text-decoration: none; */
+}
+
+.created {
+  position: absolute;
+  bottom: 10px;
+  left: 10px;
+  font-weight: bold;
+}
+
+.name {
+  font-size: 1.3rem;
+}
+
+.link {
+  text-decoration: none;
+  color: var(--absolute-black);
+}
+
+.grid {
+  /* position: relative; */
+  display: grid;
+  grid-template-columns: 150px 150px;
+  justify-content: center;
+  background-color: #eee;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
+  transition: 0.4s;
+  margin: 0;
+}
+
+.grid:hover {
+  box-shadow: 16px 16px 24px rgba(0, 0, 0, 0.4);
+}
+
+.normal {
+  padding: 3px;
+  border: solid 2px var(--normal-color);
+  border-radius: 8px;
+}
+
+.fighting {
+  padding: 3px;
+  border: solid 2px var(--fighting-color);
+  border-radius: 8px;
+}
+
+.flying {
+  padding: 3px;
+  border: solid 2px var(--flying-color);
+  border-radius: 8px;
+}
+
+.poison {
+  padding: 3px;
+  border: solid 2px var(--poison-color);
+  border-radius: 8px;
+}
+
+.ground {
+  padding: 3px;
+  border: solid 2px var(--ground-color);
+  border-radius: 8px;
+}
+
+.rock {
+  padding: 3px;
+  border: solid 2px var(--rock-color);
+  border-radius: 8px;
+}
+
+.bug {
+  padding: 3px;
+  border: solid 2px var(--bug-color);
+  border-radius: 8px;
+}
+
+.ghost {
+  padding: 3px;
+  border: solid 2px var(--ghost-color);
+  border-radius: 8px;
+}
+
+.steel {
+  padding: 3px;
+  border: solid 2px var(--steel-color);
+  border-radius: 8px;
+}
+
+.fire {
+  padding: 3px;
+  border: solid 2px var(--fire-color);
+  border-radius: 8px;
+}
+
+.water {
+  padding: 3px;
+  border: solid 2px var(--water-color);
+  border-radius: 8px;
+}
+
+.grass {
+  padding: 3px;
+  border: solid 2px var(--grass-color);
+  border-radius: 8px;
+}
+
+.electric {
+  padding: 3px;
+  border: solid 2px var(--electric-color);
+  border-radius: 8px;
+}
+
+.psychic {
+  padding: 3px;
+  border: solid 2px var(--psychic-color);
+  border-radius: 8px;
+}
+
+.ice {
+  padding: 3px;
+  border: solid 2px var(--ice-color);
+  border-radius: 8px;
+  width: 45px;
+}
+
+.dragon {
+  padding: 3px;
+  border: solid 2px var(--dragon-color);
+  border-radius: 8px;
+}
+
+.dark {
+  padding: 3px;
+  border: solid 2px var(--dark-color);
+  border-radius: 8px;
+}
+
+.fairy {
+  padding: 3px;
+  border: solid 2px var(--fairy-color);
+  border-radius: 8px;
+}
+
+.unknown {
+  padding: 3px;
+  border: solid 2px var(--unknown-color);
+  border-radius: 8px;
+}
+
+.shadow {
+  padding: 3px;
+  border: solid 2px var(--shadow-color);
+  border-radius: 8px;
+}

@@ -1,0 +1,105 @@
+:root {
+  /* --black-contrast: #0b0f10; */
+  --black-contrast: #21292c;
+  --blue-bootstrap: #007bff;
+  --absolute-white: #fff;
+  --absolute-black: #000;
+  --trasition-blue: #1f65b6;
+  --btn-gray: #d0d1d1;
+  --hover-gray: #818081;
+  --steel-color: #b1a7ba;
+  --water-color: #3399ff;
+  --bug-color: #a7b33b;
+  --dragon-color: #7365ab;
+  --electric-color: #f4cb5c;
+  --ghost-color: #6d6895;
+  --fire-color: #de5039;
+  --fairy-color: #f2b4eb;
+  --ice-color: #90d9e5;
+  --fighting-color: #dc9c8f;
+  --normal-color: #dbd3d1;
+  --grass-color: #a9df8f;
+  --psychic-color: #f89dbb;
+  --rock-color: #bba96f;
+  --dark-color: #4f4436;
+  --ground-color: #ecd495;
+  --poison-color: #9c5e8c;
+  --flying-color: #6590c8;
+  --unknown-color: #699d8e;
+  --shadow-color: #000000;
+}
+
+.background {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  align-items: center;
+  background-color: #eee;
+}
+
+.filtertext {
+  font-size: 1rem;
+  margin-left: 10px;
+}
+
+select {
+  width: 120px;
+  /* height: 30px; */
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1rem;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+}
+
+.left {
+  display: flex;
+  justify-content: start;
+}
+
+.rigth {
+  display: flex;
+  justify-content: end;
+}
+
+.create {
+  font-size: 1rem;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  margin-right: 10px;
+}
+
+.changesort {
+  font-size: 1rem;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  margin-right: 10px;
+}
+
+.wikiimg {
+  display: grid;
+  grid-template-columns: 60px 20px;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--absolute-black);
+}
+
+.wikiimg img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+}
+
+.link {
+  text-decoration: none;
+}

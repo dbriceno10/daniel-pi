@@ -1,0 +1,28 @@
+:root {
+  /* --black-contrast: #0b0f10; */
+  --black-contrast: #21292c;
+  --blue-bootstrap: #007bff;
+  --absolute-white: #fff;
+  --absolute-black: #000;
+  --trasition-blue: #1f65b6;
+  --btn-gray: #d0d1d1;
+  --hover-gray: #818081;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+}
+.container ul {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.container ul li {
+  list-style: none;
+  margin-left: 5px;
+  margin-left: 5px;
+}

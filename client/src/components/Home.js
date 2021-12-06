@@ -11,11 +11,14 @@ import {
   sortPokemonsByStrength,
   trueLoader,
 } from "../actions";
+import styles from "./styles/Home.module.css";
 import Card from "./Card";
 import { capitalizeString } from "../utils/utils";
 import Paginado from "./Paginado";
 import SortSelect from "./SortSelect";
 import SearchBar from "./SearchBar";
+import Loader from "./Loader";
+import NavHome from "./NavHome";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -77,44 +80,21 @@ export default function Home() {
   }
 
   return (
-    <React.Fragment>
-    <Link to="/"><h2>LandingPage</h2></Link>
-      <Link to="/create">
-        <h1>Crear Pokemon</h1>
-      </Link>
-      <button onClick={handleClick}>Volver a cargar todos los pokemons</button>
-      <SearchBar />
-      <div>
-        {/* Acá vamos a poner los filtros */}
-        {/*Primeros select para ordenar de forma ascendente y descendente por orden alfabético y fuerza*/}
-        <SortSelect
-          handleSort={handleSortAlphabetically}
-          sortDescription="Ordenar Alfabéricamente:"
-        />
-        <SortSelect
-          handleSort={handleSortByStrength}
-          sortDescription="Ordernar Por Fuerza:"
-        />
-        <select onChange={handleFilterTypes}>
-          {/*Segundo select para filtrar por tipo de pokemon */}
-          <option value="all">Todos</option>
-          {typesPokemons?.map((type) => {
-            return (
-              <option key={type.name} value={type.name}>
-                {capitalizeString(type.name)}
-              </option>
-            );
-          })}
-          de
-        </select>
-        <select onChange={handleFilterCreated}>
-          {/* Tercer select, para filtrar por pokemons que vienen del api o por pokemons creados por el usuario */}
-          <option value="all">Todos</option>
-          <option value="created">Creados</option>
-          <option value="api">De Internet</option>
-        </select>
+    <div className={styles.background}>
+      <NavHome
+        typesPokemons={typesPokemons}
+        handleClick={handleClick}
+        handleSortAlphabetically={handleSortAlphabetically}
+        handleSortByStrength={handleSortByStrength}
+        handleFilterCreated={handleFilterCreated}
+        handleFilterTypes={handleFilterTypes}
+      />
+      <div className={styles.pokemonscontainer}>
+        <button onClick={handleClick}>
+          Volver a cargar todos los pokemons
+        </button>
         {loader ? (
-          <p>...loading</p>
+          <Loader />
         ) : (
           <div>
             <Paginado
@@ -123,20 +103,23 @@ export default function Home() {
               paginado={paginado}
             />
             {/* Ahora debemos mapear currentPokemons */}
-            {currentPokemons?.map((pokemon) => {
-              return (
-                <Card
-                  name={capitalizeString(pokemon.name)}
-                  img={pokemon.img}
-                  types={pokemon.types}
-                  key={pokemon.id}
-                  id={pokemon.id}
-                />
-              );
-            })}
+            <div className={styles.grid}>
+              {currentPokemons?.map((pokemon) => {
+                return (
+                  <Card
+                    name={capitalizeString(pokemon.name)}
+                    img={pokemon.img}
+                    types={pokemon.types}
+                    key={pokemon.id}
+                    id={pokemon.id}
+                    create={pokemon.createInDb}
+                  />
+                );
+              })}
+            </div>
           </div>
         )}
       </div>
-    </React.Fragment>
+    </div>
   );
 }

@@ -1,0 +1,23 @@
+.form {
+  display: flex;
+}
+
+.input {
+  font-size: 1rem;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  margin-right: 10px;
+}
+
+.button {
+  font-size: 1rem;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  margin-right: 10px;
+}

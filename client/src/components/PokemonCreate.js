@@ -111,7 +111,7 @@ export default function PokemonCreate() {
     }
   }, [error, input, setDisabled]);
   return (
-    <div className={styles.container}>
+    <React.Fragment>
       <Link className={styles.link} to="/home">
         <div className={styles.wikiimg}>
           <div>
@@ -120,153 +120,159 @@ export default function PokemonCreate() {
           <p>Volver</p>
         </div>
       </Link>
-      <h1>Crea tu Pokemon</h1>
-      <form className={styles.form} onSubmit={handleSubmit}>
-        <section className={styles.datacontainer}>
-          <div className={styles.flexform}>
-            <div className={styles.flexinput}>
-              <label>Nombre:</label>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="Nombre"
-                name="name"
-                value={input.name}
-                onChange={handleChange}
-              />
-              {error.name && (
-                <p className={styles.errormessage}>{error.name}</p>
-              )}
-            </div>
-            <div className={styles.flexinput}>
-              <label>Vida:</label>
-              <input
-                className={styles.input}
-                type="number"
-                placeholder="Vida"
-                name="hp"
-                value={input.hp}
-                onChange={handleChange}
-              />
-              {error.hp && <p className={styles.errormessage}>{error.hp}</p>}
-            </div>
-          </div>
-          <div className={styles.flexform}>
-            <div className={styles.flexinput}>
-              <label>Fuerza:</label>
-              <input
-                className={styles.input}
-                type="number"
-                placeholder="Fuerza"
-                name="strength"
-                value={input.strength}
-                onChange={handleChange}
-              />
-              {error.strength && (
-                <p className={styles.errormessage}>{error.strength}</p>
-              )}
-            </div>
-            <div className={styles.flexinput}>
-              <label>Defensa:</label>
-              <input
-                className={styles.input}
-                type="number"
-                placeholder="Defensa"
-                name="defense"
-                value={input.defense}
-                onChange={handleChange}
-              />
-              {error.defense && (
-                <p className={styles.errormessage}>{error.defense}</p>
-              )}
-            </div>
-          </div>
-          <div className={styles.flexform}>
-            <div className={styles.flexinput}>
-              <label>Velocidad:</label>
-              <input
-                className={styles.input}
-                type="number"
-                placeholder="Velocidad"
-                name="speed"
-                value={input.speed}
-                onChange={handleChange}
-              />
-              {error.speed && (
-                <p className={styles.errormessage}>{error.speed}</p>
-              )}
-            </div>
-            <div className={styles.flexinput}>
-              <label>Altura:</label>
-              <input
-                className={styles.input}
-                type="number"
-                placeholder="Altura"
-                name="height"
-                value={input.height}
-                onChange={handleChange}
-              />
-              {error.height && (
-                <p className={styles.errormessage}>{error.height}</p>
-              )}
-            </div>
-          </div>
-          <div className={styles.flexform}>
-            <div className={styles.flexinput}>
-              <label>Peso:</label>
-              <input
-                className={styles.input}
-                type="number"
-                placeholder="Peso"
-                name="weight"
-                value={input.weight}
-                onChange={handleChange}
-              />
-              {error.weight && (
-                <p className={styles.errormessage}>{error.weight}</p>
-              )}
-            </div>
-            <div className={styles.flexinput}>
-              <label>Imagen:</label>
-              <input
-                className={styles.input}
-                type="text"
-                placeholder="url..."
-                name="img"
-                value={input.img}
-                onChange={handleChange}
-              />
-              {error.img && <p className={styles.errormessage}>{error.img}</p>}
-            </div>
-          </div>
-        </section>
-        <label style={{ fontWeight: "bold" }}>Tipo:</label>
-        <div className={styles.checkcontainer}>
-          {typesPokemons?.map((type) => {
-            return (
-              <div key={type.name}>
-                <p className={styles[type.name]}>
-                  {capitalizeString(type.name)}
-                </p>
+      <div className={styles.container}>
+        <form className={styles.form} onSubmit={handleSubmit}>
+          <h1>Crea tu Pokemon</h1>
+          <section className={styles.datacontainer}>
+            <div className={styles.flexform}>
+              <div className={styles.flexinput}>
+                <label>Nombre:</label>
                 <input
-                  type="checkbox"
-                  name={type.name}
-                  value={type.name}
-                  onClick={handleCheck}
+                  className={styles.input}
+                  type="text"
+                  placeholder="Nombre"
+                  name="name"
+                  value={input.name}
+                  onChange={handleChange}
                 />
+                {error.name && (
+                  <p className={styles.errormessage}>{error.name}</p>
+                )}
               </div>
-            );
-          })}
-          {error.types && <p className={styles.errormessage2}>{error.types}</p>}
-          {input.types.length > 2 ? (
-            <p className={styles.errormessage2}>Seleccione Máximo 2 Tipos</p>
-          ) : null}
-        </div>
+              <div className={styles.flexinput}>
+                <label>Vida:</label>
+                <input
+                  className={styles.input}
+                  type="number"
+                  placeholder="Vida"
+                  name="hp"
+                  value={input.hp}
+                  onChange={handleChange}
+                />
+                {error.hp && <p className={styles.errormessage}>{error.hp}</p>}
+              </div>
+            </div>
+            <div className={styles.flexform}>
+              <div className={styles.flexinput}>
+                <label>Fuerza:</label>
+                <input
+                  className={styles.input}
+                  type="number"
+                  placeholder="Fuerza"
+                  name="strength"
+                  value={input.strength}
+                  onChange={handleChange}
+                />
+                {error.strength && (
+                  <p className={styles.errormessage}>{error.strength}</p>
+                )}
+              </div>
+              <div className={styles.flexinput}>
+                <label>Defensa:</label>
+                <input
+                  className={styles.input}
+                  type="number"
+                  placeholder="Defensa"
+                  name="defense"
+                  value={input.defense}
+                  onChange={handleChange}
+                />
+                {error.defense && (
+                  <p className={styles.errormessage}>{error.defense}</p>
+                )}
+              </div>
+            </div>
+            <div className={styles.flexform}>
+              <div className={styles.flexinput}>
+                <label>Velocidad:</label>
+                <input
+                  className={styles.input}
+                  type="number"
+                  placeholder="Velocidad"
+                  name="speed"
+                  value={input.speed}
+                  onChange={handleChange}
+                />
+                {error.speed && (
+                  <p className={styles.errormessage}>{error.speed}</p>
+                )}
+              </div>
+              <div className={styles.flexinput}>
+                <label>Altura:</label>
+                <input
+                  className={styles.input}
+                  type="number"
+                  placeholder="Altura"
+                  name="height"
+                  value={input.height}
+                  onChange={handleChange}
+                />
+                {error.height && (
+                  <p className={styles.errormessage}>{error.height}</p>
+                )}
+              </div>
+            </div>
+            <div className={styles.flexform}>
+              <div className={styles.flexinput}>
+                <label>Peso:</label>
+                <input
+                  className={styles.input}
+                  type="number"
+                  placeholder="Peso"
+                  name="weight"
+                  value={input.weight}
+                  onChange={handleChange}
+                />
+                {error.weight && (
+                  <p className={styles.errormessage}>{error.weight}</p>
+                )}
+              </div>
+              <div className={styles.flexinput}>
+                <label>Imagen:</label>
+                <input
+                  className={styles.input}
+                  type="text"
+                  placeholder="url..."
+                  name="img"
+                  value={input.img}
+                  onChange={handleChange}
+                />
+                {error.img && (
+                  <p className={styles.errormessage}>{error.img}</p>
+                )}
+              </div>
+            </div>
+          </section>
+          <label style={{ fontWeight: "bold" }}>Tipo:</label>
+          <div className={styles.checkcontainer}>
+            {typesPokemons?.map((type) => {
+              return (
+                <div key={type.name}>
+                  <p className={styles[type.name]}>
+                    {capitalizeString(type.name)}
+                  </p>
+                  <input
+                    type="checkbox"
+                    name={type.name}
+                    value={type.name}
+                    onClick={handleCheck}
+                  />
+                </div>
+              );
+            })}
+            {error.types && (
+              <p className={styles.errormessage2}>{error.types}</p>
+            )}
+            {input.types.length > 2 ? (
+              <p className={styles.errormessage2}>Seleccione Máximo 2 Tipos</p>
+            ) : null}
+          </div>
 
-        <button className={styles.btnsend} type="submit" disabled={disabled}>
-          Enviar
-        </button>
-      </form>
-    </div>
+          <button className={styles.btnsend} type="submit" disabled={disabled}>
+            Enviar
+          </button>
+        </form>
+      </div>
+    </React.Fragment>
   );
 }

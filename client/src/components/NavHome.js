@@ -13,13 +13,11 @@ export default function NavHome({
   handleFilterCreated,
   handleFilterTypes,
 }) {
-  const [filter, setFilter] = useState("Ordenar Alfabéticamente");
+  const [sort, setSort] = useState("Ordenar Alfabéticamente");
   function handleFilter(e) {
     e.preventDefault();
-    console.log(e.type);
-    console.log(filter);
-    if (filter === "Ordenar Alfabéticamente") setFilter("Ordenar por Fuerza");
-    if (filter === "Ordenar por Fuerza") setFilter("Ordenar Alfabéticamente");
+    if (sort === "Ordenar Alfabéticamente") setSort("Ordenar por Fuerza");
+    if (sort === "Ordenar por Fuerza") setSort("Ordenar Alfabéticamente");
   }
   return (
     <div className={styles.background}>
@@ -27,12 +25,12 @@ export default function NavHome({
         <button
           className={styles.changesort}
           style={{ marginLeft: "10px" }}
-          value={filter}
+          value={sort}
           onClick={(e) => handleFilter(e)}
         >
-          {filter}
+          {sort}
         </button>
-        {filter === "Ordenar Alfabéticamente" ? (
+        {sort === "Ordenar Alfabéticamente" ? (
           <SortSelect
             handleSort={handleSortAlphabetically}
             sortDescription="Ordenar"

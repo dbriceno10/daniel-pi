@@ -54,24 +54,20 @@ export default function Home() {
   }
 
   function handleFilterTypes(e) {
-    e.preventDefault();
     dispatch(fillterPokemonsByType(e.target.value));
   }
 
   function handleFilterCreated(e) {
-    e.preventDefault();
     dispatch(fillterPokemonsCreated(e.target.value));
   }
 
   function handleSortAlphabetically(e) {
-    e.preventDefault();
     dispatch(sortPokemonsAlphabetically(e.target.value));
     setCurrentPage(1); //seteo la página actual en 1
     setOrder(e.target.value); //Seteo el orden actual para que me lo tome y haga el renderizado
   }
 
   function handleSortByStrength(e) {
-    e.preventDefault();
     dispatch(sortPokemonsByStrength(e.target.value));
     setCurrentPage(1);
     setOrder(e.target.value);

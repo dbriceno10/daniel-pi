@@ -3,7 +3,7 @@
   position: absolute;
   width: 64px;
   height: 64px;
-  left: calc(50vw - 64px);
+  left: calc(50vw - 32px);
   top: calc(50vh - 64px);
 }
 
@@ -12,8 +12,8 @@
   width: 13px;
   height: 13px;
   border-radius: 50%;
-  background: #000;
-  /* background: #fff; */
+  /* background: #000; */
+  background: #fff;
   animation: lds-grid 1.2s linear infinite;
 }
 

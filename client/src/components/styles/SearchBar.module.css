@@ -27,6 +27,7 @@
   --flying-color: #6590c8;
   --unknown-color: #699d8e;
   --shadow-color: #000000;
+  --soft-gray: #eee;
 }
 .form {
   display: flex;
@@ -39,7 +40,8 @@
   border: none;
   border-radius: 8px;
   background-color: var(--absolute-white);
-  margin-right: 10px;
+  margin-right: 20px;
+  padding-left: 10px;
 }
 
 .button {
@@ -53,6 +55,8 @@
   background-color: var(--btn-gray);
   margin-right: 20px;
   transition: 0.4s;
+  padding-left: 15px;
+  padding-right: 15px;
 }
 
 .button:hover {
@@ -61,6 +65,6 @@
 }
 
 .button:disabled {
-  background-color: #eee;
+  background-color: var(--soft-gray);
   color: white;
 }

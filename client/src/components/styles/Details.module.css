@@ -31,21 +31,28 @@
 .detailscontainer {
   position: relative;
   font-family: "Roboto", sans-serif;
+  padding-bottom: 40px;
 }
 
 .wikiimg {
-  margin-top: 10px;
+  align-items: center;
+  margin-bottom: 40px;
   display: grid;
   grid-template-columns: 60px 20px;
   justify-content: center;
   font-size: 1rem;
-  color: var(--absolute-black);
+  color: var(--absolute-white);
+  background-color: var(--black-contrast);
+  height: 60px;
+  padding-top: 5px;
+  padding-bottom: 5px;
 }
 
 .wikiimg img {
   width: 40px;
   height: 40px;
   border-radius: 100%;
+  margin: 10px;
 }
 
 .link {
@@ -61,7 +68,6 @@
   padding-bottom: 20px;
   border-radius: 8px;
   box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
-  margin-bottom: 40px;
   position: relative;
 }
 
@@ -126,120 +132,144 @@
 .normal {
   padding: 3px;
   border: solid 2px var(--normal-color);
+  background-color: var(--normal-color);
   border-radius: 8px;
 }
 
 .fighting {
   padding: 3px;
   border: solid 2px var(--fighting-color);
+  background-color: var(--fighting-color);
   border-radius: 8px;
 }
 
 .flying {
   padding: 3px;
   border: solid 2px var(--flying-color);
+  background-color: var(--flying-color);
   border-radius: 8px;
 }
 
 .poison {
   padding: 3px;
   border: solid 2px var(--poison-color);
+  background-color: var(--poison-color);
+  color: var(--absolute-white);
   border-radius: 8px;
 }
 
 .ground {
   padding: 3px;
   border: solid 2px var(--ground-color);
+  background-color: var(--ground-color);
   border-radius: 8px;
 }
 
 .rock {
   padding: 3px;
   border: solid 2px var(--rock-color);
+  background-color: var(--rock-color);
   border-radius: 8px;
 }
 
 .bug {
   padding: 3px;
   border: solid 2px var(--bug-color);
+  background-color: var(--bug-color);
   border-radius: 8px;
 }
 
 .ghost {
   padding: 3px;
   border: solid 2px var(--ghost-color);
+  background-color: var(--ghost-color);
+  color: var(--absolute-white);
   border-radius: 8px;
 }
 
 .steel {
   padding: 3px;
   border: solid 2px var(--steel-color);
+  background-color: var(--steel-color);
   border-radius: 8px;
 }
 
 .fire {
   padding: 3px;
   border: solid 2px var(--fire-color);
+  background-color: var(--fire-color);
   border-radius: 8px;
 }
 
 .water {
   padding: 3px;
   border: solid 2px var(--water-color);
+  background-color: var(--water-color);
   border-radius: 8px;
 }
 
 .grass {
   padding: 3px;
   border: solid 2px var(--grass-color);
+  background-color: var(--grass-color);
   border-radius: 8px;
 }
 
 .electric {
   padding: 3px;
   border: solid 2px var(--electric-color);
+  background-color: var(--electric-color);
   border-radius: 8px;
 }
 
 .psychic {
   padding: 3px;
   border: solid 2px var(--psychic-color);
+  background-color: var(--psychic-color);
   border-radius: 8px;
 }
 
 .ice {
   padding: 3px;
   border: solid 2px var(--ice-color);
+  background-color: var(--ice-color);
   border-radius: 8px;
-  width: 45px;
 }
 
 .dragon {
   padding: 3px;
   border: solid 2px var(--dragon-color);
+  background-color: var(--dragon-color);
+  color: var(--absolute-white);
   border-radius: 8px;
 }
 
 .dark {
   padding: 3px;
   border: solid 2px var(--dark-color);
+  background-color: var(--dark-color);
+  color: var(--absolute-white);
   border-radius: 8px;
 }
 
 .fairy {
   padding: 3px;
   border: solid 2px var(--fairy-color);
+  background-color: var(--fairy-color);
   border-radius: 8px;
 }
 
 .unknown {
   padding: 3px;
   border: solid 2px var(--unknown-color);
+  background-color: var(--unknown-color);
   border-radius: 8px;
 }
 
 .shadow {
   padding: 3px;
   border: solid 2px var(--shadow-color);
+  background-color: var(--shadow-color);
+  color: var(--absolute-white);
   border-radius: 8px;
 }

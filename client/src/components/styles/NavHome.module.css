@@ -49,6 +49,7 @@
 }
 
 select {
+  text-align: center;
   width: 120px;
   margin-left: 10px;
   margin-right: 10px;
@@ -57,8 +58,7 @@ select {
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
   border: none;
   border-radius: 8px;
-  background-color:var(--absolute-white);
-
+  background-color: var(--absolute-white);
 }
 
 .left {
@@ -66,7 +66,6 @@ select {
   justify-content: start;
   margin-left: 20px;
 }
-
 
 .rigth {
   display: flex;
@@ -88,9 +87,9 @@ select {
   padding-right: 15px;
 }
 
-.create:hover{
-color: var(--absolute-white);
-background-color: var(--hover-yellow);
+.create:hover {
+  color: var(--absolute-white);
+  background-color: var(--hover-yellow);
 }
 
 .changesort {
@@ -112,7 +111,6 @@ background-color: var(--hover-yellow);
   color: var(--absolute-white);
   background-color: var(--hover-yellow);
 }
-
 
 .wikiimg {
   display: grid;

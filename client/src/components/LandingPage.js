@@ -11,9 +11,11 @@ export default function LadingPage() {
         </div>
         <h1 className={styles.title}>WikiDex</h1>
       </div>
+      <div className={styles.btncontainer}>
       <Link to="/home">
         <button className={styles.btn}>Home</button>
       </Link>
+      </div>
     </div>
   );
 }

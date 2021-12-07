@@ -7,6 +7,8 @@
   --trasition-blue: #1f65b6;
   --btn-gray: #d0d1d1;
   --hover-gray: #818081;
+  --btn-yellow: #ffc20a;
+  --hover-yellow: #bd8e00;
 }
 
 body {
@@ -38,14 +40,15 @@ body {
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
   border: none;
   /* border-radius: 8px; */
-  background-color: var(--btn-gray);
+  background-color: var(--btn-yellow);
   padding: 10px;
   padding-right: 20px;
   padding-left: 20px;
+  font-weight: bold;
   transition: 0.4s;
 }
 
 .libtn:hover {
   color: var(--absolute-white);
-  background-color: var(--hover-gray);
+  background-color: var(--hover-yellow);
 }

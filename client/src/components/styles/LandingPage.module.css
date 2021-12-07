@@ -45,9 +45,14 @@ body {
   color: var(--absolute-white);
 }
 
+.btn-container {
+  display: flex;
+}
+
 .btn {
-  position: absolute;
-  bottom: 60px;
+  /* position: absolute; */
+  /* bottom: 60px; */
+  margin-top: 380px;
   border: none;
   border-radius: 8px;
   background-color: var(--btn-gray);

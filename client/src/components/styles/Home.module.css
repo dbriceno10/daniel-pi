@@ -27,6 +27,8 @@
   --flying-color: #6590c8;
   --unknown-color: #699d8e;
   --shadow-color: #000000;
+  --btn-yellow: #ffc20a;
+  --hover-yellow: #bd8e00;
 }
 .background {
   /* position: relative; */
@@ -55,17 +57,23 @@
 .refresh {
   font-size: 1rem;
   margin: 0 auto;
-  /* width: 100px; */
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
   height: 40px;
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
   border: none;
   border-radius: 8px;
-  background-color: var(--btn-gray);
+  background-color: var(--btn-yellow);
+  color: var(--absolute-black);
   margin-top: 20px;
+  cursor: pointer;
+  font-weight: bold;
   transition: 0.4s;
 }
 
 .refresh:hover {
   color: var(--absolute-white);
-  background-color: var(--hover-gray);
+  background-color: var(--hover-yellow);
 }

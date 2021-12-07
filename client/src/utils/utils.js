@@ -18,3 +18,8 @@ export const urlPatternValidation = (URL) => {
   const regex = new RegExp(/(https?:\/\/.*\.(?:png|jpg))/);
   return regex.test(URL);
 };
+
+export const entireNumbers = (num) => {
+  const regex = new RegExp(/^\d*$/)
+  return regex.test(num)
+};

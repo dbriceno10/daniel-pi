@@ -34,6 +34,12 @@
   margin-bottom: 40px;
   font-family: "Roboto", sans-serif;
 }
+.paginado {
+  margin: 0 auto;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+}
 
 .pokemonscontainer {
   position: relative;
@@ -45,4 +51,16 @@
   grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
   grid-template-rows: repeat(auto-fill, minmax(100px, 150px));
   grid-gap: 20px;
+}
+
+.refresh {
+  font-size: 1rem;
+  margin: 0 auto;
+  /* width: 100px; */
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  border-radius: 8px;
+  background-color: #eee;
+  margin-top: 20px;
 }

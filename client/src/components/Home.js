@@ -1,6 +1,5 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import {
   getAllPokemons,
@@ -15,8 +14,6 @@ import styles from "./styles/Home.module.css";
 import Card from "./Card";
 import { capitalizeString } from "../utils/utils";
 import Paginado from "./Paginado";
-import SortSelect from "./SortSelect";
-import SearchBar from "./SearchBar";
 import Loader from "./Loader";
 import NavHome from "./NavHome";
 
@@ -29,10 +26,10 @@ export default function Home() {
     //componentDitMount
     dispatch(getTypes());
     dispatch(getAllPokemons());
-    // eslint-disable-next-line react-hooks/exhaustive-deps
     return () => {
       dispatch(trueLoader());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); //NOTA: Podemos poner dispatch como argumento para que se ejecute el useEffect cada vez que se despache una acción, pero como no queremos estarle pegando a cada momento a la ruta de pokemons y tipos lo dejaremos así mientras.
   // Voy a setear estados locales para manejar el paginado
   // eslint-disable-next-line no-unused-vars
@@ -51,6 +48,7 @@ export default function Home() {
 
   function handleClick(e) {
     e.preventDefault();
+    dispatch(trueLoader());
     dispatch(getTypes());
     dispatch(getAllPokemons());
   }
@@ -83,15 +81,14 @@ export default function Home() {
     <div className={styles.background}>
       <NavHome
         typesPokemons={typesPokemons}
-        handleClick={handleClick}
         handleSortAlphabetically={handleSortAlphabetically}
         handleSortByStrength={handleSortByStrength}
         handleFilterCreated={handleFilterCreated}
         handleFilterTypes={handleFilterTypes}
       />
       <div className={styles.pokemonscontainer}>
-        <button onClick={handleClick}>
-          Volver a cargar todos los pokemons
+        <button className={styles.refresh} onClick={handleClick}>
+          Refrech Pokemons
         </button>
         {loader ? (
           <Loader />

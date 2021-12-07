@@ -137,3 +137,9 @@ export function trueLoader() {
     type: pokeAction.LOADER_TRUE,
   };
 }
+
+export function falseLoader() {
+  return {
+    type: pokeAction.LOADER_FALSE,
+  };
+}

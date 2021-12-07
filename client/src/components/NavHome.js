@@ -8,7 +8,6 @@ import { useState } from "react";
 import wikedexImg from "../assets/Logo_WikiDex_App.png";
 export default function NavHome({
   typesPokemons,
-  handleClick,
   handleSortAlphabetically,
   handleSortByStrength,
   handleFilterCreated,

@@ -63,4 +63,5 @@ body {
 
 .btn:hover {
   background-color: var(--hover-gray);
+  color: var(--absolute-white);
 }

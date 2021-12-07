@@ -40,7 +40,7 @@ export default function NavHome({
         ) : (
           <SortSelect
             handleSort={handleSortByStrength}
-            sortDescription="Ordernar"
+            sortDescription="Ordenar"
           />
         )}
         <p className={styles.filtertext}>Filtrar:</p>

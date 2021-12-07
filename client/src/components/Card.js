@@ -19,27 +19,29 @@ export default function Card({ img, name, types, id, create }) {
             <h5 className={styles.typescontainer}>
               {types?.map((type) => {
                 return (
-                  <span
+                  <p
                     className={styles[type]}
-                    style={{
-                      marginLeft: "2px",
-                      marginRight: "2px",
-                    }}
                     key={type}
                   >
                     {capitalizeStringWithTrim(type)}
-                  </span>
+                  </p>
                 );
               })}
             </h5>
           </div>
           <div>
-            <img
-              src={img ? img : defaultImg}
+          {img?<img
+              src={img}
               alt="img not found"
               width="150px"
               height="150px"
-            />
+            />:<img
+              src={defaultImg}
+              alt="img not found"
+              width="130px"
+              height="130px"
+              style={{margin: "10px"}}
+            />}
           </div>
         </div>
       </Link>

@@ -61,6 +61,12 @@
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
   border: none;
   border-radius: 8px;
-  background-color: #eee;
+  background-color: var(--btn-gray);
   margin-top: 20px;
+  transition: 0.4s;
+}
+
+.refresh:hover {
+  color: var(--absolute-white);
+  background-color: var(--hover-gray);
 }

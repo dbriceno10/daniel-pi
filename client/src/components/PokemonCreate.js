@@ -112,9 +112,6 @@ export default function PokemonCreate() {
   }, [error, input, setDisabled]);
   return (
     <div className={styles.container}>
-      {/* <Link to="/home">
-        <button>Volver</button>
-      </Link> */}
       <Link className={styles.link} to="/home">
         <div className={styles.wikiimg}>
           <div>

@@ -28,60 +28,99 @@
   --unknown-color: #699d8e;
   --shadow-color: #000000;
 }
-
-.background {
+.detailscontainer {
   position: relative;
-  /* margin: 0 auto; */
-  min-width: 300px;
-  max-width: 500px;
   font-family: "Roboto", sans-serif;
 }
 
-.created {
-  position: absolute;
-  bottom: 10px;
-  left: 10px;
-  font-weight: bold;
+.wikiimg {
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 60px 20px;
+  justify-content: center;
+  font-size: 1rem;
+  color: var(--absolute-black);
 }
 
-.name {
-  font-size: 1.3rem;
+.wikiimg img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
 }
 
 .link {
   text-decoration: none;
-  color: var(--absolute-black);
 }
 
-.typescontainer {
-  display: flex;
-  justify-content: center;
-  margin-left: 15px;
-}
-
-.typescontainer p {
-  margin-left: 2px;
-  margin-right: 2px;
-  border-radius: 16px;
-  width: 55px;
-}
-
-
-.grid {
-  /* position: relative; */
-  display: grid;
-  grid-template-columns: 150px 150px;
-  justify-content: center;
+.details {
+  margin: 0 auto;
   background-color: #eee;
-  border: none;
+  max-width: 500px;
+  min-width: 320px;
+  padding-top: 10px;
+  padding-bottom: 20px;
   border-radius: 8px;
   box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
-  transition: 0.4s;
-  margin: 0;
+  margin-bottom: 40px;
+  position: relative;
 }
 
-.grid:hover {
-  box-shadow: 16px 16px 24px rgba(0, 0, 0, 0.4);
+.created {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+  font-weight: bold;
+  background-color: var(--absolute-white);
+  padding: 8px;
+  border-radius: 16px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+}
+
+.title {
+  margin: 0;
+  font-size: 3rem;
+  letter-spacing: 5px;
+  margin-top: 20px;
+}
+
+.types {
+  justify-content: center;
+  display: flex;
+}
+
+.types p {
+  margin-left: 10px;
+  margin-right: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  border-radius: 16px;
+  width: 100px;
+}
+
+.flexdata {
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  margin: 0 auto;
+}
+
+.pokeimg {
+  width: 260px;
+  height: 260px;
+}
+.dataskill {
+}
+
+.dataskill p {
+  background-color: var(--absolute-white);
+  padding: 15px;
+  border-radius: 32px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  margin: 10px;
+  font-size: 1rem;
+  font-weight: bold;
 }
 
 .normal {

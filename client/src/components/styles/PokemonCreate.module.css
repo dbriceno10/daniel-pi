@@ -86,6 +86,7 @@
   border-radius: 8px;
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
   font-size: 1rem;
+  padding: 2px;
 }
 
 .flexform {
@@ -154,8 +155,19 @@
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
   border: none;
   border-radius: 8px;
-  background-color: #eee;
+  background-color: var(--btn-gray);
   margin-bottom: 20px;
+  transition: 0.4s;
+}
+
+.btnsend:hover {
+  color: var(--absolute-white);
+  background-color: var(--hover-gray);
+}
+
+.btnsend:disabled {
+  color: var(--absolute-white);
+  background-color: #eee;
 }
 
 .normal {

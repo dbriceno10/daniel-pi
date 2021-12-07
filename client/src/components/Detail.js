@@ -7,7 +7,7 @@ import { capitalizeString } from "../utils/utils";
 import defaultImg from "../assets/who_is.png";
 import Loader from "./Loader";
 import styles from "./styles/Details.module.css";
-import wikedexImg from "../assets/Logo_WikiDex_App.png"
+import wikedexImg from "../assets/Logo_WikiDex_App.png";
 export default function Details(props) {
   const dispatch = useDispatch();
   const pokemon = useSelector((state) => state.details);
@@ -23,7 +23,7 @@ export default function Details(props) {
 
   return (
     <div className={styles.detailscontainer}>
-    <Link className={styles.link} to="/home">
+      <Link className={styles.link} to="/home">
         <div className={styles.wikiimg}>
           <div>
             <img src={wikedexImg} alt="not found" />
@@ -33,11 +33,11 @@ export default function Details(props) {
       </Link>
       {pokemon.length > 0 ? (
         <div className={styles.details}>
-        {pokemon[0].createInDb ? (
-        <span className={styles.created}>Created</span>
-      ) : (
-        <span className={styles.created}># {pokemon[0].id}</span>
-      )}
+          {pokemon[0].createInDb ? (
+            <span className={styles.created}>Created</span>
+          ) : (
+            <span className={styles.created}># {pokemon[0].id}</span>
+          )}
           <h1 className={styles.title}>{capitalizeString(pokemon[0].name)}</h1>
           <h3 className={styles.types}>
             {pokemon[0].types?.map((type) => {
@@ -82,7 +82,16 @@ export default function Details(props) {
         <Loader />
       ) : null}
 
-      <p className={loader ? "hidden" : null}>Pokemon Not Found</p>
+      <Link style={{ textDecoration: "none", color: "#fff" }} to="/home">
+        <img
+          className={loader ? "hidden" : null}
+          src={defaultImg}
+          alt="Pokemon not Found"
+          width="300px"
+          height="300px"
+        />
+        <h2 className={loader ? "hidden" : null}> Pokemon Not Found</h2>
+      </Link>
     </div>
   );
 }

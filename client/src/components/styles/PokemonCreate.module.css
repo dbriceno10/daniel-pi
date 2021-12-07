@@ -59,7 +59,7 @@
   max-width: 500px;
   min-width: 320px;
   margin: 0 auto;
-  margin-bottom: 40px;
+  padding-bottom: 40px;
 }
 
 .form {

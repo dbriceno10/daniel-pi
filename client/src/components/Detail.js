@@ -82,16 +82,19 @@ export default function Details(props) {
         <Loader />
       ) : null}
 
-      <Link style={{ textDecoration: "none", color: "#fff" }} to="/home">
-        <img
-          className={loader ? "hidden" : null}
-          src={defaultImg}
-          alt="Pokemon not Found"
-          width="300px"
-          height="300px"
-        />
-        <h2 className={loader ? "hidden" : null}> Pokemon Not Found</h2>
-      </Link>
+      {loader ? null : (
+        <div>
+          <Link style={{ textDecoration: "none", color: "#fff" }} to="/home">
+            <img
+              src={defaultImg}
+              alt="Pokemon not Found"
+              width="300px"
+              height="300px"
+            />
+            <h2> Pokemon Not Found</h2>
+          </Link>
+        </div>
+      )}
     </div>
   );
 }

@@ -82,7 +82,7 @@ export default function PokemonCreate() {
   }
   function validate(input) {
     let errors = {};
-    if (!input.types.length) errors.types = "Tipo Requerido";
+    // if (!input.types.length) errors.types = "Tipo Requerido";
     if (!input.name) errors.name = "Nombre Requerido";
     if (input.hp < 0) errors.hp = "Inválido!";
     if (input.strength < 0) errors.strength = "Inválido!";
@@ -96,7 +96,7 @@ export default function PokemonCreate() {
   }
   useEffect(() => {
     if (
-      input.types.length > 0 &&
+      // input.types.length > 0 &&
       input.name.length > 0 &&
       input.types.length < 3 &&
       !error.hasOwnProperty("img") &&
@@ -262,9 +262,9 @@ export default function PokemonCreate() {
                 </div>
               );
             })}
-            {error.types && (
+            {/* {error.types && (
               <p className={styles.errormessage2}>{error.types}</p>
-            )}
+            )} */}
             {input.types.length > 2 ? (
               <p className={styles.errormessage2}>Seleccione Máximo 2 Tipos</p>
             ) : null}

@@ -84,7 +84,7 @@ router.get('/', async (req, res, next) => {
       return res.send(pokemonAPI);
     }
   } catch (error) {
-    res.sendStatus(404);
+    res.status(404).send(error);
   }
 });
 
@@ -109,6 +109,7 @@ router.post('/', async (req, res, next) => {
       if (!speed) speed = 1;
       if (!height) height = 1;
       if (!weight) weight = 1;
+      if (!types.length) types = ['unknown'];
       //solo si recibo un nombre voy a guardar el pokemon en la base de datos
       const nameLower = name.trim().toLowerCase();
       const pokemonCreated = await Pokemon.create({
@@ -163,7 +164,7 @@ router.get('/:id', async (req, res, next) => {
       pokemonAPI = getPokemonData2(pokemonAPI);
       return res.send(pokemonAPI);
     } catch (error) {
-      return res.status(404).send('ID no encontrado'); //si el id no se encontró en ningún lado
+      return res.status(404).send(error); //si el id no se encontró en ningún lado
     }
   }
 });

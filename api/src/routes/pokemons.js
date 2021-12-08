@@ -58,7 +58,7 @@ router.get('/', async (req, res, next) => {
       arrPokemonsDb = arrPokemonsDb.map((e) => {
         return { ...e.dataValues, types: getNamesByTypes(e.dataValues) };
       });
-      return res.send([...arrPokemonsDb, ...arrPokemons]);
+      return res.send([...arrPokemonsDb.reverse(), ...arrPokemons]);
     } else {
       //si llegó un name por query
       const nameLower = name.trim().toLowerCase();

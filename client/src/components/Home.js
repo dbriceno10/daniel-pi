@@ -55,10 +55,12 @@ export default function Home() {
 
   function handleFilterTypes(e) {
     dispatch(fillterPokemonsByType(e.target.value));
+    setCurrentPage(1);
   }
 
   function handleFilterCreated(e) {
     dispatch(fillterPokemonsCreated(e.target.value));
+    setCurrentPage(1);
   }
 
   function handleSortAlphabetically(e) {
@@ -93,6 +95,7 @@ export default function Home() {
             <Paginado
               pokemonsPerPage={pokemonsPerPage}
               allPokemons={allPokemons}
+              currentPage={currentPage}
               paginado={paginado}
             />
             {/* Ahora debemos mapear currentPokemons */}

@@ -1,6 +1,11 @@
 import React from "react";
 import styles from "./styles/Paginado.module.css";
-export default function Paginado({ pokemonsPerPage, allPokemons, paginado }) {
+export default function Paginado({
+  pokemonsPerPage,
+  allPokemons,
+  paginado,
+  currentPage,
+}) {
   const pageNumbrers = [];
   const top = Math.ceil(allPokemons.length / pokemonsPerPage); // --> calculo la cantidad de páginas que voy a tener en función de la cantidad de personajes
   for (let i = 1; i < top + 1; i++) {
@@ -13,7 +18,14 @@ export default function Paginado({ pokemonsPerPage, allPokemons, paginado }) {
           return (
             <p className={styles.li} key={number}>
               {/* debemos usar un "a" en ligar de un "button", esto es solo mientras */}
-              <span className={styles.libtn} onClick={() => paginado(number)}>{number}</span>
+              <span
+                className={
+                  number === currentPage ? styles.current : styles.libtn
+                }
+                onClick={() => paginado(number)}
+              >
+                {number}
+              </span>
             </p>
           );
         })}

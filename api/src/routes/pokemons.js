@@ -2,6 +2,7 @@ const { Router } = require('express');
 const axios = require('axios');
 const { Pokemon, Type } = require('../db'); //me raigo mis modelos de base de datos
 const { getPokemonData } = require('../utils/getPokemonData');
+const { getPokemonData2 } = require('../utils/getPokemonData2.js');
 const { getNamesByTypes } = require('../utils/getNamesByTypes');
 const { getID } = require('../utils/getID.js');
 const { arrayPokemonFilterMocks } = require('../../../mocks/mocksData.js'); //--> Array con data harcodeada
@@ -30,7 +31,7 @@ router.get('/', async (req, res, next) => {
           },
         },
       });
-      
+
       /*Descomenta el siquiente cloque para conectar la ruta principal del api */
 
       /*
@@ -52,7 +53,7 @@ router.get('/', async (req, res, next) => {
 
       /* Comenta el siguiente array  arrPokemons declarado con const para deconectar la data hardcodeada que simula la petición a la ruta principal del api */
 
-      const arrPokemons = arrayPokemonFilterMocks // ---> Data hardcodeada para mandar al front, ya tiene la info que nos interesa de los 40 pokemon en ese array
+      const arrPokemons = arrayPokemonFilterMocks; // ---> Data hardcodeada para mandar al front, ya tiene la info que nos interesa de los 40 pokemon en ese array
 
       arrPokemonsDb = arrPokemonsDb.map((e) => {
         return { ...e.dataValues, types: getNamesByTypes(e.dataValues) };
@@ -159,7 +160,7 @@ router.get('/:id', async (req, res, next) => {
       let pokemonAPI = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${parseInt(id)}`
       );
-      pokemonAPI = getPokemonData(pokemonAPI);
+      pokemonAPI = getPokemonData2(pokemonAPI);
       return res.send(pokemonAPI);
     } catch (error) {
       return res.status(404).send('ID no encontrado'); //si el id no se encontró en ningún lado

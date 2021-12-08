@@ -56,7 +56,9 @@ export default function PokemonCreate() {
       img: "",
       types: [],
     });
-    // history.push("/home");
+    setTimeout(() => {
+      history.push("/home");
+    }, 1000)
   }
   function handleCheck(e) {
     if (e.target.checked) {

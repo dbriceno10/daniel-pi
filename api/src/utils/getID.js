@@ -6,7 +6,7 @@ async function getID(data) {
     types.push(
       await Type.findOne({
         where: { name: data[i] },//en la tabla types busco los tipos de pokemon por id, y regreso solo sus ids en un array
-        attributes: ['id'],//saco el atributi id
+        attributes: ['id'],//saco el atributo id
       })
     );
   }

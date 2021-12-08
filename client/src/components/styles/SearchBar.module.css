@@ -60,6 +60,7 @@
   transition: 0.4s;
   padding-left: 15px;
   padding-right: 15px;
+  cursor: pointer;
 }
 
 .button:hover {
@@ -68,6 +69,7 @@
 }
 
 .button:disabled {
+  cursor: default;
   background-color: var(--soft-gray);
   color: white;
 }

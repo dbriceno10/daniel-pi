@@ -166,6 +166,7 @@
   background-color: var(--btn-yellow);
   font-weight: bold;
   margin-bottom: 20px;
+  cursor: pointer;
   transition: 0.4s;
 }
 
@@ -175,6 +176,7 @@
 }
 
 .btnsend:disabled {
+  cursor: default;
   color: var(--absolute-white);
   background-color: var(--black-contrast);
 }

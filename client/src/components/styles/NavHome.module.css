@@ -85,6 +85,7 @@ select {
   font-weight: bold;
   padding-left: 15px;
   padding-right: 15px;
+  cursor: pointer;
 }
 
 .create:hover {
@@ -104,6 +105,7 @@ select {
   padding-left: 15px;
   padding-right: 15px;
   font-weight: bold;
+  cursor: pointer;
   transition: 0.4s;
 }
 

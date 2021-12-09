@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles/LandingPage.module.css";
 import wikiDexImg from "../assets/Logo_WikiDex_App.png";
-export default function LadingPage() {
+export default function LandingPage() {
   return (
     <div className={styles.background}>
       <div className={styles.grid}>

@@ -5,60 +5,16 @@ const { getPokemonData } = require('../utils/getPokemonData');
 const { getPokemonData2 } = require('../utils/getPokemonData2.js');
 const { getNamesByTypes } = require('../utils/getNamesByTypes');
 const { getID } = require('../utils/getID.js');
-const { arrayPokemonFilterMocks } = require('../../../mocks/mocksData.js'); //--> Array con data harcodeada
-// Importar todos los routers;
-// Ejemplo: const authRouter = require('./auth.js');
-
-// NOTA PARA RECORDAR: si usamos next() en una ruta lo que hará es ir al siguiente midddleware qye estén en este caso va a ir al control de errores (revisar en app.js)
-
+const { getApiInfo, getDbInfo } = require('./modules/modules.js');
 const router = Router();
 
 router.get('/', async (req, res, next) => {
   const { name } = req.query;
   try {
     if (!name) {
-      //----> Traemos los pokemon que están en la base de datos
-      let arrPokemonsDb = [];
-      // arrPokemonsDb = await Pokemon.findAll({
-      //   include: Type,
-      // });
-      arrPokemonsDb = await Pokemon.findAll({
-        include: {
-          model: Type,
-          atributes: ['name'], //trae la data mediante el nombre(la propiedad del modelo type)
-          thorugh: {
-            atributes: [], //para comprobación, siempre va
-          },
-        },
-      });
-
-      /*Descomenta el siquiente cloque para conectar la ruta principal del api */
-
-      /*
-      // ---> Traemos a los pokemon desde el API
-      const dataAPI = await axios.get(
-        'https://pokeapi.co/api/v2/pokemon?limit=40'
-      ); //obtenemos pokemons del 1 al 40
-      const pk = [...dataAPI.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
-      const data = await Promise.all(
-        pk.map((pokemon) => axios.get(pokemon.url)) //genero un array de promesas
-      ); //paso mi array de promesas para resolverlo
-      let arrPokemons = []; // array auxiliar para guardar la info filtrada de cada pokemon
-      data.forEach((pokemon) => {
-        arrPokemons.push({
-          ...getPokemonData(pokemon), //obtenemos la data y la guardamos en el array de pokemons
-        });
-      });
-      */
-
-      /* Comenta el siguiente array  arrPokemons declarado con const para deconectar la data hardcodeada que simula la petición a la ruta principal del api */
-
-      const arrPokemons = arrayPokemonFilterMocks; // ---> Data hardcodeada para mandar al front, ya tiene la info que nos interesa de los 40 pokemon en ese array
-
-      arrPokemonsDb = arrPokemonsDb.map((e) => {
-        return { ...e.dataValues, types: getNamesByTypes(e.dataValues) };
-      });
-      return res.send([...arrPokemonsDb.reverse(), ...arrPokemons]);
+      const arrPokemonsDb = await getDbInfo();
+      const arrPokemons = await getApiInfo();
+      return res.send([...arrPokemonsDb, ...arrPokemons]);
     } else {
       //si llegó un name por query
       const nameLower = name.trim().toLowerCase();
@@ -123,8 +79,6 @@ router.post('/', async (req, res, next) => {
         img,
         createInDb,
       });
-      if (types) {
-        //si recibo un tipos los voy a buscar en la base de datos de tipos para buscar sus ids
         const arrID = await getID(types); //Recibo un array de tipos y recibo un array de ids sacados de la tabla de tipos
         await pokemonCreated.setTypes(arrID);
         let pokemons = await Pokemon.findOne({
@@ -138,9 +92,6 @@ router.post('/', async (req, res, next) => {
           types: getNamesByTypes(pokemons), //obtengo el array de tipos
         };
         return res.json(pokemons);
-      } else {
-        return res.status(404).send('Error, no se encontraron los tipos');
-      }
     }
     res.status(404).send('El nombre es requerido para crear un pokemon');
   } catch (error) {

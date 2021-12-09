@@ -75,13 +75,14 @@
   background-color: var(--soft-gray);
   border: none;
   border-radius: 8px;
-  box-shadow: 4px 4px 6px rgba(255, 255, 255, 0.4);
+  box-shadow: 10px 10px 15px rgba(0, 0, 0, 0.4);
   transition: 0.4s;
   margin: 0;
 }
 
 .grid:hover {
-  box-shadow: 8px 8px 12px rgba(255, 255, 255, 0.4);
+  background-color: var(--absolute-white);
+  /* box-shadow: 20px 20px 30px rgba(0, 0, 0, 0.4); */
 }
 
 .normal {

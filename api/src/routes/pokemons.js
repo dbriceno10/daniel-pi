@@ -79,19 +79,19 @@ router.post('/', async (req, res, next) => {
         img,
         createInDb,
       });
-        const arrID = await getID(types); //Recibo un array de tipos y recibo un array de ids sacados de la tabla de tipos
-        await pokemonCreated.setTypes(arrID);
-        let pokemons = await Pokemon.findOne({
-          where: {
-            id: pokemonCreated.id,
-          }, //busco el id
-          include: Type,
-        });
-        pokemons = {
-          ...pokemons.dataValues,
-          types: getNamesByTypes(pokemons), //obtengo el array de tipos
-        };
-        return res.json(pokemons);
+      const arrID = await getID(types); //Recibo un array de tipos y recibo un array de ids sacados de la tabla de tipos
+      await pokemonCreated.setTypes(arrID);
+      let pokemons = await Pokemon.findOne({
+        where: {
+          id: pokemonCreated.id,
+        }, //busco el id
+        include: Type,
+      });
+      pokemons = {
+        ...pokemons.dataValues,
+        types: getNamesByTypes(pokemons), //obtengo el array de tipos
+      };
+      return res.json(pokemons);
     }
     res.status(404).send('El nombre es requerido para crear un pokemon');
   } catch (error) {
@@ -99,25 +99,24 @@ router.post('/', async (req, res, next) => {
   }
 });
 
-router.get('/:id', async (req, res, next) => {
+router.get('/:id', (req, res, next) => {
   const { id } = req.params;
-  try {
-    //Primero vamos a buscar en la base de datos, si llega a fallar, lo carturamos en el bloque catch y disparamos un nuevo código
-    let pokemonDB = await Pokemon.findOne({ where: { id }, include: Type });
-    pokemonDB = { ...pokemonDB.dataValues, types: getNamesByTypes(pokemonDB) };
-    return res.send(pokemonDB);
-  } catch (error) {
-    try {
-      //como ese id no estaba en la base de datos, ahora vamos a buscar en el api
-      let pokemonAPI = await axios.get(
-        `https://pokeapi.co/api/v2/pokemon/${parseInt(id)}`
-      );
-      pokemonAPI = getPokemonData2(pokemonAPI);
-      return res.send(pokemonAPI);
-    } catch (error) {
-      return res.status(404).send(error); //si el id no se encontró en ningún lado
-    }
-  }
+  Pokemon.findOne({ where: { id }, include: Type })
+    .then(
+      (pokemonDB) =>
+        (pokemonDB = {
+          ...pokemonDB.dataValues,
+          types: getNamesByTypes(pokemonDB),
+        })
+    )
+    .then((pokemonDB) => res.send(pokemonDB))
+    .catch((error) =>
+      axios
+        .get(`https://pokeapi.co/api/v2/pokemon/${parseInt(id)}`)
+        .then((pokemonAPI) => (pokemonAPI = getPokemonData2(pokemonAPI)))
+        .then((pokemonAPI) => res.send(pokemonAPI))
+        .catch((error) => res.status(404).send(error))
+    );
 });
 
 module.exports = router;

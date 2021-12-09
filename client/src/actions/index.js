@@ -30,6 +30,21 @@ export function getAllPokemons() {
     }
   };
 }
+// export function getAllPokemons() {
+//   return function (dispatch) {
+//     axios("http://localhost:3001/api/pokemons")
+//       .then((pokemons) => {
+//         return dispatch({
+//           type: pokeAction.GET_ALL_POKEMONS,
+//           payload: pokemons.data,
+//         });
+//       })
+//       .catch((error) => {
+//         console.error(error);
+//         alert("Ha ocurrido un error, por favor vuelve a intentar");
+//       });
+//   };
+// }
 export function getPokemon(name) {
   return async function (dispatch) {
     try {

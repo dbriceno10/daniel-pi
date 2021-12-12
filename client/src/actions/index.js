@@ -1,4 +1,5 @@
 import axios from "axios";
+import swal from "sweetalert";
 
 export const pokeAction = {
   GET_ALL_POKEMONS: "GET_ALL_POKEMONS",
@@ -26,7 +27,12 @@ export function getAllPokemons() {
       });
     } catch (error) {
       console.error(error);
-      alert("Ha ocurrido un error, por favor vuelve a intentar");
+      // alert("Ha ocurrido un error, por favor vuelve a intentar");
+      swal({
+        title: "Error",
+        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        icon: "error",
+      });
     }
   };
 }
@@ -57,7 +63,12 @@ export function getPokemon(name) {
       });
     } catch (error) {
       console.error(error);
-      alert("Ha ocurrido un error, por favor vuelve a intentar");
+      // alert("Ha ocurrido un error, por favor vuelve a intentar");
+      swal({
+        title: "Error",
+        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        icon: "error",
+      });
       return dispatch({ type: pokeAction.LOADER_FALSE });
     }
   };
@@ -70,14 +81,24 @@ export function postPokemon(dataPokemon) {
         "http://localhost:3001/api/pokemons",
         dataPokemon
       );
-      alert("Pokemon Creado");
+      // alert("Pokemon Creado");
+      swal({
+        title: "Ok",
+        text: "Pokemon Creado",
+        icon: "success",
+      });
       return dispatch({
         type: pokeAction.POST_POKEMON,
         payload: pokemon,
       });
     } catch (error) {
       console.error(error);
-      alert("Ha ocurrido un error, por favor vuelve a intentar");
+      // alert("Ha ocurrido un error, por favor vuelve a intentar");
+      swal({
+        title: "Error",
+        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        icon: "error",
+      });
     }
   };
 }
@@ -92,7 +113,12 @@ export function getTypes() {
       });
     } catch (error) {
       console.error(error);
-      alert("Ha ocurrido un error, por favor vuelve a intentar");
+      // alert("Ha ocurrido un error, por favor vuelve a intentar");
+      swal({
+        title: "Error",
+        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        icon: "error",
+      });
     }
   };
 }
@@ -135,7 +161,12 @@ export function getDetails(id) {
       });
     } catch (error) {
       console.error(error);
-      alert("Ha ocurrido un error, por favor vuelve a intentar");
+      // alert("Ha ocurrido un error, por favor vuelve a intentar");
+      swal({
+        title: "Error",
+        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        icon: "error",
+      });
       return dispatch({ type: pokeAction.LOADER_FALSE });
     }
   };

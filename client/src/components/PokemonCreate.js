@@ -136,6 +136,7 @@ export default function PokemonCreate() {
                   name="name"
                   value={input.name}
                   onChange={handleChange}
+                  autoComplete="off"
                 />
                 {error.name && (
                   <p className={styles.errormessage}>{error.name}</p>
@@ -238,6 +239,7 @@ export default function PokemonCreate() {
                   name="img"
                   value={input.img}
                   onChange={handleChange}
+                  autoComplete="off"
                 />
                 {error.img && (
                   <p className={styles.errormessage}>{error.img}</p>

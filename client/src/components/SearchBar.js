@@ -38,9 +38,10 @@ export default function SearchBar() {
         onChange={handleInputChange}
         type="text"
         placeholder="Buscar..."
+        autoComplete="off"
       />
       <button className={styles.button} disabled={error} type="submit">
-        Bucar
+        Buscar
       </button>
     </form>
   );

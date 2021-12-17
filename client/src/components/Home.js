@@ -16,6 +16,7 @@ import { capitalizeString } from "../utils/utils";
 import Paginado from "./Paginado";
 import Loader from "./Loader";
 import NavHome from "./NavHome";
+import defaultImg from "../assets/who_is.png";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -86,7 +87,7 @@ export default function Home() {
       />
       <div className={styles.pokemonscontainer}>
         <button className={styles.refresh} onClick={handleClick}>
-          Refrech Pokemons
+          Refrescar
         </button>
         {loader ? (
           <Loader />
@@ -98,6 +99,26 @@ export default function Home() {
               currentPage={currentPage}
               paginado={paginado}
             />
+            {currentPokemons.length ? null : (
+              <div>
+                <div
+                  style={{
+                    textDecoration: "none",
+                    color: "#fff",
+                    margin: "0 auto",
+                  }}
+                  to="/home"
+                >
+                  <img
+                    src={defaultImg}
+                    alt="Pokemon not Found"
+                    width="300px"
+                    height="300px"
+                  />
+                  <h2> Pokemon Not Found</h2>
+                </div>
+              </div>
+            )}
             {/* Ahora debemos mapear currentPokemons */}
             <div className={styles.grid}>
               {currentPokemons?.map((pokemon) => {

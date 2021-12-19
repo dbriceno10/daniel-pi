@@ -28,7 +28,7 @@ server.use((req, res, next) => {
   next();
 });
 
-server.use('/api', routes); //me traigo las rutas de quefiní para usarlas y generar mi enrutado
+server.use('/', routes); //me traigo las rutas de quefiní para usarlas y generar mi enrutado
 
 // Error catching endware.
 server.use((err, req, res, next) => {

@@ -2,16 +2,16 @@ const { getPokemonData } = require('../../utils/getPokemonData.js');
 const { Pokemon, Type } = require('../../db.js');
 const { getNamesByTypes } = require('../../utils/getNamesByTypes.js');
 const axios = require('axios');
-const { arrayPokemonFilterMocks } = require('../../../../mocks/mocksData.js');
+// const { arrayPokemonFilterMocks } = require('../../../../mocks/mocksData.js');
 async function getApiInfo() {
 
   /*Descomenta el siquiente bloque para conectar la ruta principal del api */
 
-  /*
+  
 
   // ---> Traemos a los pokemon desde el API
   const dataAPI = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40'); //obtenemos pokemons del 1 al 40
-  const pk = [...dataAPI.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
+  const pk = [dataAPI.data.results[0]]; // array de resultados que contienen la info para acceder a cada pokemon
   const data = await Promise.all(
     pk.map((pokemon) => axios.get(pokemon.url)) //genero un array de promesas
   ); //paso mi array de promesas para resolverlo
@@ -22,11 +22,11 @@ async function getApiInfo() {
     });
   });
 
-  */
+  
 
   /* Comenta el siguiente array  arrPokemons declarado con const para deconectar la data hardcodeada que simula la petición a la ruta principal del api */
 
-  const arrPokemons = arrayPokemonFilterMocks; // ---> Data hardcodeada para mandar al front, ya tiene la info que nos interesa de los 40 pokemon en ese array
+  // const arrPokemons = arrayPokemonFilterMocks; // ---> Data hardcodeada para mandar al front, ya tiene la info que nos interesa de los 40 pokemon en ese array
 
   return arrPokemons;
 }

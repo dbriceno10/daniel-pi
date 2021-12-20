@@ -1,7 +1,7 @@
 const { Router } = require('express');
 const axios = require('axios');
 const { Type } = require('../db'); //me raigo mis
-const { typesMocks } = require('../../../mocks/typesMock.js');
+// const { typesMocks } = require('../../../mocks/typesMock.js');
 const router = Router();
 
 router.get('/', async (req, res, next) => {
@@ -12,15 +12,15 @@ router.get('/', async (req, res, next) => {
     });
     if (!typesBD.length) {
       //data hardcodeada, descomentar el siguiente bloque para conectar al api
-      /*
+      
       //si no están, los busco en el api
       let typesAPI = await axios.get('https://pokeapi.co/api/v2/type');
       typesAPI = await typesAPI.data.results.map((type) => {
         return { id: type.id, name: type.name };
       });
-      */
+      
      //comenta la siguiente linea para sacar la data hardcodeada
-      const typesAPI = typesMocks;
+      // const typesAPI = typesMocks;
       await Type.bulkCreate(typesAPI); //los guardo todos, bulkCreate me permite guardar un array de elementos de un solo jalón
       return res.send(typesAPI);
     }

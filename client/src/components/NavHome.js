@@ -20,9 +20,9 @@ export default function NavHome({
     if (sort === "Ordenar por Fuerza") setSort("Ordenar Alfabéticamente");
   }
   return (
-    <div className={styles.background}>
-      <div className={styles.left}>
-        <button
+    <React.Fragment>
+      <div className={styles.flex}>
+        {/* <button
           className={styles.changesort}
           style={{ marginLeft: "10px" }}
           value={sort}
@@ -40,8 +40,12 @@ export default function NavHome({
             handleSort={handleSortByStrength}
             sortDescription="Ordenar"
           />
-        )}
-        <p className={styles.filtertext}>Filtrar:</p>
+        )} */}
+        <SortSelect
+          handleSort={handleSortAlphabetically}
+          sortDescription="Ordenar"
+        />
+        {/* <p className={styles.filtertext}>Filtrar:</p> */}
         <select onChange={handleFilterTypes}>
           <option value="all">Todos</option>
           {typesPokemons?.map((type) => {
@@ -57,8 +61,7 @@ export default function NavHome({
           <option value="created">Creados</option>
           <option value="api">De Internet</option>
         </select>
-      </div>
-      <div className={styles.center}>
+
         <Link className={styles.link} to="/">
           <div className={styles.wikiimg}>
             <div>
@@ -67,14 +70,12 @@ export default function NavHome({
             <p>Volver</p>
           </div>
         </Link>
-      </div>
-      <div className={styles.rigth}>
+
         <SearchBar />
         <Link to="/create">
           <button className={styles.create}>Crear Pokemon</button>
         </Link>
-        {/* <button onClick={handleClick}>Volver a cargar todos los pokemons</button> */}
       </div>
-    </div>
+    </React.Fragment>
   );
 }

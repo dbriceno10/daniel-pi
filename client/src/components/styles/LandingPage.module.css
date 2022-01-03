@@ -16,7 +16,7 @@ body {
 .background {
   background-image: url("../../assets/fondo1.jpg");
   background-size: cover;
-  /* background-position: center; */
+  background-position: center;
   background-repeat: no-repeat;
   width: 100vw;
   height: 100vh;
@@ -25,25 +25,36 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 100%;
+  margin-right: 20px;
 }
 
 .grid {
-  display: grid;
-  grid-template-columns: 100px 250px;
-  align-items: center;
-  margin-top: 40px;
-  margin: 0 auto;
-  width: 350px;
+  display: flex;
   background-color: var(--black-contrast);
   border-radius: 32px;
   padding-left: 10px;
   padding-right: 10px;
-  position: relative;
+  align-items: center;
+  justify-content: center;
+  max-width: 380px;
+  margin: 0 auto;
 }
+
+
 
 .title {
   font-size: 4rem;
   color: var(--absolute-white);
+}
+
+@media(max-width: 360px) {
+  .imgwiki {
+    width: 60px;
+    height: 60px;
+  }
+  .title {
+    font-size: 3rem;
+  }
 }
 
 .btn-container {

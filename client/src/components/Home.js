@@ -17,6 +17,7 @@ import Paginado from "./Paginado";
 import Loader from "./Loader";
 import NavHome from "./NavHome";
 import defaultImg from "../assets/who_is.png";
+import SearchBar from "./SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -86,6 +87,7 @@ export default function Home() {
         handleFilterTypes={handleFilterTypes}
       />
       <div className={styles.pokemonscontainer}>
+      {/* <SearchBar/> */}
         <button className={styles.refresh} onClick={handleClick}>
           Refrescar
         </button>

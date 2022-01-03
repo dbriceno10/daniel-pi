@@ -42,8 +42,19 @@
   border: none;
   border-radius: 8px;
   background-color: var(--absolute-white);
-  margin-right: 20px;
+  /* margin-right: 20px; */
   padding-left: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  width: 180px;
+}
+
+@media(max-width: 600px) {
+  .input{
+    width: 150px;
+  }
 }
 
 .button {
@@ -60,6 +71,10 @@
   transition: 0.4s;
   padding-left: 15px;
   padding-right: 15px;
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
   cursor: pointer;
 }
 

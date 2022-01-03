@@ -35,15 +35,15 @@
 .wikiimg {
   justify-content: center;
   align-items: center;
-  height: 60px;
+  height: 70px;
   margin-bottom: 40px;
   display: grid;
-  grid-template-columns: 60px 20px;
+  grid-template-rows: 30px 30px;
   font-size: 1rem;
   color: var(--absolute-white);
   background-color: var(--black-contrast);
-  padding-top: 5px;
-  padding-bottom: 5px;
+  padding-top: 20px;
+  /* padding-bottom: 5px; */
 }
 
 .wikiimg img {
@@ -119,6 +119,22 @@
   margin-bottom: 20px;
   position: relative;
   height: auto;
+}
+
+@media (max-width: 450px) {
+  .flexinput .input {
+    width: 180px;
+  }
+}
+@media (max-width: 400px) {
+  .flexinput .input {
+    width: 160px;
+  }
+}
+@media (max-width: 359px) {
+  .flexinput .input {
+    width: 130px;
+  }
 }
 
 .datacontainer {

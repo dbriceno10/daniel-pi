@@ -113,14 +113,14 @@
 }
 
 .pokeimg {
-  max-width: 260px;
-  max-height: 260px;
+  width: 260px;
+  height: 260px;
 }
 
 @media (max-width: 380px) {
   .pokeimg {
-    max-width: 200px;
-  max-height: 200px;
+    width: 200px;
+    height: 200px;
   }
 }
 

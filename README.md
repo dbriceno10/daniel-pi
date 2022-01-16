@@ -20,7 +20,7 @@ Se trata de una Single Page Aplication (SPA) en la cual se pueden listar a todos
   - Ordenarlos en orden ascendente/descendente alfabéticamente
   - Ver los detalles de cada pokemón
 
-## Tecnologías Utilizadas
+## Tecnologías Utilizadas 🛠️
 * __HTML__
 * __CSS__
 * __JavaScript__

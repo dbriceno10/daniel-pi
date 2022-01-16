@@ -8,15 +8,27 @@ const { getID } = require('../utils/getID.js');
 const { getApiInfo, getDbInfo } = require('./modules/modules.js');
 const router = Router();
 
+//************RUTAS pokemons/ ************************ */
+//  GET /pokemons:
+// Obtener un listado de 40 pokemons
+// Debe devolver solo los datos necesarios para la ruta principal (id, name, types, image) si vienen del api, y toda la info del pokemon si vienen de la base de datos (id, name, hp, strength, defense, speed, height, weight, img, types,createInDb)
+
+// [ ] GET /pokemons?name="...":
+// Obtener la data de un pokemon ingresado su nombre exacto o su id como un query parameter
+
 router.get('/', async (req, res, next) => {
   const { name } = req.query;
   try {
+    // GET /pokemons
     if (!name) {
+      //obtenemos la data desde la base de datos como un array
       const arrPokemonsDb = await getDbInfo();
+      //obtenemos la data desde el api como un array
       const arrPokemons = await getApiInfo();
+      //las juntamos en un solo array y enviamos la respuesta
       return res.send([...arrPokemonsDb, ...arrPokemons]);
     } else {
-      //si llegó un name por query
+      //si llegó un name por query GET /pokemons?name="..."
       const nameLower = name.trim().toLowerCase();
       //Primero verificamos si está en la base de datos
       let pokemonDB = await Pokemon.findOne({
@@ -43,6 +55,10 @@ router.get('/', async (req, res, next) => {
     res.status(404).send(error);
   }
 });
+
+/*[ ] POST /pokemons:
+Recibe los datos recolectados desde el formulario controlado de la ruta de creación de pokemons por body
+Crea un nuevo pokemon y lo guarda en la base de datos */
 
 router.post('/', async (req, res, next) => {
   let {
@@ -98,6 +114,13 @@ router.post('/', async (req, res, next) => {
     return res.status(404).send('error de creación');
   }
 });
+
+/**[ ] GET /pokemons/{id}:
+Obtener el detalle de una raza de perro en particular
+Debe traer solo los datos pedidos en la ruta de detalle de raza de perro
+Incluir los temperamentos asociados
+Obtener los detalles de un pokemon en particular, debe traer toda la data asociada a la ruta de detalles (id, name, hp, strength, defense, speed, height, weight, img, types, y si el pokemon vienen de la base de datos: createInDb)
+*/
 
 router.get('/:id', async (req, res, next) => {
   const { id } = req.params;

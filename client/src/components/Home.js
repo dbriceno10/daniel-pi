@@ -7,7 +7,7 @@ import {
   fillterPokemonsByType,
   fillterPokemonsCreated,
   sortPokemonsAlphabetically,
-  sortPokemonsByStrength,
+  // sortPokemonsByStrength,
   trueLoader,
 } from "../actions";
 import styles from "./styles/Home.module.css";
@@ -17,23 +17,25 @@ import Paginado from "./Paginado";
 import Loader from "./Loader";
 import NavHome from "./NavHome";
 import defaultImg from "../assets/who_is.png";
-import SearchBar from "./SearchBar";
 
 export default function Home() {
   const dispatch = useDispatch();
+  //Estados de Redux
   const allPokemons = useSelector((state) => state.pokemons);
   const typesPokemons = useSelector((state) => state.types);
   const loader = useSelector((state) => state.loader);
   useEffect(() => {
-    //componentDitMount
+    //componentDitMount, pide (despacha las acciones) los pokemons de la ruta principal y los tipos al montar el componente
     dispatch(getTypes());
     dispatch(getAllPokemons());
     return () => {
+    //componentWilUnmount, despacha la acción al desmontar el componente
       dispatch(trueLoader());
     };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); //NOTA: Podemos poner dispatch como argumento para que se ejecute el useEffect cada vez que se despache una acción, pero como no queremos estarle pegando a cada momento a la ruta de pokemons y tipos lo dejaremos así mientras.
-  // Voy a setear estados locales para manejar el paginado
+
+  /******* Voy a setear estados locales para manejar el paginado *********/
   // eslint-disable-next-line no-unused-vars
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1); //inicializamos en la página 1 para arrancar desde allí
@@ -47,6 +49,8 @@ export default function Home() {
   const paginado = (page) => {
     setCurrentPage(page);
   };
+
+  /***** Manejadores de eventos (Handlers) ******/
 
   function handleClick(e) {
     e.preventDefault();
@@ -71,23 +75,22 @@ export default function Home() {
     setOrder(e.target.value); //Seteo el orden actual para que me lo tome y haga el renderizado
   }
 
-  function handleSortByStrength(e) {
-    dispatch(sortPokemonsByStrength(e.target.value));
-    setCurrentPage(1);
-    setOrder(e.target.value);
-  }
+  // function handleSortByStrength(e) {
+  //   dispatch(sortPokemonsByStrength(e.target.value));
+  //   setCurrentPage(1);
+  //   setOrder(e.target.value);
+  // }
 
   return (
     <div className={styles.background}>
       <NavHome
         typesPokemons={typesPokemons}
         handleSortAlphabetically={handleSortAlphabetically}
-        handleSortByStrength={handleSortByStrength}
+        // handleSortByStrength={handleSortByStrength}
         handleFilterCreated={handleFilterCreated}
         handleFilterTypes={handleFilterTypes}
       />
       <div className={styles.pokemonscontainer}>
-      {/* <SearchBar/> */}
         <button className={styles.refresh} onClick={handleClick}>
           Refrescar
         </button>

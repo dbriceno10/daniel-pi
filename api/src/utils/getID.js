@@ -1,3 +1,5 @@
+/******** Función para obtener los id de los types *********/
+
 const { Type } = require('../db');
 
 async function getID(data) {

@@ -2,6 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import styles from "./styles/LandingPage.module.css";
 import wikiDexImg from "../assets/Logo_WikiDex_App.png";
+
 export default function LandingPage() {
   return (
     <div className={styles.background}>
@@ -12,9 +13,9 @@ export default function LandingPage() {
         <h1 className={styles.title}>WikiDex</h1>
       </div>
       <div className={styles.btncontainer}>
-      <Link to="/home">
-        <button className={styles.btn}>Home</button>
-      </Link>
+        <Link to="/home">
+          <button className={styles.btn}>Home</button>
+        </Link>
       </div>
     </div>
   );

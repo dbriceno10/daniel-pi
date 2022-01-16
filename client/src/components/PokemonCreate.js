@@ -9,6 +9,7 @@ import wikedexImg from "../assets/Logo_WikiDex_App.png";
 
 export default function PokemonCreate() {
   const dispatch = useDispatch();
+  //Estados de Redux y locales de React
   const typesPokemons = useSelector((state) => state.types);
   const [input, setInput] = useState({
     name: "",
@@ -21,21 +22,24 @@ export default function PokemonCreate() {
     img: "",
     types: [],
   });
-  const [error, setError] = useState({});
-  const [disabled, setDisabled] = useState(true);
-  const history = useHistory();
+  const [error, setError] = useState({});//Estados locales para errores
+  const [disabled, setDisabled] = useState(true);//Estado local para desabilitar o habilitar el botón de enviar
+  const history = useHistory();//Hook useHoistory permite hacer una redirección a una página dada
+
+  //componentWillMount
   useEffect(() => {
     dispatch(getTypes());
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  //Handlers
   function handleChange(e) {
     setInput({
       ...input,
-      [e.target.name]: e.target.value.trim(),
+      [e.target.name]: e.target.value.trim(),//Al campo actual le elimino los espacios a los lados
     });
     setError(
-      validate({
+      validate({//validamos los errores
         ...input,
         [e.target.name]: e.target.value,
       })
@@ -43,7 +47,7 @@ export default function PokemonCreate() {
   }
   function handleSubmit(e) {
     e.preventDefault();
-    dispatch(postPokemon(input));
+    dispatch(postPokemon(input)); //despachamos la acción que se va a encargar de crear al pokemon, envía la data al backend
     // alert("Pokemon Creado");
     setInput({
       name: "",
@@ -61,28 +65,32 @@ export default function PokemonCreate() {
     }, 1000)
   }
   function handleCheck(e) {
+    //Para seleccionar los tipos del pokemon
     if (e.target.checked) {
+      //cuando este es seleccionado guarda el tipo en un arreglo
       setInput({
         ...input,
         types: [...input.types, e.target.value],
       });
     }
     if (!e.target.checked) {
+      //cuando el tipo es deselecconado, lo saca del array de tipos
       input.types.splice(input.types.indexOf(e.target.value), 1);
       setInput({
         ...input,
       });
     }
     setError(
-      validate({
+      validate({ //validamos errores
         ...input,
         [e.target.name]: e.target.value,
       })
     );
   }
+
+  //Función para validar errores
   function validate(input) {
     let errors = {};
-    // if (!input.types.length) errors.types = "Tipo Requerido";
     if (!input.name) errors.name = "Nombre Requerido";
     if (input.hp < 0) errors.hp = "Inválido!";
     if (input.strength < 0) errors.strength = "Inválido!";
@@ -94,9 +102,10 @@ export default function PokemonCreate() {
       errors.img = "Formato no soportado";
     return errors;
   }
+
+  //componentWillUpdate, escucha los cambios en los estados de error, input y setDisabled, para disparar el control de errores
   useEffect(() => {
     if (
-      // input.types.length > 0 &&
       input.name.length > 0 &&
       input.types.length < 3 &&
       !error.hasOwnProperty("img") &&
@@ -264,9 +273,6 @@ export default function PokemonCreate() {
                 </div>
               );
             })}
-            {/* {error.types && (
-              <p className={styles.errormessage2}>{error.types}</p>
-            )} */}
             {input.types.length > 2 ? (
               <p className={styles.errormessage2}>Seleccione Máximo 2 Tipos</p>
             ) : null}

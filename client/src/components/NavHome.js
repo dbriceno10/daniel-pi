@@ -4,21 +4,22 @@ import SearchBar from "./SearchBar";
 import SortSelect from "./SortSelect";
 import { capitalizeString } from "../utils/utils";
 import styles from "./styles/NavHome.module.css";
-import { useState } from "react";
 import wikedexImg from "../assets/Logo_WikiDex_App.png";
+
+/******* Componente de NavBar, Contendra el ordenamiento, filtrados y la SearchBar ******/
 export default function NavHome({
   typesPokemons,
   handleSortAlphabetically,
-  handleSortByStrength,
+  // handleSortByStrength,
   handleFilterCreated,
   handleFilterTypes,
 }) {
-  const [sort, setSort] = useState("Ordenar Alfabéticamente");
-  function handleFilter(e) {
-    e.preventDefault();
-    if (sort === "Ordenar Alfabéticamente") setSort("Ordenar por Fuerza");
-    if (sort === "Ordenar por Fuerza") setSort("Ordenar Alfabéticamente");
-  }
+  // const [sort, setSort] = useState("Ordenar Alfabéticamente");
+  // function handleFilter(e) {
+  //   e.preventDefault();
+  //   if (sort === "Ordenar Alfabéticamente") setSort("Ordenar por Fuerza");
+  //   if (sort === "Ordenar por Fuerza") setSort("Ordenar Alfabéticamente");
+  // }
   return (
     <React.Fragment>
       <div className={styles.flex}>

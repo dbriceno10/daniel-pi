@@ -3,6 +3,10 @@ const axios = require('axios');
 const { Type } = require('../db'); //me raigo mis
 const router = Router();
 
+//************RUTAS types/************************ */
+//  GET /types:
+//Busca todos los tipos de pokemones los regresa
+
 router.get('/', async (req, res, next) => {
   try {
     const typesBD = await Type.findAll({
@@ -24,6 +28,8 @@ router.get('/', async (req, res, next) => {
     res.status(404).send('error');
   }
 });
+
+/****** Otra forma para traer los tipos, siempre busca en el api primero y luego revisa la base de datos, si el tipo está creado lo retorna, si no lo guarda y lo retorna. En desuso por ahora ******/
 
 // router.get('/', async (req, res, next) => {
 //   try {

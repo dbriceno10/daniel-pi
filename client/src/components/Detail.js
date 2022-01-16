@@ -6,19 +6,24 @@ import { getDetails, clearDetailsState, trueLoader } from "../actions";
 import { capitalizeString } from "../utils/utils";
 import defaultImg from "../assets/who_is.png";
 import Loader from "./Loader";
+// import Footer from "./Footer";
 import styles from "./styles/Details.module.css";
 import wikedexImg from "../assets/Logo_WikiDex_App.png";
 export default function Details(props) {
   const dispatch = useDispatch();
+  //Estados globales de Redux
   const pokemon = useSelector((state) => state.details);
   const loader = useSelector((state) => state.loader);
+
   useEffect(() => {
-    dispatch(getDetails(props.match.params.id));
+    //componentWillMount
+    dispatch(getDetails(props.match.params.id)); //al montar el componente dispara getDetails para cargar la información del pokemon en la ruta de detalles
     return () => {
-      //componentWilUnmount
+      //componentWillUnmount
       dispatch(clearDetailsState());
       dispatch(trueLoader());
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -31,6 +36,7 @@ export default function Details(props) {
           <p>Volver</p>
         </div>
       </Link>
+      {/* Mientras el estado de detalles (que es un array) esté vació, se va a estar mostrando el Loader */}
       {pokemon.length > 0 ? (
         <div className={styles.details}>
           {pokemon[0].createInDb ? (
@@ -77,11 +83,12 @@ export default function Details(props) {
               </p>
             </div>
           </div>
+          {/* Mientras loader sea true y el estado de detalles esté vació se va a mostrar el loader */}
         </div>
       ) : loader ? (
         <Loader />
       ) : null}
-
+      {/* Si loader cambia a false y sigue vacío el componente de detalles, quiere decir que la carga falló o el pokemon no se encontró, por lo que vamos a mostrar una imagen con un texto que diga que el pokemon no se encontró */}
       {loader ? null : (
         <div>
           <Link style={{ textDecoration: "none", color: "#fff" }} to="/home">
@@ -95,6 +102,7 @@ export default function Details(props) {
           </Link>
         </div>
       )}
+      {/* <Footer /> */}
     </div>
   );
 }

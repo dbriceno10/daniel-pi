@@ -1,0 +1,59 @@
+:root {
+  /* --black-contrast: #0b0f10; */
+  --black-contrast: #21292c;
+  --transition-black: #1a2122;
+  --blue-bootstrap: #007bff;
+  --absolute-white: #fff;
+  --absolute-black: #000;
+  --trasition-blue: #1f65b6;
+  --btn-gray: #d0d1d1;
+  --hover-gray: #818081;
+  --steel-color: #b1a7ba;
+  --water-color: #3399ff;
+  --bug-color: #a7b33b;
+  --dragon-color: #7365ab;
+  --electric-color: #f4cb5c;
+  --ghost-color: #6d6895;
+  --fire-color: #de5039;
+  --fairy-color: #f2b4eb;
+  --ice-color: #90d9e5;
+  --fighting-color: #dc9c8f;
+  --normal-color: #dbd3d1;
+  --grass-color: #a9df8f;
+  --psychic-color: #f89dbb;
+  --rock-color: #bba96f;
+  --dark-color: #4f4436;
+  --ground-color: #ecd495;
+  --poison-color: #9c5e8c;
+  --flying-color: #6590c8;
+  --unknown-color: #699d8e;
+  --shadow-color: #000000;
+}
+
+.footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: var(--transition-black);
+  /* background-color: var(--black-contrast); */
+}
+
+.footerDiv {
+  margin: 0 auto;
+}
+.footerDivA {
+  margin-left: 40px;
+  margin-right: 40px;
+}
+
+.footerDivAImg {
+  width: 50px;
+  height: 50px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  background-color: var(--absolute-white);
+  border-radius: 100%;
+  border: solid 1px var(--absolute-white);
+}

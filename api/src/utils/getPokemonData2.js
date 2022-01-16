@@ -1,3 +1,5 @@
+/******** Función para devolver la data del pokemon desde el api necesaria para la ruta de detalles *********/
+
 function getPokemonData2(auxData) {
   return {
     id: auxData.data.id,

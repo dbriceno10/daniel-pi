@@ -72,4 +72,10 @@ npm start
 
 La app tiene desplegado el backend y la base de datos en [Heroku](https://www.heroku.com/) y el frontend en [Vercel](https://vercel.com/). 
 
-Puedes visitar [WikiDex](https://daniel-pi.vercel.app/) en el siguiente enlace: https://daniel-pi.vercel.app/
+Puedes visitar la app desplegada [Acá](https://daniel-pi.vercel.app/)
+
+Puedes ver el video de prensentación en LinkedIn [Acá](https://www.linkedin.com/feed/update/urn:li:activity:6877424908440260608/)
+
+<img src="./client/public/miniatura.png"/>
+
+⌨️ con ❤️ por [dbriceno10](https://github.com/dbriceno10) 😊

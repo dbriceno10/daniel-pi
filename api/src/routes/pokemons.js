@@ -95,21 +95,21 @@ router.post('/', async (req, res, next) => {
         img,
         createInDb,
       });
-        const arrID = await getID(types); //Recibo un array de tipos y recibo un array de ids sacados de la tabla de tipos
-        await pokemonCreated.setTypes(arrID);
-        let pokemons = await Pokemon.findOne({
-          where: {
-            id: pokemonCreated.id,
-          }, //busco el id
-          include: Type,
-        });
-        pokemons = {
-          ...pokemons.dataValues,
-          types: getNamesByTypes(pokemons), //obtengo el array de tipos
-        };
-        return res.json(pokemons);
+      const arrID = await getID(types); //Recibo un array de tipos y recibo un array de ids sacados de la tabla de tipos
+      await pokemonCreated.setTypes(arrID);
+      let pokemons = await Pokemon.findOne({
+        where: {
+          id: pokemonCreated.id,
+        }, //busco el id
+        include: Type,
+      });
+      pokemons = {
+        ...pokemons.dataValues,
+        types: getNamesByTypes(pokemons), //obtengo el array de tipos
+      };
+      return res.json(pokemons);
     }
-    res.status(404).send('El nombre es requerido para crear un pokemon');
+    // res.status(404).send('El nombre es requerido para crear un pokemon');
   } catch (error) {
     return res.status(404).send('error de creación');
   }
@@ -140,6 +140,65 @@ router.get('/:id', async (req, res, next) => {
     } catch (error) {
       return res.status(404).send(error); //si el id no se encontró en ningún lado
     }
+  }
+});
+
+/**[ ] DELETE /pokemons/{id}: 
+Recibe por por params el id del pokemon para buscarlo y borrarlo de la base datos
+**/
+
+router.delete('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    if (id) {
+      const pokemon = await Pokemon.destroy({
+        where: { id: id },
+      });
+      return res.send({message: 'Pokemon eliminado', pokemon});
+    } else res.send('Pokemon no encontrado');
+  } catch (error) {
+    return res.status(404).send(error);
+  }
+});
+
+/**[ ] UPDATE /pokemons/{id}: 
+Recibe por por params el id del pokemon para buscarlo y actualizar sus datos con los datos recibidos por body
+**/
+
+router.put(':id', async (req, res, next) => {
+  const { id } = req.params;
+  const { name, hp, strength, defense, speed, height, weight, img, types } =
+    req.body;
+  try {
+    const pokemon = await Pokemon.findOne({ where: { id: id } });
+    if(!pokemon) {
+      return res.status(404).send('Pokemon no encontrado');
+    }
+    await pokemon.update({
+      name: name? name.trim().toLowerCase() : pokemon.name,
+      hp: hp? hp : pokemon.hp,
+      strength: strength? strength : pokemon.strength,
+      defense: defense? defense : pokemon.defense,
+      speed: speed? speed : pokemon.speed,
+      height: height? height : pokemon.height,
+      weight: weight? weight : pokemon.weight,
+      img: img? img : pokemon.img,
+    });
+    // const arrID = await getID(types);
+    // await pokemon.setTypes(arrID);
+    // let pokemons = await Pokemon.findOne({
+    //   where: {
+    //     id: pokemon.id,
+    //   },
+    //   include: Type,
+    // });
+    // pokemons = {
+    //   ...pokemons.dataValues,
+    //   types: getNamesByTypes(pokemons),
+    // };
+    return res.send({mesage: 'Pokemon Actualizado', pokemon});
+  } catch (error) {
+    return res.status(404).send(error);
   }
 });
 

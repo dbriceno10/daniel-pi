@@ -6,10 +6,9 @@ import reportWebVitals from "./reportWebVitals";
 import axios from "axios";
 import { Provider } from "react-redux";
 import { store } from "./store";
-// import dotenv from "dotenv";
-// dotenv.config();
-const { API } = process.env.REACT_APP_API;
-axios.defaults.baseURL = API || "http://localhost:3001";
+
+const API = process.env.REACT_APP_API //Obtengo la variable de entorno con el api
+axios.defaults.baseURL = API || "http://localhost:3001" //Configuración base para conectarse al backend desde local o desde la nube
 
 ReactDOM.render(
   <Provider store={store}>

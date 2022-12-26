@@ -89,6 +89,7 @@ export function postPokemon(dataPokemon) {
         title: "Ok",
         text: "Pokemon Creado",
         icon: "success",
+        timer: 3000
       });
       return dispatch({
         type: pokeAction.POST_POKEMON,

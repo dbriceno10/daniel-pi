@@ -70,9 +70,9 @@ npm start
 
 ## Despliegue 📦
 
-La app tiene desplegado el backend y la base de datos en [Heroku](https://www.heroku.com/) y el frontend en [Vercel](https://vercel.com/). 
+La app tiene desplegado el backend en [Render](https://www.heroku.com/](https://render.com/)), la base de datos en [ElephantSQL](https://www.elephantsql.com/)) y el frontend en [Vercel](https://vercel.com/). 
 
-Puedes visitar la app desplegada [Acá](https://daniel-pi.vercel.app/)
+Puedes visitar la app desplegada [Acá](https://wikidex-spa.vercel.app/)
 
 Puedes ver el video de prensentación en LinkedIn [Acá](https://www.linkedin.com/feed/update/urn:li:activity:6877424908440260608/)
 

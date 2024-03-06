@@ -7,7 +7,7 @@ async function getApiInfo() {
 
 
   // ---> Traemos a los pokemon desde el API
-  const dataAPI = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=40'); //obtenemos pokemons del 1 al 40
+  const dataAPI = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=10'); //obtenemos pokemons del 1 al 10
   const pk = [...dataAPI.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
   const data = await Promise.all(
     pk.map((pokemon) => axios.get(pokemon.url)) //genero un array de promesas

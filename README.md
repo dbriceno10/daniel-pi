@@ -70,7 +70,11 @@ npm start
 
 ## Despliegue 📦
 
+<<<<<<< HEAD
+La app tiene desplegado el backend y la base de datos en [Render](https://render.com/) y el frontend en [Vercel](https://vercel.com/).
+=======
 La app tiene desplegado el backend en [Render](https://render.com/), la base de datos en [ElephantSQL](https://www.elephantsql.com/) y el frontend en [Vercel](https://vercel.com/). 
+>>>>>>> c08b18ba7dc0cc32fb26cf28f272f90d7c80adc5
 
 Puedes visitar la app desplegada [Acá](https://wikidex-spa.vercel.app/)
 

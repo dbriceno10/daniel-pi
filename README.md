@@ -70,7 +70,7 @@ npm start
 
 ## Despliegue 📦
 
-La app tiene desplegado el backend y la base de datos en [Heroku](https://www.heroku.com/) y el frontend en [Vercel](https://vercel.com/). 
+La app tiene desplegado el backend y la base de datos en [Render](https://render.com/) y el frontend en [Vercel](https://vercel.com/).
 
 Puedes visitar la app desplegada [Acá](https://daniel-pi.vercel.app/)
 

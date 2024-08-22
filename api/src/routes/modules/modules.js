@@ -4,8 +4,6 @@ const { getNamesByTypes } = require('../../utils/getNamesByTypes.js');
 const axios = require('axios');
 
 async function getApiInfo() {
-
-
   // ---> Traemos a los pokemon desde el API
   const dataAPI = await axios.get('https://pokeapi.co/api/v2/pokemon?limit=10'); //obtenemos pokemons del 1 al 10
   const pk = [...dataAPI.data.results]; // array de resultados que contienen la info para acceder a cada pokemon
@@ -38,4 +36,10 @@ async function getDbInfo() {
   return arrPokemonsDb.reverse();
 }
 
-module.exports = { getApiInfo, getDbInfo };
+const searchPokemon = async (id) => {
+  let pokemonDB = await Pokemon.findOne({ where: { id }, include: Type });
+  pokemonDB = { ...pokemonDB.dataValues, types: getNamesByTypes(pokemonDB) };
+  return pokemonDB;
+};
+
+module.exports = { getApiInfo, getDbInfo, searchPokemon };

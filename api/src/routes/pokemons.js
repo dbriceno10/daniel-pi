@@ -1,12 +1,19 @@
 const { Router } = require('express');
 const axios = require('axios');
+const { json } = require('body-parser');
+
 const { Pokemon, Type } = require('../db'); //me raigo mis modelos de base de datos
 const { getPokemonData } = require('../utils/getPokemonData');
 const { getPokemonData2 } = require('../utils/getPokemonData2.js');
 const { getNamesByTypes } = require('../utils/getNamesByTypes');
 const { getID } = require('../utils/getID.js');
-const { getApiInfo, getDbInfo } = require('./modules/modules.js');
-const { json } = require('body-parser');
+const {
+  getApiInfo,
+  getDbInfo,
+  searchPokemon,
+} = require('./modules/modules.js');
+const { isUUID } = require('../utils/utils.js');
+
 const router = Router();
 
 //************RUTAS pokemons/ ************************ */
@@ -74,7 +81,6 @@ router.post('/', async (req, res, next) => {
     types,
     createInDb,
   } = req.body; //recibo toda la info por body
-  console.log(req.body);
   try {
     if (name) {
       if (!hp) hp = 1;
@@ -128,12 +134,14 @@ Obtener los detalles de un pokemon en particular, debe traer toda la data asocia
 
 router.get('/:id', async (req, res, next) => {
   const { id } = req.params;
-  try {
-    //Primero vamos a buscar en la base de datos, si llega a fallar, lo carturamos en el bloque catch y disparamos un nuevo código
-    let pokemonDB = await Pokemon.findOne({ where: { id }, include: Type });
-    pokemonDB = { ...pokemonDB.dataValues, types: getNamesByTypes(pokemonDB) };
-    return res.send(pokemonDB);
-  } catch (error) {
+  if (isUUID(id)) {
+    try {
+      let pokemonDB = await searchPokemon(id);
+      return res.send(pokemonDB);
+    } catch (error) {
+      return res.status(404).json({ message: 'Error: Pokemon no encontrado' });
+    }
+  } else {
     try {
       //como ese id no estaba en la base de datos, ahora vamos a buscar en el api
       let pokemonAPI = await axios.get(
@@ -154,12 +162,29 @@ Recibe por por params el id del pokemon para buscarlo y borrarlo de la base dato
 router.delete('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
-    if (id) {
-      await Pokemon.destroy({
-        where: { id: id },
-      });
-      return res.send({ message: 'Pokemon eliminado con exito' });
-    } else res.json({ message: 'Error: Pokemon no encontrado' });
+    let pokemonDB = await searchPokemon(id);
+    if (!pokemonDB) {
+      return res.status(404).json({ message: 'Error: Pokemon no encontrado' });
+    } else {
+      try {
+        await Pokemon.destroy({
+          where: { id: id },
+        });
+        return res.send({
+          message: 'Pokemon eliminado con exito',
+          pokemon: pokemonDB,
+        });
+      } catch (error) {
+        res.status(404),
+          json({ message: 'Error: No se pudo eliminar al pokemon' });
+      }
+    }
+    // if (id) {
+    //   await Pokemon.destroy({
+    //     where: { id: id },
+    //   });
+    //   return res.send({ message: 'Pokemon eliminado con exito' });
+    // } else res.json({ message: 'Error: Pokemon no encontrado' });
   } catch (error) {
     return (
       res.status(404),
@@ -176,10 +201,8 @@ router.put('/:id', async (req, res, next) => {
   const { id } = req.params;
   const { name, hp, strength, defense, speed, height, weight, img, types } =
     req.body;
-  console.log(id);
-  console.log(req.body);
   try {
-    const pokemon = await Pokemon.findOne({ where: { id: id } });
+    const pokemon = await searchPokemon(id);
     if (!pokemon) {
       return res.status(404).json({ message: 'Error: Pokemon no encontrado' });
     }

@@ -6,6 +6,7 @@ const { getPokemonData2 } = require('../utils/getPokemonData2.js');
 const { getNamesByTypes } = require('../utils/getNamesByTypes');
 const { getID } = require('../utils/getID.js');
 const { getApiInfo, getDbInfo } = require('./modules/modules.js');
+const { json } = require('body-parser');
 const router = Router();
 
 //************RUTAS pokemons/ ************************ */
@@ -73,6 +74,7 @@ router.post('/', async (req, res, next) => {
     types,
     createInDb,
   } = req.body; //recibo toda la info por body
+  console.log(req.body);
   try {
     if (name) {
       if (!hp) hp = 1;
@@ -111,7 +113,9 @@ router.post('/', async (req, res, next) => {
     }
     // res.status(404).send('El nombre es requerido para crear un pokemon');
   } catch (error) {
-    return res.status(404).send('error de creación');
+    return res
+      .status(404)
+      .json({ message: 'Error: No se ha podido crear el pokemon' });
   }
 });
 
@@ -138,7 +142,7 @@ router.get('/:id', async (req, res, next) => {
       pokemonAPI = getPokemonData2(pokemonAPI);
       return res.send(pokemonAPI);
     } catch (error) {
-      return res.status(404).send(error); //si el id no se encontró en ningún lado
+      return res.status(404).json({ message: 'Error: Pokemon no encontrado' }); //si el id no se encontró en ningún lado
     }
   }
 });
@@ -147,59 +151,66 @@ router.get('/:id', async (req, res, next) => {
 Recibe por por params el id del pokemon para buscarlo y borrarlo de la base datos
 **/
 
-// router.delete('/:id', async (req, res, next) => {
-//   const { id } = req.params;
-//   try {
-//     if (id) {
-//       const pokemon = await Pokemon.destroy({
-//         where: { id: id },
-//       });
-//       return res.send({message: 'Pokemon eliminado', pokemon});
-//     } else res.send('Pokemon no encontrado');
-//   } catch (error) {
-//     return res.status(404).send(error);
-//   }
-// });
+router.delete('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  try {
+    if (id) {
+      await Pokemon.destroy({
+        where: { id: id },
+      });
+      return res.send({ message: 'Pokemon eliminado con exito' });
+    } else res.json({ message: 'Error: Pokemon no encontrado' });
+  } catch (error) {
+    return (
+      res.status(404),
+      json({ message: 'Error: No se pudo eliminar al pokemon' })
+    );
+  }
+});
 
 /**[ ] UPDATE /pokemons/{id}: 
 Recibe por por params el id del pokemon para buscarlo y actualizar sus datos con los datos recibidos por body
 **/
 
-// router.put(':id', async (req, res, next) => {
-//   const { id } = req.params;
-//   const { name, hp, strength, defense, speed, height, weight, img, types } =
-//     req.body;
-//   try {
-//     const pokemon = await Pokemon.findOne({ where: { id: id } });
-//     if(!pokemon) {
-//       return res.status(404).send('Pokemon no encontrado');
-//     }
-//     await pokemon.update({
-//       name: name? name.trim().toLowerCase() : pokemon.name,
-//       hp: hp? hp : pokemon.hp,
-//       strength: strength? strength : pokemon.strength,
-//       defense: defense? defense : pokemon.defense,
-//       speed: speed? speed : pokemon.speed,
-//       height: height? height : pokemon.height,
-//       weight: weight? weight : pokemon.weight,
-//       img: img? img : pokemon.img,
-//     });
-//     // const arrID = await getID(types);
-//     // await pokemon.setTypes(arrID);
-//     // let pokemons = await Pokemon.findOne({
-//     //   where: {
-//     //     id: pokemon.id,
-//     //   },
-//     //   include: Type,
-//     // });
-//     // pokemons = {
-//     //   ...pokemons.dataValues,
-//     //   types: getNamesByTypes(pokemons),
-//     // };
-//     return res.send({mesage: 'Pokemon Actualizado', pokemon});
-//   } catch (error) {
-//     return res.status(404).send(error);
-//   }
-// });
+router.put('/:id', async (req, res, next) => {
+  const { id } = req.params;
+  const { name, hp, strength, defense, speed, height, weight, img, types } =
+    req.body;
+  console.log(id);
+  console.log(req.body);
+  try {
+    const pokemon = await Pokemon.findOne({ where: { id: id } });
+    if (!pokemon) {
+      return res.status(404).json({ message: 'Error: Pokemon no encontrado' });
+    }
+    await pokemon.update({
+      name: name ? name.trim().toLowerCase() : pokemon.name,
+      hp: hp ? hp : pokemon.hp,
+      strength: strength ? strength : pokemon.strength,
+      defense: defense ? defense : pokemon.defense,
+      speed: speed ? speed : pokemon.speed,
+      height: height ? height : pokemon.height,
+      weight: weight ? weight : pokemon.weight,
+      img: img ? img : pokemon.img,
+    });
+    const arrID = await getID(types);
+    await pokemon.setTypes(arrID);
+    let pokemons = await Pokemon.findOne({
+      where: {
+        id: pokemon.id,
+      },
+      include: Type,
+    });
+    pokemons = {
+      ...pokemons.dataValues,
+      types: getNamesByTypes(pokemons),
+    };
+    return res.send({ mesage: 'Pokemon Actualizado con exito', pokemon });
+  } catch (error) {
+    return res
+      .status(404)
+      .json({ message: 'Error: No se ha podido actualizar el pokemon' });
+  }
+});
 
 module.exports = router;

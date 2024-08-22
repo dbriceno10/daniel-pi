@@ -25,12 +25,11 @@ export function getAllPokemons() {
         type: pokeAction.GET_ALL_POKEMONS,
         payload: pokemons.data,
       });
-    } catch (error) {
-      console.error(error);
+    } catch ({ request }) {
       // alert("Ha ocurrido un error, por favor vuelve a intentar");
       swal({
         title: "Error",
-        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        text: JSON.parse(request.response).message,
         icon: "error",
       });
     }
@@ -56,19 +55,16 @@ export function getAllPokemons() {
 export function getPokemon(name) {
   return async function (dispatch) {
     try {
-      const pokemon = await axios(
-        `/pokemons?name=${name}`
-      );
+      const pokemon = await axios(`/pokemons?name=${name}`);
       return dispatch({
         type: pokeAction.GET_POKEMON,
         payload: pokemon.data,
       });
-    } catch (error) {
-      console.error(error);
+    } catch ({ request }) {
       // alert("Ha ocurrido un error, por favor vuelve a intentar");
       swal({
         title: "Error",
-        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        text: JSON.parse(request.response).message,
         icon: "error",
       });
       return dispatch({ type: pokeAction.LOADER_FALSE });
@@ -80,27 +76,23 @@ export function getPokemon(name) {
 export function postPokemon(dataPokemon) {
   return async function (dispatch) {
     try {
-      const pokemon = await axios.post(
-        "/pokemons",
-        dataPokemon
-      );
+      const pokemon = await axios.post("/pokemons", dataPokemon);
       // alert("Pokemon Creado");
       swal({
         title: "Ok",
         text: "Pokemon Creado",
         icon: "success",
-        timer: 3000
+        timer: 3000,
       });
       return dispatch({
         type: pokeAction.POST_POKEMON,
         payload: pokemon,
       });
-    } catch (error) {
-      console.error(error);
+    } catch ({ request }) {
       // alert("Ha ocurrido un error, por favor vuelve a intentar");
       swal({
         title: "Error",
-        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        text: JSON.parse(request.response).message,
         icon: "error",
       });
     }
@@ -116,12 +108,11 @@ export function getTypes() {
         type: pokeAction.GET_TYPES,
         payload: types.data,
       });
-    } catch (error) {
-      console.error(error);
+    } catch ({ request }) {
       // alert("Ha ocurrido un error, por favor vuelve a intentar");
       swal({
         title: "Error",
-        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        text: JSON.parse(request.response).message,
         icon: "error",
       });
     }
@@ -169,12 +160,11 @@ export function getDetails(id) {
         type: pokeAction.GET_DETAILS,
         payload: detail.data,
       });
-    } catch (error) {
-      console.error(error);
+    } catch ({ request }) {
       // alert("Ha ocurrido un error, por favor vuelve a intentar");
       swal({
         title: "Error",
-        text: "Ha ocurrido un error, por favor vuelve a intentar",
+        text: JSON.parse(request.response).message,
         icon: "error",
       });
       return dispatch({ type: pokeAction.LOADER_FALSE });

@@ -202,7 +202,7 @@ router.put('/:id', async (req, res, next) => {
   const { name, hp, strength, defense, speed, height, weight, img, types } =
     req.body;
   try {
-    const pokemon = await searchPokemon(id);
+    const pokemon = await Pokemon.findOne({ where: { id: id } });
     if (!pokemon) {
       return res.status(404).json({ message: 'Error: Pokemon no encontrado' });
     }
@@ -218,17 +218,11 @@ router.put('/:id', async (req, res, next) => {
     });
     const arrID = await getID(types);
     await pokemon.setTypes(arrID);
-    let pokemons = await Pokemon.findOne({
-      where: {
-        id: pokemon.id,
-      },
-      include: Type,
+    let pokemonDB = await searchPokemon(id);
+    return res.send({
+      mesage: 'Pokemon Actualizado con exito',
+      pokemon: pokemonDB,
     });
-    pokemons = {
-      ...pokemons.dataValues,
-      types: getNamesByTypes(pokemons),
-    };
-    return res.send({ mesage: 'Pokemon Actualizado con exito', pokemon });
   } catch (error) {
     return res
       .status(404)

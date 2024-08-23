@@ -90,6 +90,9 @@ router.post('/', async (req, res, next) => {
       if (!height) height = 1;
       if (!weight) weight = 1;
       if (!types.length) types = ['unknown'];
+      if (!img)
+        img =
+          'https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/77/latest/20150621181250/Pikachu.png/640px-Pikachu.png';
       //solo si recibo un nombre voy a guardar el pokemon en la base de datos
       const nameLower = name.trim().toLowerCase();
       const pokemonCreated = await Pokemon.create({

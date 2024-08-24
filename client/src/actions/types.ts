@@ -1,4 +1,4 @@
-import { PokemonCreateDTO } from "../interfaces";
+import { PokemonResponse } from "../interfaces";
 import { Pokemon, Type } from "../models";
 
 export const pokeAction = {
@@ -22,12 +22,12 @@ interface ActionGetAllPokemons {
 }
 
 interface ActionGetPokemon {
-  payload: Pokemon;
+  payload: Pokemon[];
   type: typeof pokeAction.GET_POKEMON;
 }
 
 interface ActionPostPokemon {
-  payload: PokemonCreateDTO;
+  payload: PokemonResponse;
   type: typeof pokeAction.POST_POKEMON;
 }
 
@@ -37,7 +37,7 @@ interface ActionGetTypes {
 }
 
 interface ActionFilterPokemonsByType {
-  payload: Type;
+  payload: string;
   type: typeof pokeAction.FILTER_POKEMONS_BY_TYPE;
 }
 
@@ -72,3 +72,17 @@ interface ActionTrueLoader {
 interface ActionFalseLoader {
   type: typeof pokeAction.LOADER_FALSE;
 }
+
+export type TypesAction =
+  | ActionGetAllPokemons
+  | ActionGetPokemon
+  | ActionPostPokemon
+  | ActionGetTypes
+  | ActionFilterPokemonsByType
+  | ActionFilterPokemonsCreated
+  | ActionSortPokemonsAlphabetically
+  | ActionSortPokemonsByStrength
+  | ActionGetDetails
+  | ActionClearDetailsState
+  | ActionTrueLoader
+  | ActionFalseLoader;

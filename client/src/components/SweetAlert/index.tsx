@@ -3,7 +3,7 @@ import style from './styles.module.scss';
 
 type Icons = 'warning' | 'error' | 'success' | 'info' | 'question';
 
-export interface AlertProps {
+interface SweetAlertProps {
   title?: string;
   text?: string;
   icon?: Icons;
@@ -12,6 +12,8 @@ export interface AlertProps {
   cancelButtonText?: string;
   timer?: number;
   showConfirmButton?: boolean;
+  confirmButtonColor?: string;
+  cancelButtonColor?: string;
 }
 
 const SweetAlert = ({
@@ -20,10 +22,12 @@ const SweetAlert = ({
   icon = 'success',
   confirmButtonText = 'Aceptar',
   showCancelButton = false,
+  showConfirmButton = true,
   cancelButtonText = 'Cancelar',
   timer = 9999999,
-  showConfirmButton = true
-}: AlertProps): Promise<SweetAlertResult> => {
+  confirmButtonColor = '#1a75ff',
+  cancelButtonColor = '#f4002c'
+}: SweetAlertProps): Promise<SweetAlertResult> => {
   return swal.fire({
     customClass: {
       container: style.my_swal
@@ -32,8 +36,8 @@ const SweetAlert = ({
     text,
     icon,
     showCancelButton,
-    confirmButtonColor: '#1a75ff',
-    cancelButtonColor: '#f4002c',
+    confirmButtonColor,
+    cancelButtonColor,
     cancelButtonText,
     confirmButtonText,
     timer,

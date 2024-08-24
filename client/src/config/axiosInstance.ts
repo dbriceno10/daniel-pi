@@ -1,7 +1,7 @@
 import axios from "axios";
-
+console.log(process.env.REACT_APP_API)
 const axiosIntance = axios.create({
-  baseURL: process.env.BASE_API_URL ?? "http://localhost:3001",
+  baseURL: process.env.REACT_APP_API ?? "http://localhost:3001",
   timeout: 30000,
 });
 

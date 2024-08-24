@@ -1,12 +1,15 @@
 import React from "react";
+import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
-import styles from "./styles/LandingPage.module.scss";
+
 import wikiDexImg from "../assets/Logo_WikiDex_App.png";
+
+import styles from "./styles/LandingPage.module.scss";
 
 const LandingPage = (): JSX.Element => {
   const navigate = useNavigate();
   return (
-    <div className={styles.background}>
+    <Box className={styles.background}>
       <div className={styles.grid}>
         <div>
           <img src={wikiDexImg} alt="wikidex" className={styles.imgwiki} />
@@ -18,7 +21,7 @@ const LandingPage = (): JSX.Element => {
           Home
         </button>
       </div>
-    </div>
+    </Box>
   );
 };
 

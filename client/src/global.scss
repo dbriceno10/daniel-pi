@@ -1,0 +1,27 @@
+$gradient-background: linear-gradient(
+  0deg,
+  rgba(26, 33, 34, 1) 11%,
+  rgba(33, 68, 33, 1) 30%,
+  rgba(26, 33, 34, 1) 44%,
+  rgba(240, 103, 32, 1) 57%,
+  rgba(26, 33, 34, 1) 68%,
+  rgba(31, 101, 182, 1) 79%,
+  rgba(26, 33, 34, 1) 91%
+);
+
+html {
+  font-family: "Roboto", sans-serif;
+}
+
+body {
+  background: $gradient-background;
+  background-size: cover;
+  background-attachment: fixed;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+
+.hidden {
+  display: none;
+}

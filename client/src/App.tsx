@@ -1,25 +1,25 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import "./global.scss";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import LandingPage from "./components/LandingPage";
+// import Home from "./components/Home";
+// import PokemonCreate from "./components/PokemonCreate";
+// import Details from "./components/Detail";
+// import NotFoundPage from "./components/NotFoundPage";
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+    <BrowserRouter>
+      <div className="App">
+        <Routes>
+          <Route path="/" element={<LandingPage />} />
+          {/* <Route path="/home" element={<Home />} /> */}
+          {/* <Route path="/create" element={<PokemonCreate />} /> */}
+          {/* <Route path="/home/:id" element={<Details />} /> */}
+          {/* <Route path="*" element={<NotFoundPage />} /> */}
+        </Routes>
+      </div>
+    </BrowserRouter>
   );
 }
 

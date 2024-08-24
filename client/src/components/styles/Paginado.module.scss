@@ -1,0 +1,68 @@
+:root {
+  /* --black-contrast: #0b0f10; */
+  --black-contrast: #21292c;
+  --blue-bootstrap: #007bff;
+  --absolute-white: #fff;
+  --absolute-black: #000;
+  --trasition-blue: #1f65b6;
+  --btn-gray: #d0d1d1;
+  --hover-gray: #818081;
+  --btn-yellow: #ffc20a;
+  --hover-yellow: #bd8e00;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+
+.container {
+  margin: 0 auto;
+  /* max-width: 320px; */
+}
+.ul {
+  margin-top: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  align-self: center;
+  align-items: center;
+  justify-content: center;
+  flex-direction: row;
+}
+
+.li {
+  list-style: none;
+}
+
+.libtn {
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  color: var(--absolute-black);
+  background-color: var(--btn-yellow);
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.4s;
+}
+
+.libtn:hover {
+  color: var(--absolute-white);
+  background-color: var(--hover-yellow);
+}
+
+.current {
+  justify-content: center;
+  font-size: 1rem;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  color: var(--absolute-white);
+  background-color: var(--hover-yellow);
+  padding: 10px;
+  padding-right: 20px;
+  padding-left: 20px;
+  font-weight: bold;
+  transition: 0.4s;
+}

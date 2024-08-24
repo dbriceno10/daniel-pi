@@ -1,0 +1,83 @@
+/* 1rem = 16px */
+:root {
+  /* --black-contrast: #0b0f10; */
+  --black-contrast: #21292c;
+  --blue-bootstrap: #007bff;
+  --absolute-white: #fff;
+  --absolute-black: #000;
+  --trasition-blue: #1f65b6;
+  --btn-gray: #d0d1d1;
+  --hover-gray: #818081;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+}
+.background {
+  background-image: url("../../assets/fondo1.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  width: 100vw;
+  height: 100vh;
+}
+.imgwiki {
+  width: 80px;
+  height: 80px;
+  border-radius: 100%;
+  margin-right: 20px;
+}
+
+.grid {
+  display: flex;
+  background-color: var(--black-contrast);
+  border-radius: 32px;
+  padding-left: 10px;
+  padding-right: 10px;
+  align-items: center;
+  justify-content: center;
+  max-width: 380px;
+  margin: 0 auto;
+  max-height: 125px;
+}
+
+
+
+.title {
+  font-size: 4rem;
+  color: var(--absolute-white);
+}
+
+@media(max-width: 360px) {
+  .imgwiki {
+    width: 60px;
+    height: 60px;
+  }
+  .title {
+    font-size: 3rem;
+  }
+}
+
+.btn-container {
+  display: flex;
+}
+
+.btn {
+  margin-top: 380px;
+  border: none;
+  border-radius: 8px;
+  background-color: var(--btn-gray);
+  color: var(--absolute-black);
+  padding: 10px;
+  padding-left: 20px;
+  padding-right: 20px;
+  font-size: 2rem;
+  transition: 0.4s;
+  box-shadow: 8px 8px 12px rgba(0, 0, 0, 0.4);
+  cursor: pointer;
+}
+
+.btn:hover {
+  background-color: var(--hover-gray);
+  color: var(--absolute-white);
+}

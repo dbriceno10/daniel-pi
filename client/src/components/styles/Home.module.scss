@@ -1,0 +1,79 @@
+:root {
+  /* --black-contrast: #0b0f10; */
+  --black-contrast: #21292c;
+  --blue-bootstrap: #007bff;
+  --absolute-white: #fff;
+  --absolute-black: #000;
+  --trasition-blue: #1f65b6;
+  --btn-gray: #d0d1d1;
+  --hover-gray: #818081;
+  --steel-color: #b1a7ba;
+  --water-color: #3399ff;
+  --bug-color: #a7b33b;
+  --dragon-color: #7365ab;
+  --electric-color: #f4cb5c;
+  --ghost-color: #6d6895;
+  --fire-color: #de5039;
+  --fairy-color: #f2b4eb;
+  --ice-color: #90d9e5;
+  --fighting-color: #dc9c8f;
+  --normal-color: #dbd3d1;
+  --grass-color: #a9df8f;
+  --psychic-color: #f89dbb;
+  --rock-color: #bba96f;
+  --dart-color: #4f4436;
+  --ground-color: #ecd495;
+  --poison-color: #9c5e8c;
+  --flying-color: #6590c8;
+  --unknown-color: #699d8e;
+  --shadow-color: #000000;
+  --btn-yellow: #ffc20a;
+  --hover-yellow: #bd8e00;
+}
+.background {
+  /* position: relative; */
+  padding-bottom: 60px;
+  font-family: "Roboto", sans-serif;
+}
+.paginado {
+  margin: 0 auto;
+  max-width: 320px;
+  display: flex;
+  flex-direction: column;
+}
+
+.pokemonscontainer {
+  position: relative;
+}
+
+.grid {
+  display: grid;
+  justify-content: center;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 300px));
+  grid-template-rows: repeat(auto-fill, minmax(100px, 150px));
+  grid-gap: 20px;
+}
+
+.refresh {
+  font-size: 1rem;
+  margin: 0 auto;
+  padding-left: 15px;
+  padding-right: 15px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  height: 40px;
+  box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
+  border: none;
+  border-radius: 8px;
+  background-color: var(--btn-yellow);
+  color: var(--absolute-black);
+  margin-top: 20px;
+  cursor: pointer;
+  font-weight: bold;
+  transition: 0.4s;
+}
+
+.refresh:hover {
+  color: var(--absolute-white);
+  background-color: var(--hover-yellow);
+}

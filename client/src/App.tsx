@@ -1,11 +1,16 @@
-import "./App.css";
-import "./global.scss";
+import React, { lazy } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-import LandingPage from "./components/LandingPage";
+
+import Loader from "./components/SuspenseLoader/Loader";
 import Home from "./components/Home";
 // import PokemonCreate from "./components/PokemonCreate";
 // import Details from "./components/Detail";
 // import NotFoundPage from "./components/NotFoundPage";
+
+import "./App.css";
+import "./global.scss";
+
+const LandingPage = Loader(lazy(() => import("./pages/LandingPage/page")));
 
 function App() {
   return (

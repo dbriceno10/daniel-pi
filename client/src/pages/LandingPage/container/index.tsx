@@ -2,9 +2,9 @@ import React from "react";
 import { Box } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-import wikiDexImg from "../assets/Logo_WikiDex_App.png";
+import wikiDexImg from "../../../assets/Logo_WikiDex_App.png";
 
-import styles from "./styles/LandingPage.module.scss";
+import styles from "../../styles/LandingPage.module.scss";
 
 const LandingPage = (): JSX.Element => {
   const navigate = useNavigate();

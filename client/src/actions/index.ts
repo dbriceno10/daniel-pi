@@ -41,7 +41,7 @@ export function getAllPokemonsAsync(
     } catch (error) {
       if (error instanceof AxiosError) {
         const data: ErrorHandler = error.response?.data;
-        const message = data.message ?? "Ha ocurrido un error";
+    const message = data?.message ?? "Ha ocurrido un error";
         ToastifyAlert({
           text: message,
           type: "error",
@@ -73,7 +73,7 @@ export function getPokemonAsync(
     } catch (error) {
       if (error instanceof AxiosError) {
         const data: ErrorHandler = error.response?.data;
-        const message = data.message ?? "Ha ocurrido un error";
+    const message = data?.message ?? "Ha ocurrido un error";
         ToastifyAlert({
           text: message,
           type: "error",
@@ -110,7 +110,7 @@ export function postPokemonAsync(
     } catch (error) {
       if (error instanceof AxiosError) {
         const data: ErrorHandler = error.response?.data;
-        const message = data.message ?? "Ha ocurrido un error";
+    const message = data?.message ?? "Ha ocurrido un error";
         ToastifyAlert({
           text: message,
           type: "error",
@@ -142,7 +142,7 @@ export function getTypesAsync(
     } catch (error) {
       if (error instanceof AxiosError) {
         const data: ErrorHandler = error.response?.data;
-        const message = data.message ?? "Ha ocurrido un error";
+    const message = data?.message ?? "Ha ocurrido un error";
         ToastifyAlert({
           text: message,
           type: "error",
@@ -208,7 +208,7 @@ export function getDetailsAsync(
       dispatch(trueLoader());
       if (error instanceof AxiosError) {
         const data: ErrorHandler = error.response?.data;
-        const message = data.message ?? "Ha ocurrido un error";
+    const message = data?.message ?? "Ha ocurrido un error";
         ToastifyAlert({
           text: message,
           type: "error",

@@ -9,7 +9,7 @@ export const Dao = {
   ): Promise<AxiosResponse<Pokemon[]>> => {
     let name = "";
     if (search) {
-      name = `&name=${search}`;
+      name = `?name=${search}`;
     }
     return axiosIntance.get(`/pokemons${name}`);
   },

@@ -1,5 +1,19 @@
 import { AxiosError } from "axios";
-import { pokeAction, TypesAction } from "./types";
+import {
+  GET_ALL_POKEMONS,
+  GET_POKEMON,
+  POST_POKEMON,
+  GET_TYPES,
+  FILTER_POKEMONS_BY_TYPE,
+  FILTER_POKEMONS_CREATED,
+  SORT_POKEMONS_ALPHABETICALLY,
+  SORT_POKEMONS_BY_STRENGTH,
+  GET_DETAILS,
+  CLEAR_DETAILS_STATE,
+  LOADER_TRUE,
+  LOADER_FALSE,
+  TypesAction,
+} from "./types";
 import { Pokemon, Type } from "../models";
 import { ErrorHandler, PokemonCreateDTO } from "../interfaces";
 import { Dao } from "../api/dao";
@@ -11,7 +25,7 @@ import ToastifyAlert from "../components/ToastifyAlert";
 function getAllPokemons(payload: Pokemon[]): TypesAction {
   return {
     payload,
-    type: pokeAction.GET_ALL_POKEMONS,
+    type: GET_ALL_POKEMONS,
   };
 }
 
@@ -42,7 +56,7 @@ export function getAllPokemonsAsync(
 function getPokemon(payload: Pokemon[]): TypesAction {
   return {
     payload,
-    type: pokeAction.GET_POKEMON,
+    type: GET_POKEMON,
   };
 }
 
@@ -75,7 +89,7 @@ export function getPokemonAsync(
 function postPokemon(payload: Pokemon): TypesAction {
   return {
     payload,
-    type: pokeAction.POST_POKEMON,
+    type: POST_POKEMON,
   };
 }
 
@@ -112,7 +126,7 @@ export function postPokemonAsync(
 function getTypes(payload: Type[]): TypesAction {
   return {
     payload,
-    type: pokeAction.GET_TYPES,
+    type: GET_TYPES,
   };
 }
 
@@ -142,7 +156,7 @@ export function getTypesAsync(
 //acción que permite filtrar a los pokemones por tipo
 export function filterPokemonsByType(payload: string): TypesAction {
   return {
-    type: pokeAction.FILTER_POKEMONS_BY_TYPE,
+    type: FILTER_POKEMONS_BY_TYPE,
     payload,
   };
 }
@@ -150,7 +164,7 @@ export function filterPokemonsByType(payload: string): TypesAction {
 //acción que permite filtrar a los pokemones si estos vienen del api o de la base de datos
 export function filterPokemonsCreated(payload: string): TypesAction {
   return {
-    type: pokeAction.FILTER_POKEMONS_CREATED,
+    type: FILTER_POKEMONS_CREATED,
     payload,
   };
 }
@@ -158,7 +172,7 @@ export function filterPokemonsCreated(payload: string): TypesAction {
 //acción que permite ordenar a los pokemones de forma alfabética
 export function sortPokemonsAlphabetically(payload: string): TypesAction {
   return {
-    type: pokeAction.SORT_POKEMONS_ALPHABETICALLY,
+    type: SORT_POKEMONS_ALPHABETICALLY,
     payload,
   };
 }
@@ -166,7 +180,7 @@ export function sortPokemonsAlphabetically(payload: string): TypesAction {
 //acción que permite ordenar a los pokemones por fuerza (actualmente en desuso)
 export function sortPokemonsByStrength(payload: string): TypesAction {
   return {
-    type: pokeAction.SORT_POKEMONS_BY_STRENGTH,
+    type: SORT_POKEMONS_BY_STRENGTH,
     payload,
   };
 }
@@ -176,7 +190,7 @@ export function sortPokemonsByStrength(payload: string): TypesAction {
 function getDetails(payload: Pokemon): TypesAction {
   return {
     payload,
-    type: pokeAction.GET_DETAILS,
+    type: GET_DETAILS,
   };
 }
 
@@ -208,20 +222,20 @@ export function getDetailsAsync(
 //acción que permite limpiar el estado de detalles
 export function clearDetailsState(): TypesAction {
   return {
-    type: pokeAction.CLEAR_DETAILS_STATE,
+    type: CLEAR_DETAILS_STATE,
   };
 }
 
 //acción que permite cambiara true el estado de loader
 export function trueLoader(): TypesAction {
   return {
-    type: pokeAction.LOADER_TRUE,
+    type: LOADER_TRUE,
   };
 }
 
 //acción que permite cambiar a false es estado de loader
 export function falseLoader(): TypesAction {
   return {
-    type: pokeAction.LOADER_FALSE,
+    type: LOADER_FALSE,
   };
 }

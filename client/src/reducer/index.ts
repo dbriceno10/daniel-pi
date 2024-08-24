@@ -1,4 +1,18 @@
-import { pokeAction, TypesAction } from "../actions/types";
+import {
+  GET_ALL_POKEMONS,
+  GET_POKEMON,
+  POST_POKEMON,
+  GET_TYPES,
+  FILTER_POKEMONS_BY_TYPE,
+  FILTER_POKEMONS_CREATED,
+  SORT_POKEMONS_ALPHABETICALLY,
+  SORT_POKEMONS_BY_STRENGTH,
+  GET_DETAILS,
+  CLEAR_DETAILS_STATE,
+  LOADER_TRUE,
+  LOADER_FALSE,
+  TypesAction,
+} from "../actions/types";
 import { State } from "./state";
 
 const inicialState: State = {
@@ -15,8 +29,7 @@ const inicialState: State = {
 function rootReducer(state = inicialState, action: TypesAction) {
   switch (action.type) {
     //taer a todos los pokemones de la ruta principal
-    case pokeAction.GET_ALL_POKEMONS: {
-      const pokemons = action.payload;
+    case GET_ALL_POKEMONS: {
       return {
         ...state,
         loader: false,
@@ -25,7 +38,7 @@ function rootReducer(state = inicialState, action: TypesAction) {
         pokemonsTypesFilter: action.payload, // para no perder los estados filtrados al buscar entre pokemons del api y creados, la inicializa con todos los pokemon en un pricipio
       };
     }
-    case pokeAction.GET_POKEMON: {
+    case GET_POKEMON: {
       //traer a un pokemon por su nombre o id
       const findPokemon = state.pokemonsCopy.filter(
         (pokemon) => pokemon.id === action.payload.id
@@ -45,20 +58,20 @@ function rootReducer(state = inicialState, action: TypesAction) {
         };
       }
     }
-    case pokeAction.POST_POKEMON: {
+    case POST_POKEMON: {
       //crear a un pokemon y guardarlo en la base de datos
       return {
         ...state,
       };
     }
-    case pokeAction.GET_TYPES: {
+    case GET_TYPES: {
       //obtener los tipos de pokemones
       return {
         ...state,
         types: action.payload,
       };
     }
-    case pokeAction.FILTER_POKEMONS_BY_TYPE: {
+    case FILTER_POKEMONS_BY_TYPE: {
       //Filtrar a los pokemones por tipo
       const allPokemons = state.pokemonsCopy; //voy a tener pokemonsCopy que siempre va a tener una copia del estado completo, y el estado que se va a esatar enviando filtrado va a ser pokemons, así cada vez que vaya a filtrar nuevamente, voy a tomar como referencia a la copia con el estado original de todos los pokemons
       const typesFiltered =
@@ -73,7 +86,7 @@ function rootReducer(state = inicialState, action: TypesAction) {
         pokemonsTypesFilter: typesFiltered,
       };
     }
-    case pokeAction.FILTER_POKEMONS_CREATED: {
+    case FILTER_POKEMONS_CREATED: {
       //filtrar a los pokemones por si estos vienen del api o son creados por el usuario
       const allPokemons2 = state.pokemonsTypesFilter;
       let createdFilter = [];
@@ -89,7 +102,7 @@ function rootReducer(state = inicialState, action: TypesAction) {
         pokemons: createdFilter,
       };
     }
-    case pokeAction.SORT_POKEMONS_ALPHABETICALLY: {
+    case SORT_POKEMONS_ALPHABETICALLY: {
       //ordenar a los pokemones de forma alfabética
       let sortedArr1 = [];
       if (action.payload === "asc") {
@@ -115,7 +128,7 @@ function rootReducer(state = inicialState, action: TypesAction) {
         pokemons: sortedArr1,
       };
     }
-    case pokeAction.SORT_POKEMONS_BY_STRENGTH: {
+    case SORT_POKEMONS_BY_STRENGTH: {
       //ordena a los pokemones por fuerza (actualmente en desuso)
       let sortedArr2 = [];
       if (action.payload === "asc") {
@@ -138,27 +151,27 @@ function rootReducer(state = inicialState, action: TypesAction) {
         pokemons: sortedArr2,
       };
     }
-    case pokeAction.GET_DETAILS: {
+    case GET_DETAILS: {
       return {
         ...state,
         details: [action.payload],
       };
     }
-    case pokeAction.CLEAR_DETAILS_STATE: {
+    case CLEAR_DETAILS_STATE: {
       //Limmpiar (vaciar) el estado de detalles
       return {
         ...state,
         details: [],
       };
     }
-    case pokeAction.LOADER_TRUE: {
+    case LOADER_TRUE: {
       //camiar el loader a true
       return {
         ...state,
         loader: true,
       };
     }
-    case pokeAction.LOADER_FALSE: {
+    case LOADER_FALSE: {
       //cambiar el loader a false
       return {
         ...state,

@@ -53,7 +53,7 @@ export function getAllPokemonsAsync(
 }
 //acción que permite traer a un pokemon por su nombre exacto o su id
 
-function getPokemon(payload: Pokemon[]): TypesAction {
+function getPokemon(payload: Pokemon): TypesAction {
   return {
     payload,
     type: GET_POKEMON,
@@ -68,7 +68,7 @@ export function getPokemonAsync(
   return async function (dispatch: Function) {
     try {
       const response = await Dao.getPokemons(name);
-      dispatch(getPokemon(response.data));
+      dispatch(getPokemon(response.data[0]));
       callbackSuccess && callbackSuccess();
     } catch (error) {
       if (error instanceof AxiosError) {

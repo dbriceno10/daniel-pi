@@ -19,7 +19,7 @@ interface ActionGetAllPokemons {
 }
 
 interface ActionGetPokemon {
-  payload: Pokemon[];
+  payload: Pokemon;
   type: typeof GET_POKEMON;
 }
 

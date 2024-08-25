@@ -7,7 +7,7 @@ import wikedexImg from "../../../assets/Logo_WikiDex_App.png";
 
 import styles from "../../styles/NotFoundPage.module.scss";
 
-const NotFoundPage = () => {
+const NotFoundPage = (): JSX.Element => {
   return (
     <div className={styles.detailscontainer}>
       <Link className={styles.link} to="/">

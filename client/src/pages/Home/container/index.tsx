@@ -22,7 +22,7 @@ const Home: React.FC<HomeProps> = ({
   filterCreated,
   sortAlphabetically,
   getPokemon,
-}) => {
+}): JSX.Element => {
   const navigate = useNavigate();
 
   //Estados de Redux

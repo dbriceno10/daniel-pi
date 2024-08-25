@@ -1,33 +1,5 @@
-:root {
-  /* --black-contrast: #0b0f10; */
-  --black-contrast: #21292c;
-  --blue-bootstrap: #007bff;
-  --absolute-white: #fff;
-  --absolute-black: #000;
-  --trasition-blue: #1f65b6;
-  --btn-gray: #d0d1d1;
-  --hover-gray: #818081;
-  --steel-color: #b1a7ba;
-  --water-color: #3399ff;
-  --bug-color: #a7b33b;
-  --dragon-color: #7365ab;
-  --electric-color: #f4cb5c;
-  --ghost-color: #6d6895;
-  --fire-color: #de5039;
-  --fairy-color: #f2b4eb;
-  --ice-color: #90d9e5;
-  --fighting-color: #dc9c8f;
-  --normal-color: #dbd3d1;
-  --grass-color: #a9df8f;
-  --psychic-color: #f89dbb;
-  --rock-color: #bba96f;
-  --dark-color: #4f4436;
-  --ground-color: #ecd495;
-  --poison-color: #9c5e8c;
-  --flying-color: #6590c8;
-  --unknown-color: #699d8e;
-  --shadow-color: #000000;
-}
+@import "../../global.scss";
+
 .detailscontainer {
   position: relative;
   font-family: "Roboto", sans-serif;
@@ -41,8 +13,8 @@
   grid-template-rows: 30px 30px;
   justify-content: center;
   font-size: 1rem;
-  color: var(--absolute-white);
-  background-color: var(--black-contrast);
+  color: $absolute-white;
+  background-color: $black-contrast;
   height: 70px;
   padding-top: 20px;
   /* padding-bottom: 5px; */
@@ -80,7 +52,7 @@
   bottom: 20px;
   left: 20px;
   font-weight: bold;
-  background-color: var(--absolute-white);
+  background-color: $absolute-white;
   padding: 8px;
   border-radius: 16px;
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
@@ -133,7 +105,7 @@
 
 .dataskill p {
   /* display: none; */
-  background-color: var(--absolute-white);
+  background-color: $absolute-white;
   padding: 15px;
   border-radius: 32px;
   box-shadow: 0px 4px 8px rgba(89, 73, 30, 0.16);
@@ -144,145 +116,153 @@
 
 .normal {
   padding: 3px;
-  border: solid 2px var(--normal-color);
-  background-color: var(--normal-color);
+  border: solid 2px $normal-color;
+  background-color: $normal-color;
   border-radius: 8px;
 }
 
 .fighting {
   padding: 3px;
-  border: solid 2px var(--fighting-color);
-  background-color: var(--fighting-color);
+  border: solid 2px $fighting-color;
+  background-color: $fighting-color;
   border-radius: 8px;
 }
 
 .flying {
   padding: 3px;
-  border: solid 2px var(--flying-color);
-  background-color: var(--flying-color);
+  border: solid 2px $flying-color;
+  background-color: $flying-color;
   border-radius: 8px;
 }
 
 .poison {
   padding: 3px;
-  border: solid 2px var(--poison-color);
-  background-color: var(--poison-color);
-  color: var(--absolute-white);
+  border: solid 2px $poison-color;
+  background-color: $poison-color;
+  color: $absolute-white;
   border-radius: 8px;
 }
 
 .ground {
   padding: 3px;
-  border: solid 2px var(--ground-color);
-  background-color: var(--ground-color);
+  border: solid 2px $ground-color;
+  background-color: $ground-color;
   border-radius: 8px;
 }
 
 .rock {
   padding: 3px;
-  border: solid 2px var(--rock-color);
-  background-color: var(--rock-color);
+  border: solid 2px $rock-color;
+  background-color: $rock-color;
   border-radius: 8px;
 }
 
 .bug {
   padding: 3px;
-  border: solid 2px var(--bug-color);
-  background-color: var(--bug-color);
+  border: solid 2px $bug-color;
+  background-color: $bug-color;
   border-radius: 8px;
 }
 
 .ghost {
   padding: 3px;
-  border: solid 2px var(--ghost-color);
-  background-color: var(--ghost-color);
-  color: var(--absolute-white);
+  border: solid 2px $ghost-color;
+  background-color: $ghost-color;
+  color: $absolute-white;
   border-radius: 8px;
 }
 
 .steel {
   padding: 3px;
-  border: solid 2px var(--steel-color);
-  background-color: var(--steel-color);
+  border: solid 2px $steel-color;
+  background-color: $steel-color;
   border-radius: 8px;
 }
 
 .fire {
   padding: 3px;
-  border: solid 2px var(--fire-color);
-  background-color: var(--fire-color);
+  border: solid 2px $fire-color;
+  background-color: $fire-color;
   border-radius: 8px;
 }
 
 .water {
   padding: 3px;
-  border: solid 2px var(--water-color);
-  background-color: var(--water-color);
+  border: solid 2px $water-color;
+  background-color: $water-color;
   border-radius: 8px;
 }
 
 .grass {
   padding: 3px;
-  border: solid 2px var(--grass-color);
-  background-color: var(--grass-color);
+  border: solid 2px $grass-color;
+  background-color: $grass-color;
   border-radius: 8px;
 }
 
 .electric {
   padding: 3px;
-  border: solid 2px var(--electric-color);
-  background-color: var(--electric-color);
+  border: solid 2px $electric-color;
+  background-color: $electric-color;
   border-radius: 8px;
 }
 
 .psychic {
   padding: 3px;
-  border: solid 2px var(--psychic-color);
-  background-color: var(--psychic-color);
+  border: solid 2px $psychic-color;
+  background-color: $psychic-color;
   border-radius: 8px;
 }
 
 .ice {
   padding: 3px;
-  border: solid 2px var(--ice-color);
-  background-color: var(--ice-color);
+  border: solid 2px $ice-color;
+  background-color: $ice-color;
   border-radius: 8px;
 }
 
 .dragon {
   padding: 3px;
-  border: solid 2px var(--dragon-color);
-  background-color: var(--dragon-color);
-  color: var(--absolute-white);
+  border: solid 2px $dragon-color;
+  background-color: $dragon-color;
+  color: $absolute-white;
   border-radius: 8px;
 }
 
 .dark {
   padding: 3px;
-  border: solid 2px var(--dark-color);
-  background-color: var(--dark-color);
-  color: var(--absolute-white);
+  border: solid 2px $dark-color;
+  background-color: $dark-color;
+  color: $absolute-white;
   border-radius: 8px;
 }
 
 .fairy {
   padding: 3px;
-  border: solid 2px var(--fairy-color);
-  background-color: var(--fairy-color);
+  border: solid 2px $fairy-color;
+  background-color: $fairy-color;
   border-radius: 8px;
 }
 
 .unknown {
   padding: 3px;
-  border: solid 2px var(--unknown-color);
-  background-color: var(--unknown-color);
+  border: solid 2px $unknown-color;
+  background-color: $unknown-color;
   border-radius: 8px;
 }
 
 .shadow {
   padding: 3px;
-  border: solid 2px var(--shadow-color);
-  background-color: var(--shadow-color);
-  color: var(--absolute-white);
+  border: solid 2px $shadow-color;
+  background-color: $shadow-color;
+  color: $absolute-white;
+  border-radius: 8px;
+}
+
+.stellar {
+  padding: 3px;
+  border: solid 2px $stellar-color;
+  background-color: $stellar-color;
+  color: $absolute-white;
   border-radius: 8px;
 }

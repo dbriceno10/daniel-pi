@@ -21,3 +21,13 @@ export interface HomeProps {
     callbackError?: Function
   ) => Promise<void>;
 }
+
+export interface DetailsProps {
+  pokemon: Pokemon[];
+  clearDetails: () => TypesAction;
+  getDetails: (
+    id: string | number,
+    callbackSuccess?: Function,
+    callbackError?: Function
+  ) => Promise<void>;
+}

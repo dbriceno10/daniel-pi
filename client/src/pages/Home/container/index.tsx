@@ -1,45 +1,45 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
+import { Box } from "@mui/material";
 
-import {
-  getAllPokemonsAsync,
-  getTypesAsync,
-  filterPokemonsByType,
-  filterPokemonsCreated,
-  sortPokemonsAlphabetically,
-  trueLoader,
-} from "../actions";
-import { useAppSelector } from "../store";
-import Card from "./Card";
-import { capitalizeString } from "../utils/utils";
-import Paginado from "./Paginado";
-import Loader from "./Loader";
-import NavHome from "./NavHome";
-import defaultImg from "../assets/who_is.png";
+import { HomeProps } from "../../interfaces";
+import Card from "../../../components/Card";
+import { capitalizeString } from "../../../utils/utils";
+import Paginado from "../../../components/Paginado";
+import Loader from "../../../components/Loader";
+import NavHome from "../../../components/NavHome";
+import defaultImg from "../../../assets/who_is.png";
 
-import styles from "./styles/Home.module.scss";
+import styles from "../../styles/Home.module.scss";
 
-export default function Home() {
+const Home: React.FC<HomeProps> = ({
+  allPokemons,
+  typesPokemons,
+  getAllPokemons,
+  getTypes,
+  filterByType,
+  filterCreated,
+  sortAlphabetically,
+}) => {
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   //Estados de Redux
-  const allPokemons = useAppSelector((state) => state.pokemons);
-  const typesPokemons = useAppSelector((state) => state.types);
-  const loader = useAppSelector((state) => state.loader);
+
+  // const loader = useAppSelector((state) => state.loader);
+  const [loader, setLoader] = useState(false);
   useEffect(() => {
     //componentDitMount, pide (despacha las acciones) los pokemons de la ruta principal y los tipos al montar el componente
     if (!typesPokemons.length) {
-      dispatch(getTypesAsync());
+      getTypes();
     }
     if (!allPokemons.length) {
-      dispatch(getAllPokemonsAsync());
+      setLoader(true);
+      getAllPokemons(
+        () => setLoader(false),
+        () => setLoader(false)
+      );
     }
-    return () => {
-      //componentWilUnmount, despacha la acción al desmontar el componente
-      dispatch(trueLoader());
-    };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []); //NOTA: Podemos poner dispatch como argumento para que se ejecute el useEffect cada vez que se despache una acción, pero como no queremos estarle pegando a cada momento a la ruta de pokemons y tipos lo dejaremos así mientras.
 
@@ -62,23 +62,22 @@ export default function Home() {
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    dispatch(trueLoader());
-    dispatch(getTypesAsync());
-    dispatch(getAllPokemonsAsync());
+    getTypes();
+    getAllPokemons();
   };
 
   function handleFilterTypes(e: React.ChangeEvent<HTMLSelectElement>) {
-    dispatch(filterPokemonsByType(e.target.value));
+    filterByType(e.target.value);
     setCurrentPage(1);
   }
 
   function handleFilterCreated(e: React.ChangeEvent<HTMLSelectElement>) {
-    dispatch(filterPokemonsCreated(e.target.value));
+    filterCreated(e.target.value);
     setCurrentPage(1);
   }
 
   function handleSortAlphabetically(e: React.ChangeEvent<HTMLSelectElement>) {
-    dispatch(sortPokemonsAlphabetically(e.target.value));
+    sortAlphabetically(e.target.value);
     setCurrentPage(1); //seteo la página actual en 1
     setOrder(e.target.value); //Seteo el orden actual para que me lo tome y haga el renderizado
   }
@@ -90,7 +89,7 @@ export default function Home() {
   // }
 
   return (
-    <div className={styles.background}>
+    <Box className={styles.background}>
       <NavHome
         typesPokemons={typesPokemons}
         handleSortAlphabetically={handleSortAlphabetically}
@@ -150,6 +149,8 @@ export default function Home() {
           </div>
         )}
       </div>
-    </div>
+    </Box>
   );
-}
+};
+
+export default Home;

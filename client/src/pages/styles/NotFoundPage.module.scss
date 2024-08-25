@@ -1,0 +1,33 @@
+@import "../../global.scss";
+
+.detailscontainer {
+  position: relative;
+  font-family: "Roboto", sans-serif;
+  /* margin-bottom: 40px; */
+  height: 100vh;
+}
+
+.wikiimg {
+  align-items: center;
+  margin-bottom: 40px;
+  display: grid;
+  grid-template-rows: 30px 30px;
+  justify-content: center;
+  font-size: 1rem;
+  color: $absolute-white;
+  background-color: $black-contrast;
+  height: 70px;
+  padding-top: 20px;
+  /* padding-bottom: 5px; */
+}
+
+.wikiimg img {
+  width: 40px;
+  height: 40px;
+  border-radius: 100%;
+  margin: 10px;
+}
+
+.link {
+  text-decoration: none;
+}

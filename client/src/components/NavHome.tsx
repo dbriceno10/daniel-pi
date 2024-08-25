@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 import SearchBar from "./SearchBar";
 import SortSelect from "./SortSelect";
@@ -20,7 +20,6 @@ const NavHome: React.FC<NavHomeProps> = ({
   getPokemon,
   setLoader,
 }): JSX.Element => {
-  const navigate = useNavigate();
   // const [sort, setSort] = useState("Ordenar Alfabéticamente");
   // function handleFilter(e) {
   //   e.preventDefault();
@@ -69,17 +68,18 @@ const NavHome: React.FC<NavHomeProps> = ({
           <option value="created">Creados</option>
           <option value="api">De Internet</option>
         </select>
-
-        <div className={styles.wikiimg} onClick={() => navigate("/")}>
-          <div>
-            <img src={wikedexImg} alt="not found" />
+        <Link to="/">
+          <div className={styles.wikiimg}>
+            <div>
+              <img src={wikedexImg} alt="not found" />
+            </div>
+            <p>Volver</p>
           </div>
-          <p>Volver</p>
-        </div>
+        </Link>
         <SearchBar setLoader={setLoader} getPokemon={getPokemon} />
-        <button className={styles.create} onClick={() => navigate("/create")}>
-          Crear Pokemon
-        </button>
+        <Link to="/create">
+          <button className={styles.create}>Crear Pokemon</button>
+        </Link>
       </div>
     </React.Fragment>
   );

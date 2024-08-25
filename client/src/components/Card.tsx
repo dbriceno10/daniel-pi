@@ -1,5 +1,5 @@
 import React from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { Box } from "@mui/material";
 
 import { capitalizeStringWithTrim } from "../utils/utils";
@@ -16,7 +16,7 @@ const Card: React.FC<CardProps> = ({
   create,
 }): JSX.Element => {
   // types ---> es un arreglo con los tipos del pokemon
-  const navigate = useNavigate();
+
   return (
     <Box className={styles.background}>
       {create ? (
@@ -24,34 +24,35 @@ const Card: React.FC<CardProps> = ({
       ) : (
         <span className={styles.created}># {id}</span>
       )}
-
-      <div className={styles.grid} onClick={() => navigate(`/home/${id}`)}>
-        <div>
-          <h2 className={styles.name}>{name}</h2>
-          <h5 className={styles.typescontainer}>
-            {types?.map((type) => {
-              return (
-                <p className={styles[type]} key={type}>
-                  {capitalizeStringWithTrim(type)}
-                </p>
-              );
-            })}
-          </h5>
+      <Link className={styles.link} to={`/home/${id}`}>
+        <div className={styles.grid}>
+          <div>
+            <h2 className={styles.name}>{name}</h2>
+            <h5 className={styles.typescontainer}>
+              {types?.map((type) => {
+                return (
+                  <p className={styles[type]} key={type}>
+                    {capitalizeStringWithTrim(type)}
+                  </p>
+                );
+              })}
+            </h5>
+          </div>
+          <div>
+            {img ? (
+              <img src={img} alt="img not found" width="150px" height="150px" />
+            ) : (
+              <img
+                src={defaultImg}
+                alt="img not found"
+                width="130px"
+                height="130px"
+                style={{ margin: "10px" }}
+              />
+            )}
+          </div>
         </div>
-        <div>
-          {img ? (
-            <img src={img} alt="img not found" width="150px" height="150px" />
-          ) : (
-            <img
-              src={defaultImg}
-              alt="img not found"
-              width="130px"
-              height="130px"
-              style={{ margin: "10px" }}
-            />
-          )}
-        </div>
-      </div>
+      </Link>
     </Box>
   );
 };

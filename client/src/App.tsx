@@ -11,6 +11,7 @@ import "./global.scss";
 
 const LandingPage = Loader(lazy(() => import("./pages/LandingPage/page")));
 const Home = Loader(lazy(() => import("./pages/Home/page")));
+const NotFoundPage = Loader(lazy(() => import("./pages/NotFoundPage/page")));
 
 function App() {
   return (
@@ -21,7 +22,7 @@ function App() {
           <Route path="/home" element={<Home />} />
           {/* <Route path="/create" element={<PokemonCreate />} /> */}
           {/* <Route path="/home/:id" element={<Details />} /> */}
-          {/* <Route path="*" element={<NotFoundPage />} /> */}
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </div>
     </BrowserRouter>

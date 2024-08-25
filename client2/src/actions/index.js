@@ -56,6 +56,7 @@ export function getPokemon(name) {
   return async function (dispatch) {
     try {
       const pokemon = await axios(`/pokemons?name=${name}`);
+      console.log( Array.isArray(pokemon.data))
       return dispatch({
         type: pokeAction.GET_POKEMON,
         payload: pokemon.data,

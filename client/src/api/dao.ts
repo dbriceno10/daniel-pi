@@ -6,7 +6,7 @@ import { Pokemon, Type } from "../models";
 export const Dao = {
   getPokemons: (
     search?: string | number
-  ): Promise<AxiosResponse<Pokemon[]>> => {
+  ): Promise<AxiosResponse<Pokemon[] | Pokemon>> => {
     let name = "";
     if (search) {
       name = `?name=${search}`;

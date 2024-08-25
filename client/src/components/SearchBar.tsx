@@ -1,17 +1,18 @@
 import React, { useEffect } from "react";
 import { useState } from "react";
-import { useDispatch } from "react-redux";
-import { getPokemonAsync, trueLoader } from "../actions";
-
-import styles from "./styles/SearchBar.module.scss";
 import { Box } from "@mui/material";
 
-const SearchBar = (): JSX.Element => {
-  const dispatch = useDispatch();
+import { SearchBarProps } from "./interfaces";
+
+import styles from "./styles/SearchBar.module.scss";
+
+const SearchBar: React.FC<SearchBarProps> = ({
+  getPokemon,
+  setLoader,
+}): JSX.Element => {
   //Estados locales de React
   const [pokemon, setPokemon] = useState({ name: "" });
   const [error, setError] = useState(true); //Este estado es para habilitar o desabilitar el botón de búsqueda
-
   //Handlers
   function handleInputChange(e: React.ChangeEvent<HTMLInputElement>) {
     e.preventDefault();
@@ -23,8 +24,12 @@ const SearchBar = (): JSX.Element => {
   function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     //Dispara la búsqueda al enviar al backend la información escrita en el input despachando la action de getPokemon, luego limpia el input
     e.preventDefault();
-    dispatch(getPokemonAsync(pokemon.name));
-    dispatch(trueLoader());
+    setLoader(true);
+    getPokemon(
+      pokemon.name,
+      () => setLoader(false),
+      () => setLoader(false)
+    );
     setPokemon({ name: "" });
     const form = e.target as HTMLFormElement;
     form.reset();

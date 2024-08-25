@@ -4,18 +4,11 @@ import { useNavigate } from "react-router-dom";
 import SearchBar from "./SearchBar";
 import SortSelect from "./SortSelect";
 import { capitalizeString } from "../utils/utils";
-import { Type } from "../models";
+import { NavHomeProps } from "./interfaces";
 
 import wikedexImg from "../assets/Logo_WikiDex_App.png";
 
 import styles from "./styles/NavHome.module.scss";
-
-interface NavHomeProps {
-  typesPokemons: Type[];
-  handleSortAlphabetically: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleFilterCreated: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-  handleFilterTypes: (e: React.ChangeEvent<HTMLSelectElement>) => void;
-}
 
 /******* Componente de NavBar, Contendra el ordenamiento, filtrados y la SearchBar ******/
 const NavHome: React.FC<NavHomeProps> = ({
@@ -24,6 +17,8 @@ const NavHome: React.FC<NavHomeProps> = ({
   // handleSortByStrength,
   handleFilterCreated,
   handleFilterTypes,
+  getPokemon,
+  setLoader,
 }): JSX.Element => {
   const navigate = useNavigate();
   // const [sort, setSort] = useState("Ordenar Alfabéticamente");
@@ -81,7 +76,7 @@ const NavHome: React.FC<NavHomeProps> = ({
           </div>
           <p>Volver</p>
         </div>
-        <SearchBar />
+        <SearchBar setLoader={setLoader} getPokemon={getPokemon} />
         <button className={styles.create} onClick={() => navigate("/create")}>
           Crear Pokemon
         </button>

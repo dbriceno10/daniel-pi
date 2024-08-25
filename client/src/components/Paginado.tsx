@@ -1,13 +1,8 @@
 import React from "react";
-import styles from "./styles/Paginado.module.scss";
-import { Pokemon } from "../models";
+import { PaginadoProps } from "./interfaces";
 
-interface PaginadoProps {
-  pokemonsPerPage: number;
-  allPokemons: Pokemon[];
-  paginado: (value: number) => void;
-  currentPage: number;
-}
+import styles from "./styles/Paginado.module.scss";
+
 
 const Paginado: React.FC<PaginadoProps> = ({
   pokemonsPerPage,

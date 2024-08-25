@@ -3,17 +3,10 @@ import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
 import { capitalizeStringWithTrim } from "../utils/utils";
+import { CardProps } from "./interfaces";
 import defaultImg from "../assets/who_is.png";
 
 import styles from "./styles/Card.module.scss";
-
-interface CardProps {
-  img: string;
-  name: string;
-  types: string[];
-  id: string | number;
-  create?: boolean;
-}
 
 const Card: React.FC<CardProps> = ({
   img,

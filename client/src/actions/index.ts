@@ -36,7 +36,11 @@ export function getAllPokemonsAsync(
   return async function (dispatch: Function) {
     try {
       const response = await Dao.getPokemons();
-      dispatch(getAllPokemons(response.data));
+      if (Array.isArray(response.data)) {
+        dispatch(getAllPokemons(response.data));
+      } else {
+        throw new Error("Error con el tipo de data de la respuesta");
+      }
       callbackSuccess && callbackSuccess();
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -46,8 +50,8 @@ export function getAllPokemonsAsync(
           text: message,
           type: "error",
         });
-        callbackError && callbackError();
       }
+      callbackError && callbackError();
     }
   };
 }
@@ -68,7 +72,11 @@ export function getPokemonAsync(
   return async function (dispatch: Function) {
     try {
       const response = await Dao.getPokemons(name);
-      dispatch(getPokemon(response.data[0]));
+      if (!Array.isArray(response.data)) {
+        dispatch(getPokemon(response.data));
+      } else {
+        throw new Error("Error con el tipo de data de la respuesta");
+      }
       callbackSuccess && callbackSuccess();
     } catch (error) {
       if (error instanceof AxiosError) {
@@ -78,8 +86,8 @@ export function getPokemonAsync(
           text: message,
           type: "error",
         });
-        callbackError && callbackError();
       }
+      callbackError && callbackError();
     }
   };
 }
@@ -115,8 +123,8 @@ export function postPokemonAsync(
           text: message,
           type: "error",
         });
-        callbackError && callbackError();
       }
+      callbackError && callbackError();
     }
   };
 }
@@ -147,8 +155,8 @@ export function getTypesAsync(
           text: message,
           type: "error",
         });
-        callbackError && callbackError();
       }
+      callbackError && callbackError();
     }
   };
 }
@@ -213,8 +221,8 @@ export function getDetailsAsync(
           text: message,
           type: "error",
         });
-        callbackError && callbackError();
       }
+      callbackError && callbackError();
     }
   };
 }

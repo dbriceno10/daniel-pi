@@ -7,6 +7,7 @@ import {
   filterPokemonsByType,
   filterPokemonsCreated,
   sortPokemonsAlphabetically,
+  getPokemonAsync,
 } from "../../../actions";
 import { RootState } from "../../../store";
 
@@ -20,4 +21,5 @@ export const ProviderHome = connect(mapStateToProps, {
   filterByType: filterPokemonsByType,
   filterCreated: filterPokemonsCreated,
   sortAlphabetically: sortPokemonsAlphabetically,
+  getPokemon: getPokemonAsync,
 })(Home);

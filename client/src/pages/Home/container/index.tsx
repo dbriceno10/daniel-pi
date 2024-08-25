@@ -21,6 +21,7 @@ const Home: React.FC<HomeProps> = ({
   filterByType,
   filterCreated,
   sortAlphabetically,
+  getPokemon,
 }) => {
   const navigate = useNavigate();
 
@@ -62,8 +63,14 @@ const Home: React.FC<HomeProps> = ({
 
   const handleClick = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
     e.preventDefault();
-    getTypes();
-    getAllPokemons();
+    if (!typesPokemons.length) {
+      getTypes();
+    }
+    setLoader(true);
+    getAllPokemons(
+      () => setLoader(false),
+      () => setLoader(false)
+    );
   };
 
   function handleFilterTypes(e: React.ChangeEvent<HTMLSelectElement>) {
@@ -96,6 +103,8 @@ const Home: React.FC<HomeProps> = ({
         // handleSortByStrength={handleSortByStrength}
         handleFilterCreated={handleFilterCreated}
         handleFilterTypes={handleFilterTypes}
+        getPokemon={getPokemon}
+        setLoader={setLoader}
       />
       <div className={styles.pokemonscontainer}>
         <button className={styles.refresh} onClick={handleClick}>

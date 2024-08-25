@@ -15,4 +15,9 @@ export interface HomeProps {
   filterByType: (payload: string) => TypesAction;
   filterCreated: (payload: string) => TypesAction;
   sortAlphabetically: (payload: string) => TypesAction;
+  getPokemon: (
+    name: string | number,
+    callbackSuccess?: Function,
+    callbackError?: Function
+  ) => Promise<void>;
 }

@@ -82,45 +82,59 @@ router.post('/', async (req, res, next) => {
     createInDb,
   } = req.body; //recibo toda la info por body
   try {
-    if (name) {
-      if (!hp) hp = 1;
-      if (!strength) strength = 1;
-      if (!defense) defense = 1;
-      if (!speed) speed = 1;
-      if (!height) height = 1;
-      if (!weight) weight = 1;
-      if (!types.length) types = ['unknown'];
-      if (!img)
-        img =
-          'https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/77/latest/20150621181250/Pikachu.png/640px-Pikachu.png';
-      //solo si recibo un nombre voy a guardar el pokemon en la base de datos
-      const nameLower = name.trim().toLowerCase();
-      const pokemonCreated = await Pokemon.create({
-        name: nameLower,
-        hp,
-        strength,
-        defense,
-        speed,
-        height,
-        weight,
-        img,
-        createInDb,
-      });
-      const arrID = await getID(types); //Recibo un array de tipos y recibo un array de ids sacados de la tabla de tipos
-      await pokemonCreated.setTypes(arrID);
-      let pokemons = await Pokemon.findOne({
-        where: {
-          id: pokemonCreated.id,
-        }, //busco el id
-        include: Type,
-      });
-      pokemons = {
-        ...pokemons.dataValues,
-        types: getNamesByTypes(pokemons), //obtengo el array de tipos
-      };
-      return res.json(pokemons);
+    if (!name) {
+      res
+        .status(404)
+        .send({ message: 'El nombre es requerido para crear un pokemon' });
     }
-    // res.status(404).send('El nombre es requerido para crear un pokemon');
+    const find = await Pokemon.findOne({
+      where: { name: name.trim().toLowerCase() },
+    });
+    if (find) {
+      return res.status(400).send({
+        message:
+          'Error: El nombre ya se encuentra registrado, debe escoger otro nombre',
+      });
+    }
+    if (!hp) hp = 1;
+    if (!strength) strength = 1;
+    if (!defense) defense = 1;
+    if (!speed) speed = 1;
+    if (!height) height = 1;
+    if (!weight) weight = 1;
+    if (!types.length) types = ['unknown'];
+    // if (!img)
+    //   img =
+    //     'https://images.wikidexcdn.net/mwuploads/wikidex/thumb/7/77/latest/20150621181250/Pikachu.png/640px-Pikachu.png';
+    //solo si recibo un nombre voy a guardar el pokemon en la base de datos
+    const nameLower = name.trim().toLowerCase();
+    const pokemonCreated = await Pokemon.create({
+      name: nameLower,
+      hp,
+      strength,
+      defense,
+      speed,
+      height,
+      weight,
+      img,
+      createInDb,
+    });
+    const arrID = await getID(types); //Recibo un array de tipos y recibo un array de ids sacados de la tabla de tipos
+    await pokemonCreated.setTypes(arrID);
+    let pokemons = await Pokemon.findOne({
+      where: {
+        id: pokemonCreated.id,
+      }, //busco el id
+      include: Type,
+    });
+    pokemons = {
+      ...pokemons.dataValues,
+      types: getNamesByTypes(pokemons), //obtengo el array de tipos
+    };
+    return res.json({
+      pokemon: pokemons,
+      message: 'Pokemon creado con éxito',
+    });
   } catch (error) {
     return res
       .status(404)
@@ -165,7 +179,7 @@ Recibe por por params el id del pokemon para buscarlo y borrarlo de la base dato
 router.delete('/:id', async (req, res, next) => {
   const { id } = req.params;
   try {
-    let pokemonDB = await searchPokemon(id);
+    let pokemonDB = await await Pokemon.findOne({ where: { id } });
     if (!pokemonDB) {
       return res.status(404).json({ message: 'Error: Pokemon no encontrado' });
     } else {

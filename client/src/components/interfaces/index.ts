@@ -38,4 +38,5 @@ export interface FormProps {
   formikInstance: FormikProps<FormValues>;
   typesPokemons: Type[];
   title: string;
+  disabled: boolean;
 }

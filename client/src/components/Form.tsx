@@ -14,6 +14,7 @@ const Form: React.FC<FormProps> = ({
   formikInstance,
   typesPokemons,
   title,
+  disabled
 }): JSX.Element => {
   const handleCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     //Para seleccionar los tipos del pokemon
@@ -58,6 +59,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="name"
                 label="Nombre"
                 placeholder="Nombre"
@@ -82,6 +84,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="hp"
                 label="Vida"
                 placeholder="Vida"
@@ -106,6 +109,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="strength"
                 label="Fuerza"
                 placeholder="Fuerza"
@@ -131,6 +135,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="defense"
                 label="Defensa"
                 placeholder="Defensa"
@@ -156,6 +161,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="speed"
                 label="Velocidad"
                 placeholder="Velocidad"
@@ -180,6 +186,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="height"
                 label="Altura"
                 placeholder="Altura"
@@ -205,6 +212,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="weight"
                 label="Peso"
                 placeholder="Peso"
@@ -230,6 +238,7 @@ const Form: React.FC<FormProps> = ({
             <Grid item xs={12} sm={6} sx={{ p: 1 }}>
               <TextField
                 fullWidth
+                sx={{ backgroundColor: "#fff" }}
                 name="img"
                 label="Imagen"
                 value={formikInstance.values.img}
@@ -279,7 +288,7 @@ const Form: React.FC<FormProps> = ({
           <button
             className={styles.btnsend}
             type="submit"
-            // disabled={disabled}
+            disabled={disabled}
           >
             Enviar
           </button>

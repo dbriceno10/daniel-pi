@@ -159,10 +159,16 @@
   background-color: $hover-yellow;
 }
 
+// .btnsend:disabled {
+//   cursor: default;
+//   color: $absolute-white;
+//   background-color: $black-contrast;
+// }
+
 .btnsend:disabled {
   cursor: default;
-  color: $absolute-white;
-  background-color: $black-contrast;
+  background-color: $soft-gray;
+  color: white;
 }
 
 .normal {
@@ -328,4 +334,8 @@
 
 .pokeballIcon {
   color: $red-pokeball;
+}
+
+.input {
+  background-color: $absolute-white;
 }

@@ -39,7 +39,7 @@ export interface PokemonCreateProps {
   typesPokemons: Type[];
   createPokemon: (
     form: PokemonCreateDTO,
-    callbackSuccess?: Function,
+    callbackSuccess?: (pokemon: Pokemon) => void,
     callbackError?: Function
   ) => Promise<void>;
   getTypes: (

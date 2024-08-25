@@ -103,7 +103,7 @@ function postPokemon(payload: Pokemon): TypesAction {
 
 export function postPokemonAsync(
   form: PokemonCreateDTO,
-  callbackSuccess?: Function,
+  callbackSuccess?: (pokemon: Pokemon) => void,
   callbackError?: Function
 ) {
   return async function (dispatch: Function) {
@@ -114,8 +114,9 @@ export function postPokemonAsync(
         text: response.data.message,
         type: "success",
       });
-      callbackSuccess && callbackSuccess();
+      callbackSuccess && callbackSuccess(response.data.pokemon);
     } catch (error) {
+      console.log(error)
       if (error instanceof AxiosError) {
         const data: ErrorHandler = error.response?.data;
         const message = data?.message ?? "Ha ocurrido un error";

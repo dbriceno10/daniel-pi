@@ -11,6 +11,8 @@ import {
   CLEAR_DETAILS_STATE,
   LOADER_TRUE,
   LOADER_FALSE,
+  UPDATE_POKEMON,
+  DELETE_POKEMON,
   TypesAction,
 } from "../actions/types";
 import { State } from "./state";
@@ -39,29 +41,53 @@ function rootReducer(state = inicialState, action: TypesAction) {
       };
     }
     case GET_POKEMON: {
-      //traer a un pokemon por su nombre o id
-      const findPokemon = state.pokemonsCopy.filter(
-        (pokemon) => pokemon.id === action.payload.id
-      );
-      if (findPokemon.length) {
-        return {
-          ...state,
-          pokemons: [action.payload],
-          loader: false,
-        };
-      } else {
-        return {
-          ...state,
-          pokemons: [action.payload], // si hago get a un pokemon que no esté en el estado actual, lo guardo en un arreglo y luego lo paso al principal
-          searchPokemons: [action.payload, ...state.searchPokemons],
-          loader: false,
-        };
+      // //traer a un pokemon por su nombre o id
+      // const findPokemon = state.pokemonsCopy.filter(
+      //   (pokemon) => pokemon.id === action.payload.id
+      // );
+      // if (findPokemon.length) {
+      //   return {
+      //     ...state,
+      //     pokemons: [action.payload],
+      //     loader: false,
+      //   };
+      // } else {
+      //   return {
+      //     ...state,
+      //     pokemons: [action.payload], // si hago get a un pokemon que no esté en el estado actual, lo guardo en un arreglo y luego lo paso al principal
+      //     searchPokemons: [action.payload, ...state.searchPokemons],
+      //     loader: false,
+      //   };
+      // }
+      let pokemons = [...state.pokemons];
+      const index = pokemons?.findIndex((e) => e.id === action.payload.id);
+      if (index === -1) {
+        pokemons = [action.payload, ...pokemons];
       }
+      return {
+        ...state,
+        pokemons,
+      };
     }
     case POST_POKEMON: {
       //crear a un pokemon y guardarlo en la base de datos
+      let pokemons = [action.payload, ...state.pokemons];
       return {
         ...state,
+        pokemons,
+      };
+    }
+    case UPDATE_POKEMON: {
+      let copyPokemons = [...state.pokemons];
+      const index = copyPokemons?.findIndex((e) => e.id === action.payload.id);
+      if (index !== -1) {
+        copyPokemons[index] = action.payload;
+      } else {
+        copyPokemons = [action.payload, ...copyPokemons];
+      }
+      return {
+        ...state,
+        pokemons: copyPokemons,
       };
     }
     case GET_TYPES: {
@@ -100,6 +126,15 @@ function rootReducer(state = inicialState, action: TypesAction) {
       return {
         ...state,
         pokemons: createdFilter,
+      };
+    }
+    case DELETE_POKEMON: {
+      const pokemons = state.pokemons?.filter(
+        (e) => e.id !== action.payload.id
+      );
+      return {
+        ...state,
+        pokemons,
       };
     }
     case SORT_POKEMONS_ALPHABETICALLY: {

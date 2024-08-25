@@ -274,6 +274,7 @@ const Form: React.FC<FormProps> = ({
                     name={type.name}
                     value={type.name}
                     onChange={(e) => handleCheck(e)}
+                    checked={formikInstance.values.types?.includes(type.name)}
                   />
                 </div>
               );

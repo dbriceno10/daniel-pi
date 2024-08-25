@@ -12,10 +12,16 @@ import {
   CLEAR_DETAILS_STATE,
   LOADER_TRUE,
   LOADER_FALSE,
+  UPDATE_POKEMON,
+  DELETE_POKEMON,
   TypesAction,
 } from "./types";
 import { Pokemon, Type } from "../models";
-import { ErrorHandler, PokemonCreateDTO } from "../interfaces";
+import {
+  ErrorHandler,
+  PokemonCreateDTO,
+  PokemonUpdateDTO,
+} from "../interfaces";
 import { Dao } from "../api/dao";
 import { Repository } from "../api/repository";
 import ToastifyAlert from "../components/ToastifyAlert";
@@ -116,7 +122,41 @@ export function postPokemonAsync(
       });
       callbackSuccess && callbackSuccess(response.data.pokemon);
     } catch (error) {
-      console.log(error)
+      if (error instanceof AxiosError) {
+        const data: ErrorHandler = error.response?.data;
+        const message = data?.message ?? "Ha ocurrido un error";
+        ToastifyAlert({
+          text: message,
+          type: "error",
+        });
+      }
+      callbackError && callbackError();
+    }
+  };
+}
+
+function updatePokemon(payload: Pokemon): TypesAction {
+  return {
+    payload,
+    type: UPDATE_POKEMON,
+  };
+}
+
+export function updatePokemonAsync(
+  form: PokemonUpdateDTO,
+  callbackSuccess?: (pokemon: Pokemon) => void,
+  callbackError?: Function
+) {
+  return async function (dispatch: Function) {
+    try {
+      const response = await Repository.updatePokemon(form.id, form);
+      dispatch(updatePokemon(response.data.pokemon));
+      ToastifyAlert({
+        text: response.data.message,
+        type: "success",
+      });
+      callbackSuccess && callbackSuccess(response.data.pokemon);
+    } catch (error) {
       if (error instanceof AxiosError) {
         const data: ErrorHandler = error.response?.data;
         const message = data?.message ?? "Ha ocurrido un error";
@@ -246,5 +286,41 @@ export function trueLoader(): TypesAction {
 export function falseLoader(): TypesAction {
   return {
     type: LOADER_FALSE,
+  };
+}
+
+function deletePokemom(payload: Pokemon): TypesAction {
+  return {
+    payload,
+    type: DELETE_POKEMON,
+  };
+}
+
+export function deletePokemonAsync(
+  id: string | number,
+  callbackSuccess?: Function,
+  callbackError?: Function
+) {
+  return async function (dispatch: Function) {
+    try {
+      const response = await Repository.deletePokemon(id);
+      dispatch(deletePokemom(response.data.pokemon));
+      ToastifyAlert({
+        text: response.data.message,
+        type: "success",
+      });
+      callbackSuccess && callbackSuccess();
+    } catch (error) {
+      dispatch(trueLoader());
+      if (error instanceof AxiosError) {
+        const data: ErrorHandler = error.response?.data;
+        const message = data?.message ?? "Ha ocurrido un error";
+        ToastifyAlert({
+          text: message,
+          type: "error",
+        });
+      }
+      callbackError && callbackError();
+    }
   };
 }

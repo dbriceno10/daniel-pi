@@ -1,10 +1,15 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
+import { Box } from "@mui/material";
+import EditIcon from "@mui/icons-material/Edit";
+import DeleteIcon from "@mui/icons-material/Delete";
 
 import { capitalizeString } from "../../../utils/utils";
 import { DetailsProps } from "../../interfaces";
+import BaseButton from "../../../components/BaseButton";
 import Loader from "../../../components/Loader";
+import SweetAlert from "../../../components/SweetAlert";
 // import Footer from "./Footer";
 
 import defaultImg from "../../../assets/who_is.png";
@@ -16,11 +21,13 @@ const Details: React.FC<DetailsProps> = ({
   pokemon,
   getDetails,
   clearDetails,
+  deletePokemon,
 }): JSX.Element => {
   const { id } = useParams();
   const navigate = useNavigate();
 
   const [loader, setLoader] = useState(false);
+  const [disabled, setDisabled] = useState(false);
 
   useEffect(() => {
     //componentWillMount
@@ -52,7 +59,7 @@ const Details: React.FC<DetailsProps> = ({
       </Link>
       {/* Mientras el estado de detalles (que es un array) esté vació, se va a estar mostrando el Loader */}
       {!loader && pokemon ? (
-        <div className={styles.details}>
+        <Box className={styles.details}>
           {pokemon.createInDb ? (
             <span className={styles.created}>Created</span>
           ) : (
@@ -98,8 +105,59 @@ const Details: React.FC<DetailsProps> = ({
               </p>
             </div>
           </div>
-          {/* Mientras loader sea true y el estado de detalles esté vació se va a mostrar el loader */}
-        </div>
+          {pokemon.createInDb && (
+            <Box className={styles.actionsContainer}>
+              <BaseButton
+                btnText="Editar"
+                toolTip={"Editar Pokemon"}
+                startIcon={<EditIcon />}
+                className={styles.button}
+                color="primary"
+                disabled={disabled}
+                onClick={() =>
+                  SweetAlert({
+                    title: "Editar Pokemon",
+                    text: "¿Desea actualizar al pokemon?",
+                    showCancelButton: true,
+                    icon: "info",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      navigate(`/update/${pokemon.id}`);
+                    }
+                  })
+                }
+              />
+              <BaseButton
+                btnText="Eliminar"
+                toolTip={"Eliminar Pokemon"}
+                startIcon={<DeleteIcon />}
+                className={styles.button}
+                color="error"
+                disabled={disabled}
+                onClick={() =>
+                  SweetAlert({
+                    title: "Eliminar Pokemon",
+                    text: "¿Desea eliminar al pokemon? La acción no se podrá deshacer",
+                    showCancelButton: true,
+                    icon: "warning",
+                  }).then((result) => {
+                    if (result.isConfirmed) {
+                      setDisabled(true);
+                      deletePokemon(
+                        pokemon.id,
+                        () => {
+                          setDisabled(false);
+                          navigate("/home");
+                        },
+                        () => setDisabled(false)
+                      );
+                    }
+                  })
+                }
+              />
+            </Box>
+          )}
+        </Box>
       ) : (
         <Loader />
       )}

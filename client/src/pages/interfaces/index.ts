@@ -33,6 +33,11 @@ export interface DetailsProps {
     callbackSuccess?: Function,
     callbackError?: Function
   ) => Promise<void>;
+  deletePokemon: (
+    id: string | number,
+    callbackSuccess?: Function,
+    callbackError?: Function
+  ) => Promise<void>;
 }
 
 export interface PokemonCreateProps {
@@ -48,8 +53,29 @@ export interface PokemonCreateProps {
   ) => Promise<void>;
 }
 
+export interface PokemonUpdateProps {
+  typesPokemons: Type[];
+  pokemon: Pokemon | null;
+  getTypes: (
+    callbackSuccess?: Function,
+    callbackError?: Function
+  ) => Promise<void>;
+  updatePokemon: (
+    form: PokemonUpdateDTO,
+    callbackSuccess?: (pokemon: Pokemon) => void,
+    callbackError?: Function
+  ) => Promise<void>;
+  clearDetails: () => TypesAction;
+  getDetails: (
+    id: string | number,
+    callbackSuccess?: Function,
+    callbackError?: Function
+  ) => Promise<void>;
+}
+
 export interface FormValues extends PokemonCreateDTO {
   id?: string;
+  createInDb?: boolean;
 }
 
 export const initialValues: FormValues = {
@@ -133,4 +159,5 @@ export const validationSchema: Yup.SchemaOf<FormValues> = Yup.object({
     )
     .optional(),
   id: Yup.string().optional(),
+  createInDb: Yup.bool().optional(),
 });

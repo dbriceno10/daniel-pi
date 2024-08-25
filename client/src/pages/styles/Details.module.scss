@@ -266,3 +266,20 @@
   color: $absolute-white;
   border-radius: 8px;
 }
+
+.actionsContainer {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-items: center;
+  padding: 10px;
+  flex-wrap: wrap;
+  .button {
+    min-width: 150px;
+    margin: 5px;
+  }
+  .button:disabled {
+    background-color: $soft-gray;
+    color: $black-contrast;
+  }
+}

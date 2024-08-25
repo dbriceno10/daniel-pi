@@ -23,12 +23,15 @@ const PokemonCreate: React.FC<PokemonCreateProps> = ({
     { resetForm }: FormikHelpers<FormValues>
   ) => {
     setDisabled(true);
-    createPokemon(values, (pokemon: Pokemon) => {
-      setDisabled(false);
-      console.log('here')
-      resetForm();
-      navigate(`/home/${pokemon.id}`);
-    }, () => setDisabled(false));
+    createPokemon(
+      values,
+      (pokemon: Pokemon) => {
+        setDisabled(false);
+        resetForm();
+        navigate(`/home/${pokemon.id}`);
+      },
+      () => setDisabled(false)
+    );
   };
 
   const formikInstance = useFormik({

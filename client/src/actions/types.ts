@@ -12,6 +12,8 @@ export const GET_DETAILS = "GET_DETAILS";
 export const CLEAR_DETAILS_STATE = "CLEAR_DETAILS_STATE";
 export const LOADER_TRUE = "LOADER_TRUE";
 export const LOADER_FALSE = "LOADER_FALSE";
+export const UPDATE_POKEMON = "UPDATE_POKEMON";
+export const DELETE_POKEMON = "DELETE_POKEMON";
 
 interface ActionGetAllPokemons {
   payload: Pokemon[];
@@ -70,6 +72,16 @@ interface ActionFalseLoader {
   type: typeof LOADER_FALSE;
 }
 
+interface ActionUpdatePokemon {
+  payload: Pokemon;
+  type: typeof UPDATE_POKEMON;
+}
+
+interface ActionDeletePokemon {
+  payload: Pokemon;
+  type: typeof DELETE_POKEMON;
+}
+
 export type TypesAction =
   | ActionGetAllPokemons
   | ActionGetPokemon
@@ -82,4 +94,6 @@ export type TypesAction =
   | ActionGetDetails
   | ActionClearDetailsState
   | ActionTrueLoader
-  | ActionFalseLoader;
+  | ActionFalseLoader
+  | ActionUpdatePokemon
+  | ActionDeletePokemon;

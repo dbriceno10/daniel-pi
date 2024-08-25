@@ -1,4 +1,4 @@
-@import '../../global.scss';
+@import "../../global.scss";
 
 .form {
   display: flex;
@@ -20,8 +20,8 @@
   width: 180px;
 }
 
-@media(max-width: 600px) {
-  .input{
+@media (max-width: 600px) {
+  .input {
     width: 150px;
   }
 }
@@ -55,5 +55,5 @@
 .button:disabled {
   cursor: default;
   background-color: $soft-gray;
-  color: white;
+  color: $absolute-black;
 }

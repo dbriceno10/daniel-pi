@@ -40,10 +40,17 @@ const Card: React.FC<CardProps> = ({
           </div>
           <div>
             {img ? (
-              <img src={img} alt="img not found" width="150px" height="150px" />
+              <img
+                src={img}
+                alt={name}
+                title={name}
+                width="150px"
+                height="150px"
+              />
             ) : (
               <img
                 src={defaultImg}
+                title="img not found"
                 alt="img not found"
                 width="130px"
                 height="130px"

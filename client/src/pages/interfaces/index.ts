@@ -23,7 +23,7 @@ export interface HomeProps {
 }
 
 export interface DetailsProps {
-  pokemon: Pokemon[];
+  pokemon: Pokemon | null;
   clearDetails: () => TypesAction;
   getDetails: (
     id: string | number,

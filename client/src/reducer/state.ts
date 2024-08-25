@@ -5,7 +5,7 @@ export interface State {
   pokemonsTypesFilter: Pokemon[];
   pokemonsCopy: Pokemon[];
   types: Type[];
-  details: Pokemon[];
+  details: Pokemon | null;
   searchPokemons: Pokemon[];
   loader: boolean;
 }

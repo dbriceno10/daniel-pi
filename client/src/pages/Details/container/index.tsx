@@ -45,22 +45,22 @@ const Details: React.FC<DetailsProps> = ({
       <Link className={styles.link} to="/home">
         <div className={styles.wikiimg}>
           <div>
-            <img src={wikedexImg} alt="not found" />
+            <img src={wikedexImg} alt="go back" title="go back" />
           </div>
           <p>Volver</p>
         </div>
       </Link>
       {/* Mientras el estado de detalles (que es un array) esté vació, se va a estar mostrando el Loader */}
-      {pokemon.length > 0 ? (
+      {!loader && pokemon ? (
         <div className={styles.details}>
-          {pokemon[0].createInDb ? (
+          {pokemon.createInDb ? (
             <span className={styles.created}>Created</span>
           ) : (
-            <span className={styles.created}># {pokemon[0].id}</span>
+            <span className={styles.created}># {pokemon.id}</span>
           )}
-          <h1 className={styles.title}>{capitalizeString(pokemon[0].name)}</h1>
+          <h1 className={styles.title}>{capitalizeString(pokemon.name)}</h1>
           <h3 className={styles.types}>
-            {pokemon[0].types?.map((type) => {
+            {pokemon.types?.map((type) => {
               return (
                 <p className={styles[type]} key={type}>
                   {capitalizeString(type)}
@@ -72,49 +72,36 @@ const Details: React.FC<DetailsProps> = ({
             <div>
               <img
                 className={styles.pokeimg}
-                src={pokemon[0].img ? pokemon[0].img : defaultImg}
-                alt="not found"
+                src={pokemon.img ? pokemon.img : defaultImg}
+                alt={pokemon.img ? pokemon.name : "not found"}
+                title={pokemon.img ? pokemon.name : "not found"}
               />
             </div>
             <div className={styles.dataskill}>
               <p>
-                Vida: <span>{pokemon[0].hp}</span>
+                Vida: <span>{pokemon.hp}</span>
               </p>
               <p>
-                Fuerza: <span>{pokemon[0].strength}</span>
+                Fuerza: <span>{pokemon.strength}</span>
               </p>
               <p>
-                Defensa: <span>{pokemon[0].defense}</span>
+                Defensa: <span>{pokemon.defense}</span>
               </p>
               <p>
-                Velocidad: <span>{pokemon[0].speed}</span>
+                Velocidad: <span>{pokemon.speed}</span>
               </p>
               <p>
-                Altura: <span>{pokemon[0].height}</span>
+                Altura: <span>{pokemon.height}</span>
               </p>
               <p>
-                Peso: <span>{pokemon[0].weight}</span>
+                Peso: <span>{pokemon.weight}</span>
               </p>
             </div>
           </div>
           {/* Mientras loader sea true y el estado de detalles esté vació se va a mostrar el loader */}
         </div>
-      ) : loader ? (
+      ) : (
         <Loader />
-      ) : null}
-      {/* Si loader cambia a false y sigue vacío el componente de detalles, quiere decir que la carga falló o el pokemon no se encontró, por lo que vamos a mostrar una imagen con un texto que diga que el pokemon no se encontró */}
-      {loader ? null : (
-        <div>
-          <Link style={{ textDecoration: "none", color: "#fff" }} to="/home">
-            <img
-              src={defaultImg}
-              alt="Pokemon not Found"
-              width="300px"
-              height="300px"
-            />
-            <h2> Pokemon Not Found</h2>
-          </Link>
-        </div>
       )}
       {/* <Footer /> */}
     </div>

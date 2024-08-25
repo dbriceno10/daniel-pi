@@ -20,7 +20,7 @@ const inicialState: State = {
   pokemonsTypesFilter: [], //estado de los pokemons filtrados
   pokemonsCopy: [], //copia del estado original siempre va a tener todos los pokemon del api y bd
   types: [], //guarda el arreglo de los tipos
-  details: [],
+  details: null,
   searchPokemons: [], //para guardar los pokemon buscados con la SearchBar
   loader: true, //para setear un loader
   // pokemon: {}, //un pokemon
@@ -154,14 +154,14 @@ function rootReducer(state = inicialState, action: TypesAction) {
     case GET_DETAILS: {
       return {
         ...state,
-        details: [action.payload],
+        details: action.payload,
       };
     }
     case CLEAR_DETAILS_STATE: {
       //Limmpiar (vaciar) el estado de detalles
       return {
         ...state,
-        details: [],
+        details: null,
       };
     }
     case LOADER_TRUE: {

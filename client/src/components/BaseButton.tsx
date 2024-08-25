@@ -34,7 +34,7 @@ const BaseButton: React.FC<BaseButtonProps> = ({
   size = "medium",
   toolTip = null,
   disabled = false,
-}) => {
+}): JSX.Element => {
   return (
     <Button
       type={type}

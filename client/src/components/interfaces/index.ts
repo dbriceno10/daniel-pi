@@ -1,4 +1,7 @@
+import { FormikProps } from "formik";
+
 import { Pokemon, Type } from "../../models";
+import { FormValues } from "../../pages/interfaces";
 
 export interface PaginadoProps {
   pokemonsPerPage: number;
@@ -29,4 +32,10 @@ export interface NavHomeProps extends SearchBarProps {
   handleSortAlphabetically: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleFilterCreated: (e: React.ChangeEvent<HTMLSelectElement>) => void;
   handleFilterTypes: (e: React.ChangeEvent<HTMLSelectElement>) => void;
+}
+
+export interface FormProps {
+  formikInstance: FormikProps<FormValues>;
+  typesPokemons: Type[];
+  title: string;
 }

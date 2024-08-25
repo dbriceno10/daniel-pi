@@ -16,7 +16,7 @@ const Details: React.FC<DetailsProps> = ({
   pokemon,
   getDetails,
   clearDetails,
-}) => {
+}): JSX.Element => {
   const { id } = useParams();
   const navigate = useNavigate();
 

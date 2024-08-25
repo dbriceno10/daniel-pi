@@ -23,4 +23,5 @@ export interface PokemonUpdateDTO {
   types: string[];
 }
 
-export interface PokemonCreateDTO extends Omit<PokemonUpdateDTO, "id"> {}
+export interface PokemonCreateDTO
+  extends Omit<PokemonUpdateDTO, "id" | "createInDb"> {}

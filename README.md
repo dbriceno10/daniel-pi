@@ -25,6 +25,7 @@ Se trata de una Single Page Aplication (SPA) en la cual se pueden listar a todos
 - **HTML**
 - **CSS**
 - **JavaScript**
+- **TypeScrip (Frontend)**
 - **React**
 - **Redux**
 - **NodeJs**

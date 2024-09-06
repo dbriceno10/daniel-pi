@@ -68,10 +68,10 @@ const NavHome: React.FC<NavHomeProps> = ({
           <option value="created">Creados</option>
           <option value="api">De Internet</option>
         </select>
-        <Link to="/">
+        <Link to="/" className={styles.link}>
           <div className={styles.wikiimg}>
             <div>
-              <img src={wikedexImg} alt="not found" />
+              <img src={wikedexImg} alt="not found" title='wikidex' />
             </div>
             <p>Volver</p>
           </div>

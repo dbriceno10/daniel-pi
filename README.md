@@ -25,9 +25,11 @@ Se trata de una Single Page Aplication (SPA) en la cual se pueden listar a todos
 - **HTML**
 - **CSS**
 - **JavaScript**
-- **TypeScrip (Frontend)**
+- **TypeScript (Frontend)**
 - **React**
 - **Redux**
+- **Formik**
+- **Yup** 
 - **NodeJs**
 - **Express**
 - **Sequelize - Postgres**
@@ -59,16 +61,21 @@ DB_USER=usuariodepostgres
 DB_PASSWORD=passwordDePostgres
 DB_HOST=localhost
 ```
+5.  En `client` crear un archivo llamado: `.env` que tenga la siguiente forma:
+
+```
+REACT_APP_API=http://localhost:3001 o la URL que apunte al API
+```
 
 Reemplazar `usuariodepostgres` y `passwordDePostgres` con tus propias credenciales para conectarte a postgres.
 
-5.  Ejecutar los siguientes comandos en las carpetas `/api` y `/client`
+6.  Ejecutar los siguientes comandos en las carpetas `/api` y `/client`
 
 npm install
 
 npm start
 
-6. Por ultimo abra http://localhost:3000
+7. Por ultimo abra http://localhost:3000
 
 ## Despliegue 📦
 

@@ -1,10 +1,12 @@
 import React, { useState } from "react";
+import * as PropTypes from "prop-types";
 import { Link, useNavigate, useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { Box } from "@mui/material";
 import EditIcon from "@mui/icons-material/Edit";
 import DeleteIcon from "@mui/icons-material/Delete";
 
+import { pokemonPropTypes } from "../../../propTypes";
 import { capitalizeString } from "../../../utils/utils";
 import { DetailsProps } from "../../interfaces";
 import BaseButton from "../../../components/BaseButton";
@@ -164,6 +166,13 @@ const Details: React.FC<DetailsProps> = ({
       {/* <Footer /> */}
     </div>
   );
+};
+
+Details.propTypes = {
+  pokemon: pokemonPropTypes,
+  getDetails: PropTypes.func.isRequired,
+  clearDetails: PropTypes.func.isRequired,
+  deletePokemon: PropTypes.func.isRequired,
 };
 
 export default Details;

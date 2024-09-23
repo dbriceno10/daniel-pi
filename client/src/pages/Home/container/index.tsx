@@ -1,9 +1,10 @@
 import React from "react";
+import * as PropTypes from "prop-types";
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
 import { Box } from "@mui/material";
 
 import { HomeProps } from "../../interfaces";
+import { pokemonsPropTypes, typesPokemonsPropTypes } from "../../../propTypes";
 import Card from "../../../components/Card";
 import { capitalizeString } from "../../../utils/utils";
 import Paginado from "../../../components/Paginado";
@@ -23,7 +24,7 @@ const Home: React.FC<HomeProps> = ({
   sortAlphabetically,
   getPokemon,
 }): JSX.Element => {
-  const navigate = useNavigate();
+  // const navigate = useNavigate();
 
   //Estados de Redux
 
@@ -45,7 +46,7 @@ const Home: React.FC<HomeProps> = ({
   }, []); //NOTA: Podemos poner dispatch como argumento para que se ejecute el useEffect cada vez que se despache una acción, pero como no queremos estarle pegando a cada momento a la ruta de pokemons y tipos lo dejaremos así mientras.
 
   /******* Voy a setear estados locales para manejar el paginado *********/
-  // eslint-disable-next-line no-unused-vars
+  // eslint-disable-next-line no-unused-vars, @typescript-eslint/no-unused-vars
   const [order, setOrder] = useState("");
   const [currentPage, setCurrentPage] = useState(1); //inicializamos en la página 1 para arrancar desde allí
   const pokemonsPerPage = 12; //12 pokemons por página
@@ -127,8 +128,8 @@ const Home: React.FC<HomeProps> = ({
                     textDecoration: "none",
                     color: "#fff",
                     margin: "0 auto",
+                    cursor: "pointer",
                   }}
-                  onClick={() => navigate("/home")}
                 >
                   <img
                     src={defaultImg}
@@ -160,6 +161,17 @@ const Home: React.FC<HomeProps> = ({
       </div>
     </Box>
   );
+};
+
+Home.propTypes = {
+  allPokemons: PropTypes.arrayOf(pokemonsPropTypes).isRequired,
+  typesPokemons: typesPokemonsPropTypes,
+  getAllPokemons: PropTypes.func.isRequired,
+  getTypes: PropTypes.func.isRequired,
+  filterByType: PropTypes.func.isRequired,
+  filterCreated: PropTypes.func.isRequired,
+  sortAlphabetically: PropTypes.func.isRequired,
+  getPokemon: PropTypes.func.isRequired,
 };
 
 export default Home;

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import * as PropTypes from "prop-types";
 import { useFormik, FormikHelpers } from "formik";
 import { useNavigate } from "react-router-dom";
 
+import { typesPokemonsPropTypes } from "../../../propTypes";
 import {
   FormValues,
   PokemonCreateProps,
@@ -56,6 +58,12 @@ const PokemonCreate: React.FC<PokemonCreateProps> = ({
       disabled={disabled}
     />
   );
+};
+
+PokemonCreate.propTypes = {
+  typesPokemons: typesPokemonsPropTypes,
+  createPokemon: PropTypes.func.isRequired,
+  getTypes: PropTypes.func.isRequired,
 };
 
 export default PokemonCreate;

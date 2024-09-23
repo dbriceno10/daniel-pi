@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import * as PropTypes from "prop-types";
 import { useFormik, FormikHelpers } from "formik";
 import { useNavigate, useParams } from "react-router-dom";
 
+import { typesPokemonsPropTypes, pokemonPropTypes } from "../../../propTypes";
 import {
   FormValues,
   PokemonUpdateProps,
@@ -95,6 +97,15 @@ const PokemonUpdate: React.FC<PokemonUpdateProps> = ({
       )}
     </React.Fragment>
   );
+};
+
+PokemonUpdate.propTypes = {
+  typesPokemons: typesPokemonsPropTypes,
+  pokemon: pokemonPropTypes,
+  getTypes: PropTypes.func.isRequired,
+  getDetails: PropTypes.func.isRequired,
+  clearDetails: PropTypes.func.isRequired,
+  updatePokemon: PropTypes.func.isRequired,
 };
 
 export default PokemonUpdate;
